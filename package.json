@@ -4,7 +4,9 @@
   "description": "Redesign and rebrand of retail storefront built using React.js for front-end components and Express.js for the main server.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js",
+    "react-dev": "webpack --config ./webpack.config.js --mode development -w"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,8 @@
   "devDependencies": {
     "@babel/core": "^7.17.2",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.3",
     "babel-preset-react": "^6.24.1",
@@ -31,6 +35,12 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
+    "axios": "^0.25.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }
