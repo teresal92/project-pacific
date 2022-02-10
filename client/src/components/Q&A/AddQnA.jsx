@@ -9,7 +9,7 @@ class AddQnA extends React.Component {
     return(
       <div>
         <div>
-        Add Button
+        <button className='addQuestionButton'>Add Question</button>
           </div>
       </div>
     )
