@@ -9,7 +9,20 @@ class QnAEntrie extends React.Component {
     }
 
     this.getAnswers = this.getAnswers.bind(this);
+    this.getQuestions = this.getQuestions.bind(this);
   }
+
+    getQuestions() {
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/563364`, {
+        headers: {
+          Authorization: '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'
+        }
+      }).then(response => {
+        console.log(response)
+      }).catch(err => {
+        console.error(err)
+      })
+    }
 
     getAnswers() {
       axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/563364/answers`, {
@@ -26,7 +39,8 @@ class QnAEntrie extends React.Component {
   render(){
     return(
       <div className='QnAEntrie'>
-          <button onClick={this.getAnswers}>TEST</button>
+          <button onClick={this.getQuestions}>QUE</button>
+          <button onClick={this.getAnswers}>ANS</button>
         <div>
           <div className='qBody'>
           Q: {this.props.qObj.question_body}
