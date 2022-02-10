@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductInfo from './ProductInfo.jsx';
-import ProductImageGallery from './ProductImageGallery.jsx';
+import ImageGallery from './ImageGallery.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 import { API_KEY } from '../../config/config.js';
@@ -49,7 +49,7 @@ function ProductDetailOverview({product}) {
     <div>
       <span><a href="#">Read all 'REPLACE' reviews</a></span>
       <span>Social Media icons</span>
-      <ProductImageGallery styles={styles} />
+      <ImageGallery styles={styles} />
       <ProductInfo product={product} styles={styles} />
       <StyleSelector styles={styles}/>
       <AddToCart styles={styles}/>

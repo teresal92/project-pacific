@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ProductListEntry from './ProductDetail/ProductListEntry.jsx';
-import ProductDetailOverview from './ProductDetail/ProductDetailOverview.jsx';
+import ProductListEntry from './ProductDetailOverview/ProductListEntry.jsx';
+import ProductDetailOverview from './ProductDetailOverview/ProductDetailOverview.jsx';
 import { API_KEY } from '../config/config.js';
 const axios = require('axios');
 

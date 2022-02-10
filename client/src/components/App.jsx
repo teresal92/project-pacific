@@ -1,7 +1,11 @@
 import React from 'react';
+<<<<<<< HEAD
 import ProductDetailOverview from './ProductDetail/ProductDetailOverview.jsx';
 import ProductList from './ProductList.jsx';
 
+=======
+import QnACore from './Q&A/QnACore.jsx'
+>>>>>>> main
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -18,11 +22,17 @@ class App extends React.Component{
     })
   }
 
+
+
+
   render() {
     return(
       <div>
         <div>hello</div>
         <ProductList getSelectedProduct={this.getSelectedProduct} />
+    return (
+      <div>
+        <QnACore />
       </div>
     )
   }
