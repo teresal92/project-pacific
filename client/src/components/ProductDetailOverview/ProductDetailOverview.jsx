@@ -8,7 +8,7 @@ const axios = require('axios');
 
 
 function ProductDetailOverview({product}) {
-  const [productInfo, setProductInfo] = useState([]);
+  const [ productInfo, setProductInfo ] = useState([]);
   const [ styles, setStyles ] = useState([]);
 
   // fetch list of styles for particular product id
@@ -53,9 +53,6 @@ function ProductDetailOverview({product}) {
       <ProductInfo product={product} styles={styles} />
       <StyleSelector styles={styles}/>
       <AddToCart styles={styles}/>
-      {/* {products.map((product, i) => {
-        <ProductInfo product={product} key={`product-key-${i}`} />
-      })} */}
     </div>
   )
 };
