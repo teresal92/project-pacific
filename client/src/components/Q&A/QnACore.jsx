@@ -7,7 +7,8 @@ class QnACore extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-
+      questions: {},
+      answers: {},
     }
   }
 
@@ -26,4 +27,5 @@ class QnACore extends React.Component {
     )
   }
 }
+
 export default QnACore;
