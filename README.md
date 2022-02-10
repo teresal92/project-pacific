@@ -18,6 +18,7 @@ You can link to the different sections below
 ## Installation
 * Run command
     npm install
+* Make your key available from a new file src/config/config.js
 ## Usage
 * Open Terminal and run commands
     npm run start
