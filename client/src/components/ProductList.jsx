@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import ProductListEntry from './ProductDetail/ProductListEntry.jsx';
 import ProductDetailOverview from './ProductDetail/ProductDetailOverview.jsx';
 import { API_KEY } from '../config/config.js';
 const axios = require('axios');
 
 
-function ProductList(props) {
+function ProductList({getSelectedProduct}) {
   const [ products, setProducts ] = useState([]);
 
   // fetch list of products - might need to go in App
@@ -25,8 +26,8 @@ function ProductList(props) {
   }, []);
 
   return (
-    <div>
-      {products.map((product, i) => <ProductDetailOverview product={product} key={`product-key-${i}`} />)}
+    <div className="product-id"  onClick={() => {getSelectedProduct()}}>
+      {products.map((product, i) => <ProductListEntry product={product} key={`product-key-${i}`} />)}
     </div>
   )
 };
