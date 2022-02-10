@@ -8,26 +8,42 @@ const axios = require('axios');
 
 
 function ProductDetailOverview({product}) {
-  // const [productInfo, setProductInfo] = useState([]);
+  const [productInfo, setProductInfo] = useState([]);
   const [ styles, setStyles ] = useState([]);
 
-  // fetch list of products - might need to go in App
+  // fetch list of styles for particular product id
   useEffect(() => {
-    async function getStyles() {
-      try {
-        const res = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${product.id}/styles`, {
+    // async function getStyles() {
+    function getStyles() {
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${product.id}/styles`, {
           headers: { 'Authorization': `${API_KEY}` }
-        });
-        console.log(res.data);
-        setStyles(res.data);
-      } catch (err) {
-        console.error(err);
-      }
+        })
+        .then( res => setStyles(res.data))
+        .catch( err => console.error(err))
 
-    }
+      // try {
+      //   const res = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${product.id}/styles`, {
+      //     headers: { 'Authorization': `${API_KEY}` }
+      //   });
+      //   console.log(res.data);
+      //   setStyles(res.data);
+      // } catch (err) {
+      //   console.error(err);
+      // }
+    };
     getStyles();
 
+    function getProductInfo() {
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${product.id}`, {
+        headers: { 'Authorization': `${API_KEY}` }
+      })
+      .then( res => setProductInfo(res.data))
+      .catch( err => console.error(err));
+    }
+    getProductInfo();
   }, []);
+
+
 
   return (
     <div>

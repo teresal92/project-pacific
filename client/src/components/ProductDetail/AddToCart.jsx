@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function AddToCart({product}) {
 
   return (
-    <div className="add-to-cart">
+    <form className="add-to-cart">
 
-    </div>
+
+
+    </form>
   )
 }
 
