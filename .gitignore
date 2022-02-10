@@ -3,4 +3,4 @@ node_modules
 bundle.js
 bundle.js.map
 
-src/config/config.js
+config.js
