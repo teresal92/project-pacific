@@ -17,11 +17,11 @@ You can link to the different sections below
 
 ## Installation
 * Run command
-    "npm install"
+    npm install
 ## Usage
 * Open Terminal and run commands
-    "npm run start"
-    "npm run react-dev"
+    npm run start
+    npm run react-dev
 ## Team Members
 [Estevan Gonzalez](https://github.com/GonzalezEstevan)
 [Zebib Gebreslassie](https://github.com/zebibg)
