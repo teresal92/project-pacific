@@ -4,6 +4,7 @@ function ProductInfo({product, styles}) {
 
   const [ onSale, setOnSale ] = useState(false);
 
+
   // check if styles.results.sale_price is not null
     // setOnSale to true
 
