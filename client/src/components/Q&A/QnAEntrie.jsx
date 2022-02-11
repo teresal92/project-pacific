@@ -38,11 +38,13 @@ class QnAEntrie extends React.Component {
           <div className='qBody'>
           Q: {this.props.question.question_body}
           </div>
+          <div>
               {this.state.answerBody.map(item => {
                 var temp = new Date(item.date)
                 var date = temp.toString().substring(0,16)
                 return <AnswerEntrie answers={item} key={item.answer_id} date={date}/>
               })}
+          </div>
         </div>
       </div>
     )
