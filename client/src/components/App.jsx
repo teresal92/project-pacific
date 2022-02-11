@@ -33,7 +33,6 @@ class App extends React.Component{
   render() {
     return(
       <div>
-        <div>hello</div>
         {/* <ProductList getSelectedProduct={this.getSelectedProduct} /> */}
         <ProductList />
         <ProductDetailOverview product={this.state.exampleProduct} />
