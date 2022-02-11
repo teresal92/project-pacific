@@ -24,7 +24,7 @@ class QnACore extends React.Component {
   }
 
   getQuestions() {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/?product_id=42370`, {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/?product_id=42367`, {
       headers: {
         Authorization: API_KEY
       },
@@ -36,20 +36,6 @@ class QnACore extends React.Component {
       console.error(err)
     })
   }
-
-  // getAnswers() {
-  //   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/426085/answers`, {
-  //     headers: {
-  //       Authorization: API_KEY
-  //     }
-  //   }).then(response => {
-  //     this.setState({
-  //       answers: response.data.results
-  //     })
-  //   }).catch(err => {
-  //     console.error(err)
-  //   })
-  // }
 
 
   render() {

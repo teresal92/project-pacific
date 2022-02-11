@@ -35,13 +35,14 @@ class QnAEntrie extends React.Component {
     return (
       <div className='QnAEntrie'>
         <div>
-         <button onClick={this.getAnswers}>Click</button>
           <div className='qBody'>
           Q: {this.props.question.question_body}
-              {this.state.answerBody.map(item => {
-                return <AnswerEntrie answers={item} key={item.answer_id}/>
-              })}
           </div>
+              {this.state.answerBody.map(item => {
+                var temp = new Date(item.date)
+                var date = temp.toString().substring(0,16)
+                return <AnswerEntrie answers={item} key={item.answer_id} date={date}/>
+              })}
         </div>
       </div>
     )
