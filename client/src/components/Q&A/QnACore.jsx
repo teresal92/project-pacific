@@ -11,27 +11,31 @@ class QnACore extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      questions: fakeData,
+      questions: [],
       answers: [],
     }
-    // this.getQuestions = this.getQuestions.bind(this);
+    // this.getAnswers = this.getAnswers.bind(this);
+    this.getQuestions = this.getQuestions.bind(this);
   }
-// WILL EVENTUALLY USE THIS
-//   getQuestions() {
-//     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/`, {
-//       params: {
-//         product_id: 42366,
-//       },
-//       headers: {
-//         Authorization: API_KEY
-//       }
-//     })
-//       .then(({data}) => {
-//         console.log(data)
-//       }).catch(err => {
-//         console.error(err)
-//       })
-//   }
+
+  componentDidMount() {
+    this.getQuestions();
+    // this.getAnswers();
+  }
+
+  getQuestions() {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/?product_id=42367`, {
+      headers: {
+        Authorization: API_KEY
+      },
+    }).then(response => {
+      this.setState({
+        questions: response.data.results
+      })
+    }).catch(err => {
+      console.error(err)
+    })
+  }
 
 
   render() {
@@ -39,7 +43,7 @@ class QnACore extends React.Component {
       <div>
         <div>
           <SearchAnswers />
-          <QnAList data={this.state.questions}/>
+          <QnAList questions={this.state.questions}/>
           <Question />
         </div>
       </div>

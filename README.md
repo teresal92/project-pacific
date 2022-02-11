@@ -25,5 +25,5 @@ You can link to the different sections below
     npm run react-dev
 ## Team Members
 [Estevan Gonzalez](https://github.com/GonzalezEstevan)
-[Zebib Gebreslassie](https://github.com/zebibg)
+[Tristen Urban](https://github.com/TristenUrban)
 [Teresa Lew](https://github.com/teresal92)
