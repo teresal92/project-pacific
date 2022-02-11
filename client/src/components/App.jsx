@@ -1,11 +1,13 @@
 import React from 'react';
+
 import ProductDetailOverview from './ProductDetailOverview/ProductDetailOverview.jsx';
-import ProductList from './ProductDetailOverview/ProductListEntry.jsx';
+
 import QnACore from './Q&A/QnACore.jsx'
 
 import ProductList from './ProductList.jsx';
-import QnACore from './Q&A/QnACore.jsx';
+
 import exProductData from './exProductData.js';
+
 
 class App extends React.Component{
   constructor(props){
@@ -26,9 +28,6 @@ class App extends React.Component{
   render() {
     return(
       <div>
-        <div></div>
-        <ProductList getSelectedProduct={this.getSelectedProduct} />
-        {/* <ProductList getSelectedProduct={this.getSelectedProduct} /> */}
         <ProductList />
         <ProductDetailOverview product={this.state.selectedProduct} />
         <QnACore />
