@@ -9,8 +9,6 @@ import Typography from '@mui/material/Typography';
 
 function StyleSelector({styles}) {
 
-
-
   return (
     <div>
       <Typography variant="overline" display="block" >
