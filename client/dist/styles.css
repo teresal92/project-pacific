@@ -60,3 +60,10 @@ body{
 .social {
   margin-left: 100px;
 }
+
+.style-thumbnail {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}

@@ -41,7 +41,6 @@ function ProductDetailOverview({product}) {
     }
     getProductInfo();
 
-
   }, []);
 
 
@@ -63,7 +62,6 @@ function ProductDetailOverview({product}) {
         <StyleSelector styles={styles}/>
         <AddToCart style={selectedStyle}/>
       </div>
-
     </div>
   )
 };

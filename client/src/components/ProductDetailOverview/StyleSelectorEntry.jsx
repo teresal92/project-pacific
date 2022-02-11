@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 function StyleSelectorEntry({style}) {
 
-
+  console.log('style: ', style.photos[0].thumbnail_url);
   return (
-    <div className="style-thumbnail"></div>
+    <img className="style-thumbnail" src={style.photos[0].thumbnail_url} />
   )
 }
 
