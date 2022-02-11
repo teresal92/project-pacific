@@ -1,11 +1,11 @@
 import React from 'react';
 import QnAEntrie from './QnAEntrie.jsx';
-const QnAList = ({data}) => {
+const QnAList = (props) => {
   return(
     <div>
       <div>
-        {data.results.map((item) => {
-          return <QnAEntrie qObj={item} key={item.question_id} id={item.question_id}/>
+        {props.questions.map(item => {
+          return <QnAEntrie question={item} key={item.question_id}/>
         })}
       </div>
     </div>
