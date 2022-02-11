@@ -1,24 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function ProductInfo({product, styles}) {
+function ProductInfo({product, style}) {
 
-  const [ onSale, setOnSale ] = useState(false);
+  function flagOnSale() {
+    // check if styles.results.sale_price is not null
+    if (style.sale_price !== null) {
+      return <span className='sale-price'>{style.sale_price}</span>
+    } else {
 
-
-  // check if styles.results.sale_price is not null
-    // setOnSale to true
-
-  // if onSale is true
-    // conditionally render sale price in red and original price should be crossed out
+    }
+  }
 
   return (
     <div className="product-info">
       <h3>{product.category}</h3>
       <h1>{product.name}</h1>
-      <span>{product.default_price}</span>
-      <p>{product.description}</p>
+      <span
+        className='org-price'
+        style={{'textDecoration': 'line-through'}}>
+        {product.default_price}
+      </span>
+      {flagOnSale()}
+      <p className='product-description'>{product.description}</p>
     </div>
   )
-}
+};
 
 export default ProductInfo;
