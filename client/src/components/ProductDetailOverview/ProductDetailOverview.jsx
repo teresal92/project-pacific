@@ -3,6 +3,7 @@ import ProductInfo from './ProductInfo.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
+import exStyleData from './exStyleData.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter, faPinterest, faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -13,8 +14,8 @@ const axios = require('axios');
 function ProductDetailOverview({product}) {
   const [ productInfo, setProductInfo ] = useState([]);
   const [ styles, setStyles ] = useState([]);
-  // use dummy data for selectedStyleId for now
-  const [ selectedStyle, setSelectedStyle ] = useState({style_id: 253620, name: 'Forest Green & Black', original_price: '140.00', sale_price: '100.00', 'default?': true})
+  // need to update fake data with specific style obj
+  const [ selectedStyle, setSelectedStyle ] = useState(exStyleData);
   const productId = product[0].id;
 
   // fetch list of styles for particular product id
