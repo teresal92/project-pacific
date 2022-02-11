@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Typography from '@mui/material/Typography';
 
 function ProductInfo({product, style}) {
 
@@ -12,16 +13,22 @@ function ProductInfo({product, style}) {
   }
 
   return (
-    <div className="product-info">
-      <h3>{product.category}</h3>
-      <h1>{product.name}</h1>
+    <div>
+      <Typography variant="overline" display="block" gutterBottom>
+        {product.category}
+      </Typography>
+      <Typography variant='h3' component='div'>
+        {product.name}
+      </Typography>
       <span
         className='org-price'
         style={{'textDecoration': 'line-through'}}>
         {product.default_price}
       </span>
       {flagOnSale()}
-      <p className='product-description'>{product.description}</p>
+      <Typography variant="body1" gutterBottom>
+          {product.description}
+      </Typography>
     </div>
   )
 };
