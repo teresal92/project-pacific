@@ -1,11 +1,8 @@
 import React from 'react';
-<<<<<<< HEAD
-import ProductDetailOverview from './ProductDetail/ProductDetailOverview.jsx';
-import ProductList from './ProductList.jsx';
+import ProductDetailOverview from './ProductDetailOverview/ProductDetailOverview.jsx';
+import ProductList from './ProductDetailOverview/ProductListEntry.jsx';
 
-=======
 import QnACore from './Q&A/QnACore.jsx'
->>>>>>> main
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -30,8 +27,6 @@ class App extends React.Component{
       <div>
         <div>hello</div>
         <ProductList getSelectedProduct={this.getSelectedProduct} />
-    return (
-      <div>
         <QnACore />
       </div>
     )
