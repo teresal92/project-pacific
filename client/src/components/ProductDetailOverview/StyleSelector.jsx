@@ -4,14 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
-
-// TODO:
-  // Conditionally render overlay checkbox on top right of thumbnail when style is selected
-
 function StyleSelector({styles, handleStyleSelector}) {
   // after refactoring to pass down styles, should be able to access default
   // const [ selectedStyle, setSelectedStyle ] = useState(styles[0]);
-
   const [ selectedStyle, setSelectedStyle ] = useState([]);
   const [ isSelected, setIsSelected ] = useState(false);
 
@@ -38,7 +33,7 @@ function StyleSelector({styles, handleStyleSelector}) {
       </Typography>
       <ImageList sx={{ width: 400, height: 250 }} cols={4} rowHeight={100}>
         {styles.map((style) =>
-          <ImageListItem key={`style-id-${style.style_id}`} onClick={(e) => handleClick(e, style)}>
+          <ImageListItem key={style.style_id} onClick={(e) => handleClick(e, style)}>
             <img
               className='thumbnail'
               name={style.name}
