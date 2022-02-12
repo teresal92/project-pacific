@@ -6,20 +6,15 @@ import AddToCart from './AddToCart.jsx';
 import exStyleData from './exStyleData.js';
 import { API_KEY } from '../../config/config.js';
 // MUI
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-// import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 // Icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTwitter, faPinterest, faFacebook } from '@fortawesome/free-brands-svg-icons'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import Icon from '@mui/material/Icon';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import PinterestIcon from '@mui/icons-material/Pinterest';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 const axios = require('axios');
-
-// const Item = styled(Paper)(({ theme }) => ({
-//   padding: theme.spacing(1),
-// }));
 
 function ProductDetailOverview({product}) {
   const [ productInfo, setProductInfo ] = useState([]);
@@ -36,7 +31,6 @@ function ProductDetailOverview({product}) {
           headers: { 'Authorization': `${API_KEY}` }
         })
         .then( res => setStyles(res.data.results))
-        // .then( res => setStyles(res.data))
         .catch( err => console.error(err))
     };
 
@@ -53,26 +47,34 @@ function ProductDetailOverview({product}) {
 
   }, []);
 
+  // passed setSelectedStyle as prop into styleSelector
+  // when style is clicked within styleSelector, pass particular style id into handleStyleSelector
+  // to set selectedStyle
+  function handleStyleSelector(style) {
+    setSelectedStyle(style);
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
         {/* for xs screen take up 6 cols */}
-        <Grid item xs={12} sm={6}>
-          <ImageGallery styles={styles} />
+        <Grid item xs={12} sm={6} md={6}>
+          <ImageGallery style={selectedStyle} />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <div>
-            <span className='reviews'><a href="#">Read all 'REPLACE' reviews</a></span>
-            <span className='social'>
-              <FontAwesomeIcon icon={faHeart} />
-              <FontAwesomeIcon icon={faTwitter} />
-              <FontAwesomeIcon icon={faPinterest} />
-              <FontAwesomeIcon icon={faFacebook} />
-            </span>
-            <ProductInfo product={productInfo} style={selectedStyle} />
-            <StyleSelector styles={styles}/>
-            <AddToCart style={selectedStyle}/>
-          </div>
+        <Grid item xs={12} sm={6} md={6}>
+          <Grid container spacing={3}>
+            <Grid item xs={8}>
+              <span className='reviews'><a href="#">Read all 'REPLACE' reviews</a></span>
+            </Grid>
+            <Grid item xs={4}>
+              <PinterestIcon />
+              <FacebookIcon />
+              <TwitterIcon />
+            </Grid>
+          </Grid>
+          <ProductInfo product={productInfo} style={selectedStyle} />
+          <StyleSelector styles={styles} handleStyleSelector={handleStyleSelector}/>
+          <AddToCart style={selectedStyle}/>
         </Grid>
       </Grid>
     </Box>
