@@ -52,13 +52,13 @@ function ProductDetailOverview({product}) {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={5}>
+    <Box >
+      <Grid container spacing={3}>
         {/* for xs screen take up 6 cols */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} sm={6} md={8}>
           <ImageGallery style={selectedStyle} />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} sm={6} md={4}>
           <Grid container spacing={3}>
             <Grid item xs={8}>
               <span className='reviews'><a href="#">Read all 'REPLACE' reviews</a></span>

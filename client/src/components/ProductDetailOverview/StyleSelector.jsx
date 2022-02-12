@@ -9,8 +9,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
   // Conditionally render overlay checkbox on top right of thumbnail when style is selected
 
 function StyleSelector({styles, handleStyleSelector}) {
-
-    // after refactoring to pass down styles, should be able to access default
+  // after refactoring to pass down styles, should be able to access default
   // const [ selectedStyle, setSelectedStyle ] = useState(styles[0]);
 
   const [ selectedStyle, setSelectedStyle ] = useState([]);
