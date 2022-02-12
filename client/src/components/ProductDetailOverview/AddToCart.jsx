@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function AddToCart({product}) {
+function AddToCart({style}) {
 
   return (
     <form className="add-to-cart">

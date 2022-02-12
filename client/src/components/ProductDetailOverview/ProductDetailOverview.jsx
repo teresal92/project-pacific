@@ -26,14 +26,12 @@ function ProductDetailOverview({product}) {
   // fetch list of styles for particular product id
   useEffect(() => {
     function getStyles() {
-
       axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
           headers: { 'Authorization': `${API_KEY}` }
         })
         .then( res => setStyles(res.data.results))
         .catch( err => console.error(err))
     };
-
     getStyles();
 
     function getProductInfo() {
@@ -44,7 +42,6 @@ function ProductDetailOverview({product}) {
       .catch( err => console.error(err));
     }
     getProductInfo();
-
   }, []);
 
   // passed setSelectedStyle as prop into styleSelector
@@ -56,20 +53,20 @@ function ProductDetailOverview({product}) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={3}>
+      <Grid container spacing={5}>
         {/* for xs screen take up 6 cols */}
-        <Grid item xs={12} sm={6} md={6}>
+        <Grid item xs={12} md={6}>
           <ImageGallery style={selectedStyle} />
         </Grid>
-        <Grid item xs={12} sm={6} md={6}>
+        <Grid item xs={12} md={6}>
           <Grid container spacing={3}>
             <Grid item xs={8}>
               <span className='reviews'><a href="#">Read all 'REPLACE' reviews</a></span>
             </Grid>
             <Grid item xs={4}>
-              <PinterestIcon />
-              <FacebookIcon />
-              <TwitterIcon />
+               <a className='sm-icon' href='https://www.pinterest.com/'><PinterestIcon /></a>
+               <a className='sm-icon' href='https://www.facebook.com/'><FacebookIcon /></a>
+               <a className='sm-icon' href='https://twitter.com/'><TwitterIcon /></a>
             </Grid>
           </Grid>
           <ProductInfo product={productInfo} style={selectedStyle} />
