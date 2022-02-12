@@ -62,6 +62,12 @@ body{
   margin-left: 100px;
 }
 
+.overlay {
+  position: absolute;
+  opacity: 0.6;
+  background-color: transparent;
+}
+
 .thumbnail {
   border-radius: 50%;
 }
