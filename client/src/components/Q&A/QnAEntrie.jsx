@@ -46,7 +46,7 @@ class QnAEntrie extends React.Component {
               {this.state.answerBody.map(item => {
                 var temp = new Date(item.date)
                 var date = temp.toString().substring(0,16)
-                return <AnswerEntrie answers={item} key={item.answer_id} date={date}/>
+                return <AnswerEntrie answers={item} key={item.answer_id} date={date} questionId={this.props.question.question_id}/>
               })}
           </div>
         </div>

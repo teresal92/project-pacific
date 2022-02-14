@@ -5,8 +5,8 @@ import Question from './Question.jsx';
 import axios from 'axios';
 import { API_KEY } from '../../config/config.js'
 import fakeData from './fakeData.js'
-import Answer from './Answer.jsx'
 axios.defaults.headers.common['Authorization'] = API_KEY;
+
 class QnACore extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +20,7 @@ class QnACore extends React.Component {
     // this.getAnswers = this.getAnswers.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.filterSearch = this.filterSearch.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -30,9 +31,6 @@ class QnACore extends React.Component {
 
   getQuestions() {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/?product_id=${this.state.prodId}&count=20`, {
-      headers: {
-        Authorization: API_KEY
-      },
     }).then(response => {
       var sortedRes = response.data.results.sort(function (a, b) {
         return b.question_helpfulness - a.question_helpfulness;
@@ -46,14 +44,12 @@ class QnACore extends React.Component {
     })
   }
   grabUserInput(e) {
-    e.preventDefault();
     this.setState({
       userInput: e.target.value
     })
   }
 
   filterSearch(e) {
-    e.preventDefault();
     var filtered = this.state.questions.filter(question => {
       if (this.state.userInput === '') {
         return question
@@ -67,16 +63,23 @@ class QnACore extends React.Component {
       filteredQuestions: filtered
     })
   }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({
+      userInput: '',
+    })
+  }
   render() {
     var {questions} = this.state
     return this.state.filteredQuestions.length > 0 ?
     <div>
     <div>
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <input
           className='search-questions'
           placeholder='Search Questions'
-          onChange={(e) => {e.preventDefault(), this.grabUserInput(e), this.filterSearch(e)}}></input>
+          onChange={(e) => {this.grabUserInput(e), this.filterSearch(e)}}></input>
       </form>
     </div>
     <div>
@@ -87,11 +90,11 @@ class QnACore extends React.Component {
     (
       <div>
         <div>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <input
               className='search-questions'
               placeholder='Search Questions'
-              onChange={(e) => { e.preventDefault() ,this.grabUserInput(e), this.filterSearch(e)}}></input>
+              onChange={(e) => {this.grabUserInput(e), this.filterSearch(e)}}></input>
           </form>
         </div>
         <div>
