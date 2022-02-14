@@ -1,6 +1,8 @@
 import React from 'react';
 import QnAEntrie from './QnAEntrie.jsx';
+
 const QnAList = (props) => {
+
   return (
     <div>
       <div>

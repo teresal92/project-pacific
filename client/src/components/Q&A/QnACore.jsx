@@ -15,6 +15,7 @@ class QnACore extends React.Component {
       answers: [],
       prodId: 42367,
       userInput: '',
+      filteredQuestions: [],
     }
     // this.getAnswers = this.getAnswers.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
@@ -23,6 +24,7 @@ class QnACore extends React.Component {
 
   componentDidMount() {
     this.getQuestions();
+    this.filterSearch
   }
 
 
@@ -44,12 +46,14 @@ class QnACore extends React.Component {
     })
   }
   grabUserInput(e) {
+    e.preventDefault();
     this.setState({
       userInput: e.target.value
     })
   }
 
   filterSearch(e) {
+    e.preventDefault();
     var filtered = this.state.questions.filter(question => {
       if (this.state.userInput === '') {
         return question
@@ -60,21 +64,34 @@ class QnACore extends React.Component {
       // return questionLowerCase.includes(this.state.userInput.toLowerCase());
     })
     this.setState({
-      questions: filtered
+      filteredQuestions: filtered
     })
   }
   render() {
     var {questions} = this.state
-    return questions.length === 0 ? <h2>Loading...</h2> :(
+    return this.state.filteredQuestions.length > 0 ?
+    <div>
+    <div>
+      <form>
+        <input
+          className='search-questions'
+          placeholder='Search Questions'
+          onChange={(e) => {e.preventDefault(), this.grabUserInput(e), this.filterSearch(e)}}></input>
+      </form>
+    </div>
+    <div>
+      <QnAList questions={this.state.filteredQuestions} setAnswers={this.setAnswers} />
+      <Question prodId={this.state.prodId} getQuestions={this.getQuestions} />
+    </div>
+  </div> :(
     (
       <div>
         <div>
-          <button onClick={this.filterSearch}>TEST</button>>
           <form>
             <input
               className='search-questions'
               placeholder='Search Questions'
-              onChange={(e) => {this.grabUserInput(e), this.filterSearch()}}></input>
+              onChange={(e) => { e.preventDefault() ,this.grabUserInput(e), this.filterSearch(e)}}></input>
           </form>
         </div>
         <div>
