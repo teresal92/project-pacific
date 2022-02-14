@@ -1,32 +1,32 @@
-import React from 'react';
+// import React from 'react';
+// import QnAEntries from './QnAEntrie.jsx'
+// class SearchAnswers extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       userInput: '',
+//     }
+//     this.grabUserInput = this.grabUserInput.bind(this);
+//   }
 
-class SearchAnswers extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userInput: '',
-    }
-    this.grabUserInput = this.grabUserInput.bind(this);
-  }
+//   grabUserInput(e) {
+//     this.setState({
+//       userInput: e.target.value
+//     })
+//   }
 
-  grabUserInput(e) {
-    this.setState({
-      userInput: e.target.value
-    })
-    console.log(this.state.userInput)
-  }
-
-  render() {
-    return(
-      <div>
-        <form>
-        <input
-        className='search-answers'
-        placeholder='Search Answers'
-        onChange={this.grabUserInput}></input>
-        </form>
-      </div>
-    )
-  }
-}
-export default SearchAnswers;
+//   render() {
+//     return(
+//       <div>
+//         {console.log(this.props.answers)}
+//         <form>
+//         <input
+//         className='search-answers'
+//         placeholder='Search Answers'
+//         onChange={this.grabUserInput}></input>
+//         </form>
+//       </div>
+//     )
+//   }
+// }
+// export default SearchAnswers;

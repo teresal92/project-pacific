@@ -22,8 +22,6 @@ function ProductList({getSelectedProduct}) {
     }
     getProducts();
   }, []);
-
-  console.log('products: ', products);
   return (
     <div className="product-id"  onClick={() => {getSelectedProduct()}}>
       {products.map((product, i) => <ProductListEntry product={product} key={`product-key-${i}`} />)}

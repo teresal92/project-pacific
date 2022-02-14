@@ -17,6 +17,7 @@ class QnAEntrie extends React.Component {
     this.getAnswers();
   }
 
+
   getAnswers() {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/answers`, {
       headers: {
@@ -31,6 +32,7 @@ class QnAEntrie extends React.Component {
     })
   }
 
+
   render() {
     return (
       <div className='QnAEntrie'>
@@ -38,11 +40,13 @@ class QnAEntrie extends React.Component {
           <div className='qBody'>
           Q: {this.props.question.question_body}
           </div>
+          <span>Helpful? Yes({this.props.question.question_helpfulness})</span>
+          <span>Add Answer</span>
           <div>
               {this.state.answerBody.map(item => {
                 var temp = new Date(item.date)
                 var date = temp.toString().substring(0,16)
-                return <AnswerEntrie answers={item} key={item.answer_id} date={date}/>
+                return <AnswerEntrie answers={item} key={item.answer_id} date={date} questionId={this.props.question.question_id}/>
               })}
           </div>
         </div>
