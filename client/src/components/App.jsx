@@ -5,11 +5,6 @@ import QnACore from './Q&A/QnACore.jsx'
 
 import ProductList from './ProductList.jsx';
 
-
-import QnACore from './Q&A/QnACore.jsx'
-
-import ProductList from './ProductList.jsx';
-
 import exProductData from './exProductData.js';
 
 

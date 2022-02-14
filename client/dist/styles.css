@@ -4,6 +4,9 @@ body{
   font-family: 'Roboto';
 }
 
+a {
+  cursor: pointer;
+}
 
 .search-questions{
   position:relative;
@@ -58,13 +61,31 @@ body{
   margin-left: 10px;
 }
 
-.social {
-  margin-left: 100px;
+.sm-icon {
+  color: #121212;
 }
 
-.style-thumbnail {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  object-fit: cover;
+.sm-icon:hover {
+  color: red;
 }
+
+.overlay {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  opacity: 0.7;
+  background-color: transparent;
+}
+
+.select-style-thumbnail {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.thumbnail:hover {
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+

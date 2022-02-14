@@ -17,7 +17,7 @@ function ProductInfo({product, style}) {
       <Typography variant="overline" display="block" gutterBottom>
         {product.category}
       </Typography>
-      <Typography variant='h3' component='div'>
+      <Typography variant='h4' component='div'>
         {product.name}
       </Typography>
       <span
