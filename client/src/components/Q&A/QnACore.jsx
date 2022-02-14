@@ -6,7 +6,6 @@ import axios from 'axios';
 import { API_KEY } from '../../config/config.js'
 import fakeData from './fakeData.js'
 axios.defaults.headers.common['Authorization'] = API_KEY;
-
 class QnACore extends React.Component {
   constructor(props) {
     super(props);
