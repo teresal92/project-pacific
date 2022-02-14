@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProductInfo from './ProductInfo.jsx';
-import ImageGallery from './ImageGallery.jsx';
-import StyleSelector from './StyleSelector.jsx';
-import AddToCart from './AddToCart.jsx';
-import exStyleData from './exStyleData.js';
+
 import { API_KEY } from '../../config/config.js';
 // MUI
 import Box from '@mui/material/Box';
@@ -14,6 +10,13 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
+// Components
+import ProductInfo from './ProductInfo.jsx';
+import ImageGallery from './ImageGallery.jsx';
+import StyleSelector from './StyleSelector.jsx';
+import AddToCart from './AddToCart.jsx';
+import exStyleData from './exStyleData.js';
+
 const axios = require('axios');
 
 function ProductDetailOverview({product}) {
@@ -23,7 +26,7 @@ function ProductDetailOverview({product}) {
   const [ selectedStyle, setSelectedStyle ] = useState(exStyleData);
   const productId = product[0].id;
 
-  // fetch list of styles for particular product id
+  // fetch list of styles and product_idfor particular product id
   useEffect(() => {
     function getStyles() {
       axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
@@ -54,7 +57,6 @@ function ProductDetailOverview({product}) {
   return (
     <Box >
       <Grid container spacing={3}>
-        {/* for xs screen take up 6 cols */}
         <Grid item xs={12} sm={6} md={8}>
           <ImageGallery style={selectedStyle} />
         </Grid>
