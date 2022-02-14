@@ -10,6 +10,7 @@ function StyleSelector({styles, handleStyleSelector}) {
   const [ selectedStyle, setSelectedStyle ] = useState({});
   const [ isSelected, setIsSelected ] = useState(false);
 
+  // set default for selectedStyle
   useEffect(() => {
     if (styles[0]) {
       setSelectedStyle(styles[0]);
