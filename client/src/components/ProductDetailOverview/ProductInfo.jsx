@@ -6,9 +6,22 @@ function ProductInfo({product, style}) {
   function flagOnSale() {
     // check if styles.results.sale_price is not null
     if (style.sale_price !== null) {
-      return <span className='sale-price'>{style.sale_price}</span>
+      return (
+        <div>
+          <span
+            className='org-price'
+            style={{'textDecoration': 'line-through'}}>
+            {product.default_price}
+          </span>
+          <span className='sale-price'>{style.sale_price}</span>
+        </div>
+      )
     } else {
-
+      return (
+        <span className='org-price'>
+          {product.default_price}
+        </span>
+      )
     }
   }
 
@@ -20,11 +33,6 @@ function ProductInfo({product, style}) {
       <Typography variant='h4' component='div'>
         {product.name}
       </Typography>
-      <span
-        className='org-price'
-        style={{'textDecoration': 'line-through'}}>
-        {product.default_price}
-      </span>
       {flagOnSale()}
       <Typography variant="body1" gutterBottom>
           {product.description}
