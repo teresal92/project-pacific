@@ -5,18 +5,6 @@ axios.defaults.headers.common['Authorization'] = API_KEY;
 
 const AnswerEntrie = (props) => {
 
-  // useEffect(() => {
-  //     axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${props.questionId}/answers`, {
-  //       body: 'test',
-  //       name:'estevan',
-  //       email: 'test@gmail.com',
-  //       photos: []
-  //     }).then(response => {
-  //       console.log(response)
-  //     }).catch(err => {
-  //       console.error(err)
-  //     })
-  //   })
     return(
       <div>
       <div className='answer-body'>
@@ -26,4 +14,6 @@ const AnswerEntrie = (props) => {
     </div>
   )
 }
+
+
 export default AnswerEntrie;

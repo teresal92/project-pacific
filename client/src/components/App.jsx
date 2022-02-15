@@ -25,8 +25,8 @@ class App extends React.Component {
     return (
       <div>
         <ProductList />
-        {/* <ProductDetailOverview product={this.state.selectedProduct} />
-        <QnACore /> */}
+        <ProductDetailOverview product={this.state.selectedProduct} />
+        <QnACore />
       </div>
     )
   }
