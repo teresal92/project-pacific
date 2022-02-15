@@ -18,33 +18,32 @@ import exStyleData from './exStyleData.js';
 import { API_KEY } from '../../config/config.js';
 const axios = require('axios');
 
-function ProductDetailOverview({productId}) {
+const ProductDetailOverview = ({productId}) => {
   const [ productInfo, setProductInfo ] = useState([]);
   const [ styles, setStyles ] = useState([]);
   // TODO: update default value from dummyData to default to first style obj in styles array
-  const [ selectedStyle, setSelectedStyle ] = useState(exStyleData);
-  // const productId = product[0].id;
+  const [ selectedStyle, setSelectedStyle ] = useState({});
+  const [ isLoading, setIsLoading ] = useState(true);
 
-  // fetch list of styles and product_idfor particular product id
+  // fetch list of styles and product info for particular product id
   useEffect(() => {
-    function getStyles() {
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
-          headers: { 'Authorization': `${API_KEY}` }
-        })
-        .then( res => setStyles(res.data.results))
-        .catch( err => console.error(err))
-    };
-    getStyles();
+    let getProductInfo = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}`, {
+      headers: { 'Authorization': `${API_KEY}` }
+    });
 
-    function getProductInfo() {
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}`, {
-        headers: { 'Authorization': `${API_KEY}` }
+    let getStyles = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
+      headers: { 'Authorization': `${API_KEY}` }
+    });
+
+    Promise.all([ getProductInfo, getStyles])
+      .catch(err => console.error(err))
+      .then(res => {
+        setProductInfo(res[0].data);
+        setStyles(res[1].data.results);
+        setSelectedStyle(res[1].data.results[0]);
       })
-      .then( res => setProductInfo(res.data))
-      .catch( err => console.error(err));
-    }
-    getProductInfo();
-  }, []);
+      .then(() => setIsLoading(false));
+  }, [productId]);
 
   // passed setSelectedStyle as prop into styleSelector
   // when style is clicked within styleSelector, pass particular style id into handleStyleSelector
@@ -55,30 +54,52 @@ function ProductDetailOverview({productId}) {
     }
   }
 
-  return (
+  return !isLoading ? (
     <Container maxWidth="lg">
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={8}>
           <ImageGallery style={selectedStyle} />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Grid container spacing={3}>
-            <Grid item xs={8}>
-              <span className="reviews"><a href="#">Read all 'REPLACE' reviews</a></span>
-            </Grid>
-            <Grid item xs={4}>
-               <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
-               <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
-               <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
-            </Grid>
-          </Grid>
-          <ProductInfo product={productInfo} style={selectedStyle} />
-          <StyleSelector styles={styles} handleStyleSelector={handleStyleSelector}/>
+          <span className="social">
+            <span className="reviews"><a href="#">Read all 'REPLACE' reviews</a></span>
+              <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
+              <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
+              <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
+          </span>
+          <ProductInfo
+            product={productInfo}
+            style={selectedStyle}
+          />
+          <StyleSelector
+            styles={styles}
+            handleStyleSelector={handleStyleSelector}
+          />
           <AddToCart style={selectedStyle}/>
         </Grid>
       </Grid>
     </Container>
+  ) : (
+    <div>Loading... </div>
   )
 };
 
- export default ProductDetailOverview;
+export default ProductDetailOverview;
+
+
+// function getStyles() {
+  //   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
+  //       headers: { 'Authorization': `${API_KEY}` }
+  //     })
+  //     .then( res => setStyles(res.data.results))
+  //     .catch( err => console.error(err))
+  //     .then( () => setIsLoading(false));
+  // };
+  // getStyles();
+
+  // function getProductInfo() {
+  //
+  //   .then( res => setProductInfo(res.data))
+  //   .catch( err => console.error(err));
+  // }
+  // getProductInfo();

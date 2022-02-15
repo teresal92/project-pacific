@@ -3,8 +3,8 @@ import { API_KEY } from '../../config/config.js';
 const axios = require('axios');
 
 // MUI components
-// import Button from '@mui/material/Button';
-// import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import Button from '@mui/material/Button';
+import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 // import Box from '@mui/material/Box';
 // import InputLabel from '@mui/material/InputLabel';
 // import MenuItem from '@mui/material/MenuItem';
@@ -20,6 +20,8 @@ export default function AddToCart({style}) {
   const [sku, setSku] = React.useState('');
   const [size, setSize] = React.useState('');
   const [qty, setQty] = React.useState('');
+  const [isValid, setIsValid] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   /* Size Dropdown
    * only list sizes that are currently instock for style selected
@@ -28,12 +30,12 @@ export default function AddToCart({style}) {
    * by default: dropdown should show 'Select Size'
    */
   // TODO: why is sku working in select value instead of size?
-  const showSizeDropdown = () => {
+  const renderSizeDropdown = () => {
     let availableSkus = skuList.filter(sku => sku.quantity > 0);
 
     return ((availableSkus.length > 0) ? (
-      <select value={sku} onChange={handleSizeChange}>
-        <option value=''>Select Size</option>
+      <select className="size-dropdown" value={sku} onChange={handleSizeChange}>
+        <option value='' disabled>Select Size</option>
         {availableSkus.map((sku, i) => <option key={i} value={sku.id}>{sku.size}</option>)}
       </select>
     ) : (
@@ -48,9 +50,7 @@ export default function AddToCart({style}) {
    * by default: if size not selected, show '-' and dropdown will be disabled
    * if size is selected, dropdown should default to 1
    */
-  const showQtyDropdown = () => {
-    // if size is selected
-    // options will be from 1 - either qty of sku in stock or 15
+  const renderQtyDropdown = () => {
     if (sku) {
       let max = (skus[sku].quantity < 15) ? skus[sku].quantity : 15;
       let range = [];
@@ -73,34 +73,53 @@ export default function AddToCart({style}) {
     }
   };
 
+  /* Add to Cart Button
+   * if default 'Select Size' is currently selected: onClick should open size dropdown and message should appear above dropdown
+   * stating 'Please select size'
+   * if no stock: button should be hidden
+   * if both valid size and valid qty are valid, onClick will add product to user's cart
+   */
+  const renderCartButton = () => {
+    return ( (size !== '') ?
+    <div>
+      <Button onClick={handleButtonClick} variant="contained" startIcon={<ShoppingCartRoundedIcon />}>Add to Cart</Button>
+    </div> : null)
+    // return ( (size !== '') ? <input type="submit" value="Add to Cart" onClick={handleButtonClick} /> : null)
+  }
+
   // set state for sku and size based on sku id, then pass sku id to showQtyDropdown
-  const handleSizeChange = (event) => {
-    let id = event.target.value;
+  const handleSizeChange = (e) => {
+    let id = e.target.value;
     let size = skus[id].size;
     setSize(size);
     setSku(id);
   };
 
-  const handleQtyChange = (event) => {
-    setQty(event.target.value);
+  const handleQtyChange = (e) => {
+    setQty(e.target.value);
   };
 
   /* On Submit of add to cart button
    * add sku to cart by posting to '/cart' with sku_id as param
    */
-  const onSubmit = (event) => {
-    event.preventDefault();
-    // console.log(`Submitted!! ${sku}`);
-    axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/cart', { 'sku_id': sku }, { headers: { 'Authorization': `${API_KEY}` } })
-      .then( res => console.log(`Success! ${res}`))
-      .catch( err => console.error(err));
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    console.log('clicked!', e);
+    if (sku && size && qty) {
+      setIsValid(true);
+      // axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/cart', { 'sku_id': sku }, { headers: { 'Authorization': `${API_KEY}` } })
+      // .then( res => console.log(`Success! ${res}`))
+      // .catch( err => console.error(err));
+    } else {
+      setIsOpen(true);
+    }
   };
 
   return (
-    <form className="add-to-cart-form" onSubmit={onSubmit}>
-      {showSizeDropdown()}
-      {showQtyDropdown()}
-      <input type="submit" value="Add to Cart"></input>
+    <form className="add-to-cart-form">
+      {renderSizeDropdown()}
+      {renderQtyDropdown()}
+      {renderCartButton()}
     </form>
   )
 };
