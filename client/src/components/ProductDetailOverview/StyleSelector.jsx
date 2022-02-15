@@ -10,7 +10,7 @@ function StyleSelector({styles, handleStyleSelector}) {
   const [ selectedStyle, setSelectedStyle ] = useState({});
   const [ isSelected, setIsSelected ] = useState(false);
 
-  // set default for selectedStyle
+  // retrieve default for selectedStyle
   useEffect(() => {
     if (styles[0]) {
       setSelectedStyle(styles[0]);
@@ -40,11 +40,11 @@ function StyleSelector({styles, handleStyleSelector}) {
         STYLE > {selectedStyle.name ? selectedStyle.name : 'SELECT STYLE'}
       </Typography>
       <ImageList sx={{ width: 400, height: 250 }} cols={4} rowHeight={100}>
-        {styles.map((style) =>
-          <ImageListItem key={style.style_id} onClick={(e) => handleClick(e, style)}>
+        {styles.map((style, i) =>
+          <ImageListItem key={`style-${i}`} onClick={(e) => handleClick(e, style)}>
             <img
               className='select-style-thumbnail'
-              name={style.name}
+              name={style.style_id}
               src={`${style.photos[0].thumbnail_url}?w=100&h=100&fit=crop&auto=format`}
               srcSet={`${style.photos[0].thumbnail_url}?w=100&h=100&fit=crop&auto=format&dpr=2 2x`}
               alt={style.name}
@@ -54,7 +54,7 @@ function StyleSelector({styles, handleStyleSelector}) {
           </ImageListItem>
         )}
       </ImageList>
-      </div>
+    </div>
   );
 }
 
