@@ -1,7 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import {API_KEY} from '../../config/config.js';
+import { API_KEY } from '../../config/config.js';
 import AnswerEntrie from './AnswerEntrie.jsx';
+axios.defaults.headers.common['Authorization'] = API_KEY;
+import { Container } from '@mui/material';
+import { FormControl, Card, CardContent, Grid, Typography, Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 class QnAEntrie extends React.Component {
   constructor(props) {
@@ -9,12 +15,21 @@ class QnAEntrie extends React.Component {
     this.state = {
       qId: '',
       answerBody: [],
+      body: '',
+      name: '',
+      email: '',
+      photos: [],
+      addAnswerClick: false,
     }
     this.getAnswers = this.getAnswers.bind(this)
+    this.addAnswer = this.addAnswer.bind(this);
+    this.handleAnswer = this.handleAnswer.bind(this);
+    this.answerFormSubmit = this.answerFormSubmit.bind(this);
   }
 
   componentDidMount() {
     this.getAnswers();
+
   }
 
 
@@ -31,26 +46,133 @@ class QnAEntrie extends React.Component {
       console.error(err)
     })
   }
+  addAnswer(e) {
+    e.preventDefault()
+    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/answers`, {
+      body: this.state.body,
+      name: this.state.name,
+      email: this.state.email,
+      photos: this.state.photos,
+    }).then(response => {
+      console.log(response)
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/answers?count=200`)
+        .then(res => {
+          var sortedAnswerArray = res.data.results.sort(function (a, b) {
+            var dateA = new Date(a.date), dateB = new Date(b.date)
+            return dateB - dateA
+          })
+          this.setState({
+            answerBody: sortedAnswerArray
+          })
+          console.log(res)
+        })
+    }).catch(err => {
+      console.error(err)
+    })
+  }
 
+  handleAnswer(e) {
+    this.setState({
+      addAnswerClick: !this.state.addAnswerClick
+    })
+  }
+
+  answerFormSubmit(e) {
+    e.preventDefault();
+    if (e.target.placeholder === 'Name') {
+      this.setState({
+        name: e.target.value
+      })
+    } else if (event.target.placeholder === 'Body') {
+      this.setState({
+        body: e.target.value
+      })
+    } else if (event.target.placeholder === 'Email') {
+      this.setState({
+        email: e.target.value
+      })
+    } else if (event.target.placeholder === 'Photos') {
+      this.setState({
+        photos: e.target.value
+      })
+    }
+
+  }
 
   render() {
-    return (
-      <div className='QnAEntrie'>
-        <div>
-          <div className='qBody'>
-          Q: {this.props.question.question_body}
-          </div>
-          <span>Helpful? Yes({this.props.question.question_helpfulness})</span>
-          <span>Add Answer</span>
+
+    var { addAnswerClick } = this.state
+    return !addAnswerClick ? (
+      <Box
+        sx={{
+          bgcolor: 'background.paper',
+          boxShadow: 6,
+          borderRadius: 5,
+          p: 2,
+          m: 2,
+          mx: 40,
+          minWidth: 300,
+        }}
+      >
+        <div className='QnAEntrie'>
           <div>
+            <div className='qBody'>
+              Q: {this.props.question.question_body}
+            </div>
+            <span>Helpful? Yes({this.props.question.question_helpfulness})</span>
+            <button onClick={this.handleAnswer}>Add Answer</button>
+            <div>
               {this.state.answerBody.map(item => {
                 var temp = new Date(item.date)
-                var date = temp.toString().substring(0,16)
-                return <AnswerEntrie answers={item} key={item.answer_id} date={date} questionId={this.props.question.question_id}/>
+                var date = temp.toString().substring(0, 16)
+                return <AnswerEntrie answers={item} key={item.answer_id} date={date} questionId={this.props.question.question_id} />
               })}
+            </div>
           </div>
         </div>
-      </div>
+
+      </Box>
+    ) : (
+      <Box
+        sx={{
+          bgcolor: '#bdbdbd',
+          boxShadow: 6,
+          borderRadius: 5,
+          maxWidth: 700,
+          margin: "0 auto",
+          minWidth: 300,
+        }}
+      >
+        <Typography variant='h6' align='center'>
+          Q: {this.props.question.question_body}
+        </Typography>
+        <Card sx={{
+          bgcolor: 'background.paper',
+          boxShadow: 10,
+        }} style={{maxWidth:600, margin:'0 auto'}}>
+          <CardContent>
+            <form onSubmit={this.addAnswer}>
+            <Grid container spacing={1}>
+              <Grid xs={12} sm={6} item>
+                <TextField onChange={this.answerFormSubmit} label='Enter Name' placeholder='Name' variant='outlined' fullWidth required />
+              </Grid>
+              <Grid xs={12} sm={6} item>
+                <TextField onChange={this.answerFormSubmit} type='email' label='Enter Email' placeholder='Email' variant='outlined' fullWidth required />
+              </Grid>
+              <Grid xs={12} item>
+                <TextField onChange={this.answerFormSubmit} label='Enter Photo URL' placeholder='Photos' variant='outlined' fullWidth />
+              </Grid>
+              <Grid xs={12} item>
+                <TextField onChange={this.answerFormSubmit} label='Enter Body' multiline rows={4} placeholder='Body' variant='outlined' fullWidth required />
+              </Grid>
+              <Grid xs={12} item>
+                <Button type='submit' variant='contained' color='primary' fullWidth>Submit Answer</Button>
+              </Grid>
+            </Grid>
+            </form>
+          </CardContent>
+        </Card>
+      </Box>
     )
   }
 }
@@ -58,3 +180,20 @@ class QnAEntrie extends React.Component {
 
 
 export default QnAEntrie;
+{/* <div className='QnAEntrie'>
+      <div>
+        <div className='qBody'>
+          Q: {this.props.question.question_body}
+        </div>
+        <span>Helpful? Yes({this.props.question.question_helpfulness})</span>
+        <button onClick={this.handleAnswer}>Add Answer</button>
+        <div>
+          <form>
+          <input placeholder='Body'></input>
+          <input placeholder='Name'></input>
+          <input placeholder='Email'></input>
+          <input placeholder='Photos'></input>
+          </form>
+        </div>
+      </div>
+    </div> */}

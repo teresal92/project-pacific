@@ -2,6 +2,7 @@ import React from 'react';
 import ProductDetailOverview from './ProductDetailOverview/ProductDetailOverview.jsx';
 import ProductList from './Home/ProductList.jsx';
 import QnACore from './Q&A/QnACore.jsx'
+
 import exProductData from './exProductData.js';
 
 class App extends React.Component {
@@ -10,6 +11,10 @@ class App extends React.Component {
     // UPDATE fake product data with selected product data
     this.state = {
       selectedProduct: exProductData
+
+
+
+      
     }
     // this.getSelectedProduct = this.getSelectedProduct.bind(this);
   }
@@ -24,8 +29,8 @@ class App extends React.Component {
     return (
       <div>
         <ProductList />
-        {/* <ProductDetailOverview product={this.state.selectedProduct} />
-        <QnACore /> */}
+        <ProductDetailOverview product={this.state.selectedProduct} />
+        <QnACore />
       </div>
     )
   }

@@ -6,7 +6,6 @@ import axios from 'axios';
 import { API_KEY } from '../../config/config.js'
 import fakeData from './fakeData.js'
 axios.defaults.headers.common['Authorization'] = API_KEY;
-
 class QnACore extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +29,7 @@ class QnACore extends React.Component {
 
 
   getQuestions() {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/?product_id=${this.state.prodId}&count=20`, {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/?product_id=${this.state.prodId}&count=10`, {
     }).then(response => {
       var sortedRes = response.data.results.sort(function (a, b) {
         return b.question_helpfulness - a.question_helpfulness;
