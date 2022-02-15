@@ -11,6 +11,10 @@ class App extends React.Component {
     // UPDATE fake product data with selected product data
     this.state = {
       selectedProduct: exProductData
+
+
+
+      
     }
     // this.getSelectedProduct = this.getSelectedProduct.bind(this);
   }
