@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
-import { API_KEY } from '../../config/config.js';
 // MUI
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -18,6 +16,7 @@ import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 import exStyleData from './exStyleData.js';
 
+import { API_KEY } from '../../config/config.js';
 const axios = require('axios');
 
 function ProductDetailOverview({product}) {

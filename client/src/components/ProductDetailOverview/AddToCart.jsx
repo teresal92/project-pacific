@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { API_KEY } from '../../config/config.js';
+const axios = require('axios');
 
 // MUI components
 // import Button from '@mui/material/Button';
@@ -9,10 +11,10 @@ import React, { useState, useEffect } from 'react';
 // import FormControl from '@mui/material/FormControl';
 // import Select from '@mui/material/Select';
 
-export default function AddToCart({ style }) {
+export default function AddToCart({style}) {
   const skus = style.skus
   const skuIds = Object.keys(skus);
-  let skuList = skuIds.map(skuId => ({ id: skuId, quantity: skus[skuId].quantity, size: skus[skuId].size }));
+  const skuList = skuIds.map(skuId => ({ id: skuId, quantity: skus[skuId].quantity, size: skus[skuId].size }));
   // console.log(`skuList: ${JSON.stringify(skuList)}`);
 
   const [sku, setSku] = React.useState('');
@@ -37,7 +39,7 @@ export default function AddToCart({ style }) {
     ) : (
       <select value={''} onChange={handleSizeChange} disabled>{'OUT OF STOCK'}</select>
     ))
-  }
+  };
 
   /* Size Dropdown
    * options: list range from 1-max.
@@ -49,16 +51,8 @@ export default function AddToCart({ style }) {
   const showQtyDropdown = () => {
     // if size is selected
     // options will be from 1 - either qty of sku in stock or 15
-    // TODO: look up sku id associated with size and look up qty
-    // iterate from 1 - qty if qty is less than 15, default to 1
     if (sku) {
-      let max;
-      if (skus[sku].quantity < 15) {
-        max = skus[sku].quantity;
-      } else {
-        max = 15;
-      }
-
+      let max = (skus[sku].quantity < 15) ? skus[sku].quantity : 15;
       let range = [];
       for (let i = 1; i <= max; i++) {
         range.push(i);
@@ -77,7 +71,7 @@ export default function AddToCart({ style }) {
         </select>
       )
     }
-  }
+  };
 
   // set state for sku and size based on sku id, then pass sku id to showQtyDropdown
   const handleSizeChange = (event) => {
@@ -85,18 +79,22 @@ export default function AddToCart({ style }) {
     let size = skus[id].size;
     setSize(size);
     setSku(id);
-  }
+  };
 
   const handleQtyChange = (event) => {
     setQty(event.target.value);
-  }
+  };
 
-  // on submit of add to cart button
-  // adds product (style, size, qty) to cart by posting to /cart with sku_id as param
+  /* On Submit of add to cart button
+   * add sku to cart by posting to '/cart' with sku_id as param
+   */
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(`Submitted!! ${sku}`)
-  }
+    // console.log(`Submitted!! ${sku}`);
+    axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/cart', { 'sku_id': sku }, { headers: { 'Authorization': `${API_KEY}` } })
+      .then( res => console.log(`Success! ${res}`))
+      .catch( err => console.error(err));
+  };
 
   return (
     <form className="add-to-cart-form" onSubmit={onSubmit}>
@@ -105,57 +103,45 @@ export default function AddToCart({ style }) {
       <input type="submit" value="Add to Cart"></input>
     </form>
   )
-}
+};
 
-
-  // const showSizeDropdown = () => {
-  //   return ((availableSizes.length > 0) ? (
-  //     <select value={size} onChange={handleSizeChange}>
-  //       <option value=''>Select Size</option>
-  //       {availableSizes.map((sku, i) => <option key={`size-${i}`} value={i}>{sku.size}</option>)}
-  //     </select>
-  //   ) : (
-  //     <select value={''} onChange={handleSizeChange} disabled>{'OUT OF STOCK'}</select>
-  //   ))
-  // }
-
-  // MUI form
-  // <div>
-  //   <FormControl sx={{ m: 1, minWidth: 120 }} >
-  //     <InputLabel id="demo-simple-select-label">
-  //       Select Size
-  //     </InputLabel>
-  //     <Select
-  //       labelId="demo-simple-select-label"
-  //       id="demo-simple-select"
-  //       name="size"
-  //       value={size}
-  //       label="Size"
-  //       onChange={handleSizeChange}
-  //     >
-  //       <MenuItem value=''><em>Select Size</em></MenuItem>
-  //       {skus.map((sku, i) => <MenuItem key={`size-${i}`} value={sku.size}>{sku.size}</MenuItem>)}
-  //     </Select>
-  //   </FormControl>
-  //   <FormControl sx={{ m: 1, minWidth: 120 }}>
-  //     <InputLabel id="demo-simple-select-label">
-  //       Select Qty
-  //     </InputLabel>
-  //     <Select
-  //       labelId="demo-simple-select-label"
-  //       id="demo-simple-select"
-  //       name="size"
-  //       value={qty}
-  //       label="Qty"
-  //       onChange={handleQtyChange}
-  //     >
-  //       <MenuItem value=''><em>Select Qty</em></MenuItem>
-  //       {skus.map((sku, i) => <MenuItem key={`qty-${i}`} value={sku.quantity}>{sku.quantity}</MenuItem>)}
-  //     </Select>
-  //   </FormControl>
-  //   <div>
-  //     <Button variant="contained" startIcon={<ShoppingCartRoundedIcon />}>
-  //       Add to Cart
-  //     </Button>
-  //   </div>
-  // </div>
+// MUI form
+// <div>
+//   <FormControl sx={{ m: 1, minWidth: 120 }} >
+//     <InputLabel id="demo-simple-select-label">
+//       Select Size
+//     </InputLabel>
+//     <Select
+//       labelId="demo-simple-select-label"
+//       id="demo-simple-select"
+//       name="size"
+//       value={size}
+//       label="Size"
+//       onChange={handleSizeChange}
+//     >
+//       <MenuItem value=''><em>Select Size</em></MenuItem>
+//       {skus.map((sku, i) => <MenuItem key={`size-${i}`} value={sku.size}>{sku.size}</MenuItem>)}
+//     </Select>
+//   </FormControl>
+//   <FormControl sx={{ m: 1, minWidth: 120 }}>
+//     <InputLabel id="demo-simple-select-label">
+//       Select Qty
+//     </InputLabel>
+//     <Select
+//       labelId="demo-simple-select-label"
+//       id="demo-simple-select"
+//       name="size"
+//       value={qty}
+//       label="Qty"
+//       onChange={handleQtyChange}
+//     >
+//       <MenuItem value=''><em>Select Qty</em></MenuItem>
+//       {skus.map((sku, i) => <MenuItem key={`qty-${i}`} value={sku.quantity}>{sku.quantity}</MenuItem>)}
+//     </Select>
+//   </FormControl>
+//   <div>
+//     <Button variant="contained" startIcon={<ShoppingCartRoundedIcon />}>
+//       Add to Cart
+//     </Button>
+//   </div>
+// </div>
