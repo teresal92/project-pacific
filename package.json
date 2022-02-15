@@ -4,7 +4,7 @@
   "description": "Redesign and rebrand of retail storefront built using React.js for front-end components and Express.js for the main server.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "nodemon server/index.js",
     "react-dev": "webpack --config ./webpack.config.js --mode development -w"
   },
@@ -25,6 +25,7 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@testing-library/react": "^12.1.2",
     "babel-loader": "^8.2.3",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^6.6.0",
@@ -43,10 +44,12 @@
     "axios": "^0.25.0",
     "cors": "^2.8.5",
     "express": "^4.17.2",
+    "jest": "^27.5.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.2"
   }
 }

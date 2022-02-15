@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
-import { API_KEY } from '../../config/config.js';
 // MUI
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 // Icons
 import Icon from '@mui/material/Icon';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -17,14 +15,15 @@ import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 import exStyleData from './exStyleData.js';
 
+import { API_KEY } from '../../config/config.js';
 const axios = require('axios');
 
-function ProductDetailOverview({product}) {
+function ProductDetailOverview({productId}) {
   const [ productInfo, setProductInfo ] = useState([]);
   const [ styles, setStyles ] = useState([]);
-  // need to update fake data with specific style obj onSelect
+  // TODO: update default value from dummyData to default to first style obj in styles array
   const [ selectedStyle, setSelectedStyle ] = useState(exStyleData);
-  const productId = product[0].id;
+  // const productId = product[0].id;
 
   // fetch list of styles and product_idfor particular product id
   useEffect(() => {
@@ -51,11 +50,13 @@ function ProductDetailOverview({product}) {
   // when style is clicked within styleSelector, pass particular style id into handleStyleSelector
   // to set selectedStyle
   function handleStyleSelector(style) {
-    setSelectedStyle(style);
+    if (style.length > 0) {
+      setSelectedStyle(style);
+    }
   }
 
   return (
-    <Box >
+    <Container maxWidth="lg">
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={8}>
           <ImageGallery style={selectedStyle} />
@@ -63,12 +64,12 @@ function ProductDetailOverview({product}) {
         <Grid item xs={12} sm={6} md={4}>
           <Grid container spacing={3}>
             <Grid item xs={8}>
-              <span className='reviews'><a href="#">Read all 'REPLACE' reviews</a></span>
+              <span className="reviews"><a href="#">Read all 'REPLACE' reviews</a></span>
             </Grid>
             <Grid item xs={4}>
-               <a className='sm-icon' href='https://www.pinterest.com/'><PinterestIcon /></a>
-               <a className='sm-icon' href='https://www.facebook.com/'><FacebookIcon /></a>
-               <a className='sm-icon' href='https://twitter.com/'><TwitterIcon /></a>
+               <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
+               <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
+               <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
             </Grid>
           </Grid>
           <ProductInfo product={productInfo} style={selectedStyle} />
@@ -76,8 +77,8 @@ function ProductDetailOverview({product}) {
           <AddToCart style={selectedStyle}/>
         </Grid>
       </Grid>
-    </Box>
+    </Container>
   )
 };
 
-export default ProductDetailOverview;
+ export default ProductDetailOverview;
