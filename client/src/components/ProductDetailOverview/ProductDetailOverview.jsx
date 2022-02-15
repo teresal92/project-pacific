@@ -50,7 +50,9 @@ function ProductDetailOverview({productId}) {
   // when style is clicked within styleSelector, pass particular style id into handleStyleSelector
   // to set selectedStyle
   function handleStyleSelector(style) {
-    setSelectedStyle(style);
+    if (style.length > 0) {
+      setSelectedStyle(style);
+    }
   }
 
   return (
