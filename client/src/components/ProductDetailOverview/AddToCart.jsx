@@ -27,7 +27,7 @@ export default function AddToCart({style}) {
    * when collapsed, dropdown should show only currently selected size
    * by default: dropdown should show 'Select Size'
    */
-  {/* TODO: why is sku working in select value instead of size? */}
+  // TODO: why is sku working in select value instead of size?
   const showSizeDropdown = () => {
     let availableSkus = skuList.filter(sku => sku.quantity > 0);
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 // MUI
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 // Icons
@@ -19,12 +18,12 @@ import exStyleData from './exStyleData.js';
 import { API_KEY } from '../../config/config.js';
 const axios = require('axios');
 
-function ProductDetailOverview({product}) {
+function ProductDetailOverview({productId}) {
   const [ productInfo, setProductInfo ] = useState([]);
   const [ styles, setStyles ] = useState([]);
-  // need to update fake data with specific style obj onSelect
+  // TODO: update default value from dummyData to default to first style obj in styles array
   const [ selectedStyle, setSelectedStyle ] = useState(exStyleData);
-  const productId = product[0].id;
+  // const productId = product[0].id;
 
   // fetch list of styles and product_idfor particular product id
   useEffect(() => {
