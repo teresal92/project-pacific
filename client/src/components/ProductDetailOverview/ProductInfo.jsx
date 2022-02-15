@@ -35,7 +35,7 @@ function ProductInfo({product, style}) {
       </Typography>
       {flagOnSale()}
       <Typography variant="body1" gutterBottom>
-          {product.description}
+        {product.description}
       </Typography>
     </div>
   )
