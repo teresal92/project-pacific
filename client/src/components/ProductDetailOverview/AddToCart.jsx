@@ -12,7 +12,6 @@ import React, { useState, useEffect } from 'react';
 export default function AddToCart({ style }) {
   const skus = style.skus
   const skuIds = Object.keys(skus);
-
   let skuList = skuIds.map(skuId => ({ id: skuId, quantity: skus[skuId].quantity, size: skus[skuId].size }));
   // console.log(`skuList: ${JSON.stringify(skuList)}`);
 
@@ -26,29 +25,19 @@ export default function AddToCart({ style }) {
    * when collapsed, dropdown should show only currently selected size
    * by default: dropdown should show 'Select Size'
    */
-
   {/* TODO: why is sku working in select value instead of size? */}
-  let availableSkus = skuList.filter(sku => sku.quantity > 0);
   const showSizeDropdown = () => {
+    let availableSkus = skuList.filter(sku => sku.quantity > 0);
+
     return ((availableSkus.length > 0) ? (
       <select value={sku} onChange={handleSizeChange}>
         <option value=''>Select Size</option>
-        {availableSkus.map((sku) => <option key={`sku-id-${sku.id}`} value={sku.id}>{sku.size}</option>)}
+        {availableSkus.map((sku, i) => <option key={i} value={sku.id}>{sku.size}</option>)}
       </select>
     ) : (
       <select value={''} onChange={handleSizeChange} disabled>{'OUT OF STOCK'}</select>
     ))
   }
-  // const showSizeDropdown = () => {
-  //   return ((availableSizes.length > 0) ? (
-  //     <select value={size} onChange={handleSizeChange}>
-  //       <option value=''>Select Size</option>
-  //       {availableSizes.map((sku, i) => <option key={`size-${i}`} value={i}>{sku.size}</option>)}
-  //     </select>
-  //   ) : (
-  //     <select value={''} onChange={handleSizeChange} disabled>{'OUT OF STOCK'}</select>
-  //   ))
-  // }
 
   /* Size Dropdown
    * options: list range from 1-max.
@@ -58,19 +47,33 @@ export default function AddToCart({ style }) {
    * if size is selected, dropdown should default to 1
    */
   const showQtyDropdown = () => {
-    // if size is selected, sku id will be passed in
+    // if size is selected
     // options will be from 1 - either qty of sku in stock or 15
-    //   default to 1
+    // TODO: look up sku id associated with size and look up qty
+    // iterate from 1 - qty if qty is less than 15, default to 1
     if (sku) {
-      // TODO!! look up sku id associated with size and look up qty
-      // iterate from 1 - qty if qty is less than 15
-      <select value={skus[sku].quantity} onChange={handleQtyChange}>
-        <option value=''>-</option>
-      </select>
+      let max;
+      if (skus[sku].quantity < 15) {
+        max = skus[sku].quantity;
+      } else {
+        max = 15;
+      }
+
+      let range = [];
+      for (let i = 1; i <= max; i++) {
+        range.push(i);
+      };
+      console.log(`range ${range}`);
+
+      return (
+        <select value={qty} onChange={handleQtyChange}>
+          {range.map((num, i) => <option key={i} value={num}>{num}</option>)}
+        </select>
+      )
     } else {
       return (
         <select value={qty} onChange={handleQtyChange} disabled>
-          <option value='' >-</option>
+          <option value=''>-</option>
         </select>
       )
     }
@@ -103,6 +106,18 @@ export default function AddToCart({ style }) {
     </form>
   )
 }
+
+
+  // const showSizeDropdown = () => {
+  //   return ((availableSizes.length > 0) ? (
+  //     <select value={size} onChange={handleSizeChange}>
+  //       <option value=''>Select Size</option>
+  //       {availableSizes.map((sku, i) => <option key={`size-${i}`} value={i}>{sku.size}</option>)}
+  //     </select>
+  //   ) : (
+  //     <select value={''} onChange={handleSizeChange} disabled>{'OUT OF STOCK'}</select>
+  //   ))
+  // }
 
   // MUI form
   // <div>
