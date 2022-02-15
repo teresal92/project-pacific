@@ -5,8 +5,6 @@ import { ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/mat
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 function StyleSelector({styles, handleStyleSelector}) {
-  // after refactoring to pass down styles, should be able to access default
-  // const [ selectedStyle, setSelectedStyle ] = useState(styles[0]);
   const [ selectedStyle, setSelectedStyle ] = useState({});
   const [ isSelected, setIsSelected ] = useState(false);
 
