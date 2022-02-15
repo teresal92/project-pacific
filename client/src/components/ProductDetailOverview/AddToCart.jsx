@@ -1,29 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 // MUI components
-import Button from '@mui/material/Button';
-import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
-// cart : [
-//     {
-//       "sku_id": 1,
-//       "count": 2
-//   },
-//   {
-//       "sku_id": 3,
-//       "count": 1
-//   },
-//   {
-//       "sku_id": 5,
-//       "count": 33
-//   },
-//   //...
-// ]
+// import Button from '@mui/material/Button';
+// import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+// import Box from '@mui/material/Box';
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
+// import FormControl from '@mui/material/FormControl';
+// import Select from '@mui/material/Select';
 
 export default function AddToCart({ style }) {
   const skus = style.skus
@@ -36,7 +20,6 @@ export default function AddToCart({ style }) {
   const [size, setSize] = React.useState('');
   const [qty, setQty] = React.useState('');
 
-  // TODO: track sku_id and set size/qty state by sku_id?
   /* Size Dropdown
    * only list sizes that are currently instock for style selected
    * if no remaining stock, dropdown should become inactive and read 'OUT OF STOCK'
@@ -44,18 +27,18 @@ export default function AddToCart({ style }) {
    * by default: dropdown should show 'Select Size'
    */
 
+  {/* TODO: why is sku working in select value instead of size? */}
   let availableSkus = skuList.filter(sku => sku.quantity > 0);
   const showSizeDropdown = () => {
     return ((availableSkus.length > 0) ? (
-      <select value={size} onChange={handleSizeChange}>
+      <select value={sku} onChange={handleSizeChange}>
         <option value=''>Select Size</option>
-        {availableSkus.map((sku, i) => <option key={`size-${i}`} value={sku.id}>{sku.size}</option>)}
+        {availableSkus.map((sku) => <option key={`sku-id-${sku.id}`} value={sku.id}>{sku.size}</option>)}
       </select>
     ) : (
       <select value={''} onChange={handleSizeChange} disabled>{'OUT OF STOCK'}</select>
     ))
   }
-
   // const showSizeDropdown = () => {
   //   return ((availableSizes.length > 0) ? (
   //     <select value={size} onChange={handleSizeChange}>
@@ -74,14 +57,14 @@ export default function AddToCart({ style }) {
    * by default: if size not selected, show '-' and dropdown will be disabled
    * if size is selected, dropdown should default to 1
    */
-  const showQtyDropdown = (skuId) => {
+  const showQtyDropdown = () => {
     // if size is selected, sku id will be passed in
     // options will be from 1 - either qty of sku in stock or 15
-      // default to 1
-    if (skuId) {
-      // look up sku id associated with size and look up qty
+    //   default to 1
+    if (sku) {
+      // TODO!! look up sku id associated with size and look up qty
       // iterate from 1 - qty if qty is less than 15
-      <select value={qty} onChange={handleQtyChange}>
+      <select value={skus[sku].quantity} onChange={handleQtyChange}>
         <option value=''>-</option>
       </select>
     } else {
@@ -93,9 +76,12 @@ export default function AddToCart({ style }) {
     }
   }
 
+  // set state for sku and size based on sku id, then pass sku id to showQtyDropdown
   const handleSizeChange = (event) => {
-    setSize(event.target.value);
-    // showQtyDropdown(styleId)
+    let id = event.target.value;
+    let size = skus[id].size;
+    setSize(size);
+    setSku(id);
   }
 
   const handleQtyChange = (event) => {
@@ -106,7 +92,7 @@ export default function AddToCart({ style }) {
   // adds product (style, size, qty) to cart by posting to /cart with sku_id as param
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(`Submitted!!!! ${size}`)
+    console.log(`Submitted!! ${sku}`)
   }
 
   return (
