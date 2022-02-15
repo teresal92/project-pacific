@@ -9,11 +9,7 @@ const axios = require('axios');
 
 function ProductList({ getSelectedProduct }) {
   const [products, setProducts] = useState([]);
-  const [ styles, setStyles ] = useState([]);
 
-
-
-  // fetch list of products - might need to go in App
   useEffect(() => {
 
     async function getProducts() {
@@ -33,7 +29,7 @@ function ProductList({ getSelectedProduct }) {
     console.log(event);
   }
 
-  console.log('products: ', products);
+
 
   return (
     <div>
