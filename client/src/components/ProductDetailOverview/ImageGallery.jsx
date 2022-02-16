@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function ImageGallery({style}) {
+const ImageGallery = ({style}) => {
   const [ photos, setPhotos ] = useState(style.photos);
   const [ defaultImg, setDefaultImg ] = useState(style.photos[0].url);
 

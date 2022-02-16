@@ -154,8 +154,9 @@ export default function AddToCart({style}) {
     return ( !OOS ?
     <div>
       <Button
-        onClick={handleButtonClick}
         variant="contained"
+        fullWidth={true}
+        onClick={handleButtonClick}
         startIcon={<ShoppingCartRoundedIcon />}
       >
         Add to Cart
@@ -202,6 +203,7 @@ export default function AddToCart({style}) {
 
   return (
     <form className="add-to-cart-form">
+      {open ? <p>Please select a size</p> : <p></p>}
       {renderSizeDropdown()}
       {renderQtyDropdown()}
       {renderCartButton()}
