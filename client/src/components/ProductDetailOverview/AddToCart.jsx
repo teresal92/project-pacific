@@ -72,7 +72,6 @@ export default function AddToCart({style}) {
         </FormControl>
       )
     }
-
     // if (availableSkus.length > 0) {
     //   return (
     //     <select className="size-dropdown" value={sku} onChange={handleSizeChange}>
@@ -98,7 +97,7 @@ export default function AddToCart({style}) {
         range.push(i);
       };
       return (
-        <FormControl sx={{ m: 1, minWidth: 140 }}>
+        <FormControl sx={{ m: 1, minWidth: 200 }}>
           <InputLabel id="demo-simple-select-label">Select Qty</InputLabel>
           <Select
             labelId="demo-controlled-open-select-label"
@@ -119,7 +118,7 @@ export default function AddToCart({style}) {
       )
     } else {
       return (
-        <FormControl sx={{ m: 1, minWidth: 140 }}>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="demo-simple-select-label">Select Qty</InputLabel>
           <Select
             labelId="demo-controlled-open-select-label"
@@ -154,6 +153,8 @@ export default function AddToCart({style}) {
     <div>
       <Button
         variant="contained"
+        size="large"
+        color="inherit"
         onClick={handleButtonClick}
         startIcon={<ShoppingCartRoundedIcon />}
       >

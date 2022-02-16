@@ -58,17 +58,19 @@ const ProductDetailOverview = ({productId}) => {
 
   return !isLoading ? (
     <Container maxWidth="lg">
-      <Grid container spacing={3}>
+      <Grid container justify="center" spacing={3}>
         <Grid item xs={12} sm={6} md={7}>
           <ImageGallery style={selectedStyle} />
         </Grid>
         <Grid item xs={12} sm={6} md={5}>
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={3}>
               <Ratings />
               <a href="#">Read all Reviews</a>
-              <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
-              <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
-              <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
+              <span className="social">
+                <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
+                <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
+                <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
+              </span>
           </Stack>
           <ProductInfo
             product={productInfo}

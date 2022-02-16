@@ -22,7 +22,7 @@ const ProductInfo = ({product, style}) => {
   };
 
   return (
-    <div>
+    <div className="product-info">
       <Typography variant="overline" display="block" gutterBottom>
         {product.category}
       </Typography>
