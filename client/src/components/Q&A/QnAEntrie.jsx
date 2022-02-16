@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_KEY } from '../../config/config.js';
 import AnswerEntrie from './AnswerEntrie.jsx';
@@ -20,6 +20,7 @@ class QnAEntrie extends React.Component {
       email: '',
       photos: [],
       addAnswerClick: false,
+      count: 5,
     }
     this.getAnswers = this.getAnswers.bind(this)
     this.addAnswer = this.addAnswer.bind(this);
@@ -29,46 +30,40 @@ class QnAEntrie extends React.Component {
 
   componentDidMount() {
     this.getAnswers();
-
   }
 
 
-  getAnswers() {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/answers`, {
+   getAnswers() {
+     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/answers?count=500`, {
       headers: {
         Authorization: API_KEY
       }
-    }).then(response => {
-      this.setState({
-        answerBody: response.data.results
+    }).then(async (response) => {
+      var sortedAnswerArray = response.data.results.sort(function (a, b) {
+        var dateA = new Date(a.date), dateB = new Date(b.date)
+        return dateB - dateA;
+      })
+      var splicedAnswers = sortedAnswerArray.splice(0, this.state.count)
+       await this.setState({
+        answerBody: splicedAnswers
       })
     }).catch(err => {
       console.error(err)
     })
   }
   addAnswer(e) {
-    e.preventDefault()
+    e.preventDefault();
     axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/answers`, {
       body: this.state.body,
       name: this.state.name,
       email: this.state.email,
       photos: this.state.photos,
     }).then(response => {
-      console.log(response)
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/answers?count=200`)
-        .then(res => {
-          var sortedAnswerArray = res.data.results.sort(function (a, b) {
-            var dateA = new Date(a.date), dateB = new Date(b.date)
-            return dateB - dateA
-          })
-          this.setState({
-            answerBody: sortedAnswerArray
-          })
-          console.log(res)
-        })
+      this.getAnswers();
     }).catch(err => {
       console.error(err)
     })
+
   }
 
   handleAnswer(e) {
@@ -96,8 +91,9 @@ class QnAEntrie extends React.Component {
         photos: e.target.value
       })
     }
-
   }
+
+
 
   render() {
 
@@ -125,12 +121,11 @@ class QnAEntrie extends React.Component {
               {this.state.answerBody.map(item => {
                 var temp = new Date(item.date)
                 var date = temp.toString().substring(0, 16)
-                return <AnswerEntrie answers={item} key={item.answer_id} date={date} questionId={this.props.question.question_id} />
+                return <AnswerEntrie answers={item} key={item.answer_id} date={date} questionId={this.props.question.question_id} getAnswers={this.getAnswers}/>
               })}
             </div>
           </div>
         </div>
-
       </Box>
     ) : (
       <Box
@@ -149,26 +144,27 @@ class QnAEntrie extends React.Component {
         <Card sx={{
           bgcolor: 'background.paper',
           boxShadow: 10,
-        }} style={{maxWidth:600, margin:'0 auto'}}>
+        }} style={{ maxWidth: 600, margin: '0 auto' }}>
           <CardContent>
+          <button onClick={this.handleAnswer}>Back</button>
             <form onSubmit={this.addAnswer}>
-            <Grid container spacing={1}>
-              <Grid xs={12} sm={6} item>
-                <TextField onChange={this.answerFormSubmit} label='Enter Name' placeholder='Name' variant='outlined' fullWidth required />
+              <Grid container spacing={1}>
+                <Grid xs={12} sm={6} item>
+                  <TextField onChange={this.answerFormSubmit} label='Enter Name' placeholder='Name' variant='outlined' fullWidth required />
+                </Grid>
+                <Grid xs={12} sm={6} item>
+                  <TextField onChange={this.answerFormSubmit} type='email' label='Enter Email' placeholder='Email' variant='outlined' fullWidth required />
+                </Grid>
+                <Grid xs={12} item>
+                  <TextField onChange={this.answerFormSubmit} label='Enter Photo URL' placeholder='Photos' variant='outlined' fullWidth />
+                </Grid>
+                <Grid xs={12} item>
+                  <TextField onChange={this.answerFormSubmit} label='Enter Body' multiline rows={4} placeholder='Body' variant='outlined' fullWidth required />
+                </Grid>
+                <Grid xs={12} item>
+                  <Button type='submit' variant='contained' color='primary' fullWidth>Submit Answer</Button>
+                </Grid>
               </Grid>
-              <Grid xs={12} sm={6} item>
-                <TextField onChange={this.answerFormSubmit} type='email' label='Enter Email' placeholder='Email' variant='outlined' fullWidth required />
-              </Grid>
-              <Grid xs={12} item>
-                <TextField onChange={this.answerFormSubmit} label='Enter Photo URL' placeholder='Photos' variant='outlined' fullWidth />
-              </Grid>
-              <Grid xs={12} item>
-                <TextField onChange={this.answerFormSubmit} label='Enter Body' multiline rows={4} placeholder='Body' variant='outlined' fullWidth required />
-              </Grid>
-              <Grid xs={12} item>
-                <Button type='submit' variant='contained' color='primary' fullWidth>Submit Answer</Button>
-              </Grid>
-            </Grid>
             </form>
           </CardContent>
         </Card>
@@ -180,20 +176,3 @@ class QnAEntrie extends React.Component {
 
 
 export default QnAEntrie;
-{/* <div className='QnAEntrie'>
-      <div>
-        <div className='qBody'>
-          Q: {this.props.question.question_body}
-        </div>
-        <span>Helpful? Yes({this.props.question.question_helpfulness})</span>
-        <button onClick={this.handleAnswer}>Add Answer</button>
-        <div>
-          <form>
-          <input placeholder='Body'></input>
-          <input placeholder='Name'></input>
-          <input placeholder='Email'></input>
-          <input placeholder='Photos'></input>
-          </form>
-        </div>
-      </div>
-    </div> */}

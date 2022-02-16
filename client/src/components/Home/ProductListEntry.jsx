@@ -25,7 +25,7 @@ export default function ProductListEntry(props) {
 
   return (
     <div>
-      <Card className='Category' onClick={(event) => { props.getId(props.product.id) }}>
+      <Card className='Category' onClick={(event) => { props.getId(props.product) }}>
         <CardHeader title={props.product.name} />
         <CardMedia
         component='img'
