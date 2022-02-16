@@ -59,10 +59,10 @@ const ProductDetailOverview = ({productId}) => {
   return !isLoading ? (
     <Container maxWidth="lg">
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={8}>
+        <Grid item xs={12} sm={6} md={7}>
           <ImageGallery style={selectedStyle} />
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={5}>
           <Stack direction="row" spacing={2}>
               <Ratings />
               <a href="#">Read all Reviews</a>

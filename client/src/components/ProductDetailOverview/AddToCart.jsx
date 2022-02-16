@@ -154,7 +154,6 @@ export default function AddToCart({style}) {
     <div>
       <Button
         variant="contained"
-        fullWidth={true}
         onClick={handleButtonClick}
         startIcon={<ShoppingCartRoundedIcon />}
       >
