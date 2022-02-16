@@ -12,7 +12,7 @@ class QnACore extends React.Component {
     this.state = {
       questions: [],
       answers: [],
-      prodId: 42367,
+      prodId: this.props.prodId,
       userInput: '',
       filteredQuestions: [],
       count: 2,
@@ -83,6 +83,7 @@ class QnACore extends React.Component {
     return this.state.filteredQuestions.length > 0 ?
     <div>
     <div>
+
       <form onSubmit={this.handleSubmit}>
         <input
           className='search-questions'
@@ -98,6 +99,7 @@ class QnACore extends React.Component {
     (
       <div>
         <div>
+        {console.log(this)}
           <form onSubmit={this.handleSubmit}>
             <input
               className='search-questions'
