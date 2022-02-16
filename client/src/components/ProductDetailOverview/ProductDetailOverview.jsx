@@ -14,7 +14,6 @@ import ProductInfo from './ProductInfo.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
-// import exStyleData from './exStyleData.js';
 import Ratings from './Ratings.jsx';
 
 import { API_KEY } from '../../config/config.js';
@@ -23,7 +22,6 @@ const axios = require('axios');
 const ProductDetailOverview = ({productId}) => {
   const [ productInfo, setProductInfo ] = useState([]);
   const [ styles, setStyles ] = useState([]);
-  // TODO: update default value from dummyData to default to first style obj in styles array
   const [ selectedStyle, setSelectedStyle ] = useState({});
   const [ isLoading, setIsLoading ] = useState(true);
 
@@ -47,7 +45,7 @@ const ProductDetailOverview = ({productId}) => {
       .then(() => setIsLoading(false));
   }, [productId]);
 
-  // passed setSelectedStyle as prop into styleSelector
+
   // when style is clicked within styleSelector, pass particular style id into handleStyleSelector
   // to set selectedStyle
   function handleStyleSelector(style) {
@@ -57,12 +55,12 @@ const ProductDetailOverview = ({productId}) => {
   }
 
   return !isLoading ? (
-    <Container maxWidth="lg s">
+    <Container>
       <Grid container justify="center" spacing={3}>
-        <Grid className="imageContainer" item xs={12} sm={6} md={7}>
+        <Grid className="imageContainer" item xs={12} sm={12} md={7}>
           <ImageGallery style={selectedStyle} />
         </Grid>
-        <Grid item xs={12} sm={6} md={5}>
+        <Grid item xs={12} sm={12} md={5}>
           <Stack direction="row" spacing={3}>
               <Ratings />
               <a href="#">Read all Reviews</a>

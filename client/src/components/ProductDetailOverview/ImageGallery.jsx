@@ -4,6 +4,18 @@ const ImageGallery = ({style}) => {
   const [ photos, setPhotos ] = useState(style.photos);
   const [ defaultImg, setDefaultImg ] = useState(style.photos[0].url);
 
+  const renderDefaultView = () => {
+
+
+  }
+
+
+  const renderExpandedView = () => {
+
+
+  }
+
+
   return (
     <div className="image-gallery">
       {/* Thumbnails list Vertical Scrolling*/}
