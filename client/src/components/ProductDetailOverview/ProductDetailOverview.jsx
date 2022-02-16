@@ -57,7 +57,7 @@ const ProductDetailOverview = ({productId}) => {
   }
 
   return !isLoading ? (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <Grid container justify="center" spacing={3}>
         <Grid item xs={12} sm={6} md={7}>
           <ImageGallery style={selectedStyle} />
