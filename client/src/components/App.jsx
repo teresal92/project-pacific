@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductDetailOverview from './ProductDetailOverview/ProductDetailOverview.jsx';
 import ProductList from './Home/ProductList.jsx';
+import NavBar from './Home/NavBar.jsx';
 import QnACore from './Q&A/QnACore.jsx'
 
 import exProductData from './exProductData.js';
@@ -8,28 +9,50 @@ import exProductData from './exProductData.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // UPDATE fake product data with selected product data
     this.state = {
-      selectedProduct: exProductData[0]
+      selectedProduct: exProductData[0],
+      productSelected: false
     }
-    // this.getSelectedProduct = this.getSelectedProduct.bind(this);
   }
 
-  // getSelectedProduct(productId) {
-  //   this.setState({
-  //     selectedProductId: productId
-  //   })
-  // }
+  getProductId = (event) => {
+    this.setState({
+      selectedProduct: event,
+    }),
+      this.setState({
+        productSelected: !this.state.productSelected
+      })
+  }
+
+  getHome = (event) => {
+    this.setState({
+      productSelected: false
+    })
+  }
 
   render() {
     return (
-      // <h1>Hello world React!</h1>
-      <div>
-        <ProductList />
-        <ProductDetailOverview productId={this.state.selectedProduct.id} />
-        <QnACore />
-      </div>
-    )
+      this.state.productSelected ? (
+        <div>
+          <div className='navbar'>
+            <NavBar categories={this.getHome.bind(this)}/>
+          </div>
+          <div>
+            <ProductDetailOverview productId={this.state.selectedProduct.id} />
+            <QnACore />
+          </div>
+        </div >
+      ) : (
+        <div>
+          <div className='navbar'>
+            <NavBar />
+          </div>
+          <div>
+            <ProductList getId={this.getProductId.bind(this)} />
+            <div className='textbox'>text box</div>
+          </div>
+        </div>
+      ))
   }
 }
 

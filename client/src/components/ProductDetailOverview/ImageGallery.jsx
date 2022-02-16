@@ -8,7 +8,7 @@ function ImageGallery({style}) {
     <div className="product-image-gallery">
       {/* Thumbnails list Vertical Scrolling*/}
       {/* Image Carousel Horizontal Scrolling*/}
-      <img src={defaultImg} />
+      <img className='selImage' height='500' src={defaultImg} />
     </div>
   )
 }

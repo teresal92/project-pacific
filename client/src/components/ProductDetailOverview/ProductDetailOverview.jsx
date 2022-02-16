@@ -19,6 +19,7 @@ import { API_KEY } from '../../config/config.js';
 const axios = require('axios');
 
 function ProductDetailOverview({productId}) {
+  console.log(productId)
   const [ productInfo, setProductInfo ] = useState([]);
   const [ styles, setStyles ] = useState([]);
   // TODO: update default value from dummyData to default to first style obj in styles array
@@ -56,9 +57,9 @@ function ProductDetailOverview({productId}) {
   }
 
   return (
-    <Container maxWidth="lg">
+    <Container className='gallery' maxWidth="lg">
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={8}>
+        <Grid className='imageContainer' item xs={12} sm={6} md={8}>
           <ImageGallery style={selectedStyle} />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>

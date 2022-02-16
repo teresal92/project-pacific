@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ProductListEntry from './ProductListEntry.jsx';
 import { API_KEY } from '../../config/config.js';
 import { ImageList, ImageListItem, ImageListItemBar } from '@mui/material';
-import {Carousel} from '3d-react-carousal';
+import { Carousel } from '3d-react-carousal';
 
 const axios = require('axios');
 
 
-function ProductList({ getSelectedProduct }) {
+function ProductList(props) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -25,20 +25,14 @@ function ProductList({ getSelectedProduct }) {
     getProducts();
   }, []);
 
-  const getProductId = (event) => {
-    console.log(event);
-  }
-
-
-
   return (
     <div>
       <Carousel slides={products.map((product, i) => (
-            <ProductListEntry
-              product={product}
-              key={`product-key-${i}`}
-              getId={getProductId} />
-              ))}/>
+        <ProductListEntry
+          product={product}
+          key={`product-key-${i}`}
+          getId={props.getId} />
+      ))} />
     </div>
   )
 };
