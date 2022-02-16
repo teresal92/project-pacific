@@ -8,8 +8,13 @@ const QnAList = (props) => {
     <div>
       <div>
         {props.questions.map(item => {
-          return <QnAEntrie question={item} key={item.question_id} setAnswers={props.setAnswers} />
+          return <QnAEntrie question={item} key={item.question_id} getQuestions={props.getQuestions}/>
         })}
+
+        <button onClick={ (e) => {
+          var temp = props.count + 2
+          props.addCount(temp)}
+        }>Add Questions</button>
       </div>
     </div>
   )
