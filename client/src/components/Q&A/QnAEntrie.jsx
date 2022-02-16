@@ -33,7 +33,6 @@ class QnAEntrie extends React.Component {
   }
 
 
-
    getAnswers() {
      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/answers?count=500`, {
       headers: {
