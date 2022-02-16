@@ -2,7 +2,14 @@ body{
   background-color: rgb(236, 241, 241);
   color: #121212;
   font-family: 'Roboto';
+  width: 100% !important;
 }
+
+html {
+  display: block;
+  width: 95% !important;
+}
+
 
 a {
   cursor: pointer;
@@ -77,9 +84,10 @@ a {
 
 .overlay {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: -2px;
+  right: -2px;
   opacity: 0.7;
+  color: #900000;
   background-color: transparent;
 }
 
@@ -95,9 +103,23 @@ a {
 }
 
 .react-3d-carousel {
-  position: flex !important;
-  left: 25% !important;
-  width: 75% !important;
+  position: relative;
+  width: 42% !important;
+  margin-left: 10%;
+  margin-top: 5%;
+  margin-bottom: 2%;
+    background-image:
+    linear-gradient(
+      to right,
+      rgba(180, 180, 180, 0.2),
+      rgb(255, 255, 255),
+      rgb(255, 255, 255),
+      rgba(180, 180, 180, 0.2)
+    );
+    box-shadow: 0px 10px 40px rgba(180, 180, 180, 0.5);
+  border-radius: 20px;
+  padding-bottom: 2%;
+  float: left;
 }
 
 .react-3d-carousel .slider-container .slider-left div {
@@ -128,17 +150,6 @@ a {
   border-left: 2px solid #900000 !important;
 }
 
-.react-3d-carousel .slider-container .slider-right {
-  display: none;
-  position: absolute;
-  z-index: 3;
-  left: 31.6% ;
-  padding: 20px 15px;
-  height: 101%;
-  cursor: pointer;
-  margin-left: -2px;
-}
-
 .react-3d-carousel .slider-container .slider-content .slider-single .slider-single-content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -148,33 +159,12 @@ a {
   justify-content: center;
   position: relative;
   left: 0;
-  top: 0;
-  min-width: 200px !important;
-  max-width: 360px !important;
-  box-shadow: 0px 10px 20px rgba(90, 0, 0, 0.2) !important;
+  top: 15px !important;
+  width: 100%;
+  box-shadow: 0px 10px 40px rgb(0 0 0 / 0%) !important;
   transition: 500ms cubic-bezier(0.17, 0.67, 0.55, 1.43);
   transform: scale(0);
   opacity: 0;
-}
-
-.css-1qvr50w-MuiTypography-root {
-  margin: 0;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
-  font-weight: 400;
-  font-size: 1.5rem;
-  line-height: 1.334;
-  letter-spacing: 0em;
-  display: block;
-}
-
-.react-3d-carousel .slider-container .slider-content .slider-single {
-  position: absolute;
-  z-index: 0;
-  left: 0;
-  top: 0;
-  min-width: 335px;
-  max-width: 375px;
-  transition: z-index 0ms 250ms;
 }
 
 .css-bhp9pd-MuiPaper-root-MuiCard-root {
@@ -183,11 +173,87 @@ a {
   -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: 4px;
-  width: 360px;
+  width: 250px;
+  max-height: 360px;
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
   overflow: hidden;
 }
 
+.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: -8px;
+  margin-left: 12.5%;
+  width: 80% !important;
+  box-sizing: border-box;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: static;
+  background-color: #6f0000 !important;
+  color: #fff;
+}
+
+.css-1t6c9ts {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  justify-content: right !important;
+}
+
+.textbox {
+  border: 2px solid #900000;
+  position: relative;
+  float: right;
+  height: 400px;
+  width: 40%;
+  margin-top: 5%;
+  margin-right: 5%;
+}
+
+.imageContainer {
+  position: relative;
+  width: 42% !important;
+  margin-left: 10%;
+  margin-top: 10%;
+  margin-bottom: 2%;
+    background-image:
+    linear-gradient(
+      to right,
+      rgba(180, 180, 180, 0.2),
+      rgb(255, 255, 255),
+      rgb(255, 255, 255),
+      rgba(180, 180, 180, 0.2)
+    );
+    box-shadow: 0px 10px 40px rgba(180, 180, 180, 0.5);
+  border-radius: 20px;
+  padding-bottom: 2%;
+  float: left;
+}
+
+.product-image-gallery {
+  max-height: 360px;
+}
+
+.selImage {
+  margin-left: 25%;
+}
+
+.css-zow5z4-MuiGrid-root>.MuiGrid-item {
+  padding-top: 24px;
+  margin-top: 8%;
+}
 .answerBody {
   display:inline;
 }
