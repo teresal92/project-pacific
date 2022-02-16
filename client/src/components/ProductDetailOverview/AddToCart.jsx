@@ -14,7 +14,6 @@ import MenuItem from '@mui/material/MenuItem';
 export default function AddToCart({style}) {
   const skus = style.skus;
   const skuList = Object.keys(skus).map(skuId => ({ id: skuId, quantity: skus[skuId].quantity, size: skus[skuId].size }));
-  // console.log(`skuList: ${JSON.stringify(skuList)}`);
   const [sku, setSku] = React.useState('');
   const [size, setSize] = React.useState('');
   const [qty, setQty] = React.useState('');
@@ -180,7 +179,7 @@ export default function AddToCart({style}) {
     setQty(e.target.value);
   };
 
-  /* On Submit of add to cart button */
+  /* On Click of Aadd to cart button */
   const handleButtonClick = (e) => {
     e.preventDefault();
     if (sku && qty) {

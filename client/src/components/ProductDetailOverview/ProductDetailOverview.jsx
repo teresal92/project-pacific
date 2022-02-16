@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // MUI
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack';
 // Icons
 import Icon from '@mui/material/Icon';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -13,7 +14,8 @@ import ProductInfo from './ProductInfo.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
-import exStyleData from './exStyleData.js';
+// import exStyleData from './exStyleData.js';
+import Ratings from './Ratings.jsx';
 
 import { API_KEY } from '../../config/config.js';
 const axios = require('axios');
@@ -61,12 +63,13 @@ const ProductDetailOverview = ({productId}) => {
           <ImageGallery style={selectedStyle} />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <span className="social">
-            <span className="reviews"><a href="#">Read all 'REPLACE' reviews</a></span>
+          <Stack direction="row" spacing={2}>
+              <Ratings />
+              <a href="#">Read all Reviews</a>
               <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
               <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
               <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
-          </span>
+          </Stack>
           <ProductInfo
             product={productInfo}
             style={selectedStyle}
