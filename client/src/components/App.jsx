@@ -39,7 +39,7 @@ class App extends React.Component {
           </div>
           <div>
             <ProductDetailOverview productId={this.state.selectedProduct.id} />
-            <QnACore />
+            <QnACore prodId={this.state.selectedProduct.id}/>
           </div>
         </div >
       ) : (
