@@ -34,14 +34,14 @@ function StyleSelector({styles, selectedStyle, handleStyleSelector}) {
       <Typography variant="overline" display="block" >
         STYLE > {selectedStyle.name ? selectedStyle.name : 'SELECT STYLE'}
       </Typography>
-      <ImageList sx={{ width: 360, height: 200 }} cols={4} rowHeight={80}>
+      <ImageList sx={{ width: 400, height: 250 }} cols={4} rowHeight={100}>
         {styles.map((style, i) =>
           <ImageListItem key={`style-${i}`} onClick={(e) => handleClick(e, style)}>
             <img
               className='select-style-thumbnail'
               name={style.style_id}
-              src={`${style.photos[0].thumbnail_url}?w=80&h=8&fit=crop&auto=format`}
-              srcSet={`${style.photos[0].thumbnail_url}?w=80&h=80&fit=crop&auto=format&dpr=2 2x`}
+              src={`${style.photos[0].thumbnail_url}?w=100&h=100&fit=crop&auto=format`}
+              srcSet={`${style.photos[0].thumbnail_url}?w=100&h=100&fit=crop&auto=format&dpr=2 2x`}
               alt={style.name}
               loading='lazy'
             />
