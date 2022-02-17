@@ -18,7 +18,7 @@ class QnACore extends React.Component {
       prodId: this.props.prodId,
       userInput: '',
       filteredQuestions: [],
-      count: 2,
+      count: 4,
       allQuestions: [],
     }
     // this.getAnswers = this.getAnswers.bind(this);
@@ -40,7 +40,6 @@ class QnACore extends React.Component {
         return b.question_helpfulness - a.question_helpfulness;
       })
        var sortedWithoutReported = sortedRes.filter(item =>{
-         console.log(item)
          return item.reported !== true
        })
       var temp = sortedWithoutReported.splice(0, this.state.count)
@@ -93,7 +92,7 @@ class QnACore extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <input
           className='search-questions'
-          placeholder='Search Questions'
+          placeholder='Have a question? Search for answers…'
           onChange={(e) => {this.grabUserInput(e), this.filterSearch(e)}}></input>
       </form>
     </div>
@@ -108,7 +107,7 @@ class QnACore extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <input
               className='search-questions'
-              placeholder='Search Questions'
+              placeholder='Have a question? Search for answers…'
               onChange={(e) => {this.grabUserInput(e), this.filterSearch(e)}}></input>
           </form>
         </div>

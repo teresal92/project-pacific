@@ -7,7 +7,15 @@ const QnAList = (props) => {
   return (
     <div>
       <div>
-        <Grid >
+      <Box
+        sx={{
+          bgcolor: 'background.paper',
+          boxShadow: 10,
+          borderRadius: 3,
+          mx: 60,
+          minWidth: 300,
+        }}
+      >
         {props.questions.map(item => {
             return <QnAEntrie question={item} key={item.question_id} getQuestions={props.getQuestions}/>
         })}
@@ -15,7 +23,7 @@ const QnAList = (props) => {
           var temp = props.count + 2
           props.addCount(temp)}
         }>Add Questions</button>
-        </Grid>
+        </Box>
       </div>
     </div>
   )
