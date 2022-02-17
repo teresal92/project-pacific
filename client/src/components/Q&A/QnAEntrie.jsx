@@ -3,11 +3,10 @@ import axios from 'axios';
 import { API_KEY } from '../../config/config.js';
 import AnswerEntrie from './AnswerEntrie.jsx';
 axios.defaults.headers.common['Authorization'] = API_KEY;
-import { Container } from '@mui/material';
-import { FormControl, Card, CardContent, Grid, Typography, Button } from '@mui/material';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import { FormControl, Card, CardContent, Grid, Typography, Button, TextField, OutlinedInput, Box, Container} from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 class QnAEntrie extends React.Component {
   constructor(props) {
@@ -26,6 +25,8 @@ class QnAEntrie extends React.Component {
     this.addAnswer = this.addAnswer.bind(this);
     this.handleAnswer = this.handleAnswer.bind(this);
     this.answerFormSubmit = this.answerFormSubmit.bind(this);
+    this.helpfulQuestion = this.helpfulQuestion.bind(this)
+    this.reportQuestion = this.reportQuestion.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +52,14 @@ class QnAEntrie extends React.Component {
       console.error(err)
     })
   }
+
+  helpfulQuestion(e) {
+    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/helpful`)
+      .then(async (e) => {
+        await this.props.getQuestions();
+      })
+  }
+
   addAnswer(e) {
     e.preventDefault();
     axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/answers`, {
@@ -93,37 +102,86 @@ class QnAEntrie extends React.Component {
     }
   }
 
-
+  reportQuestion(e) {
+    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/report`)
+      .then(async () => {
+        await this.props.getQuestions()
+      })
+  }
 
   render() {
 
     var { addAnswerClick } = this.state
+    var {answerBody} = this.state
     return !addAnswerClick ? (
       <Box
         sx={{
           bgcolor: 'background.paper',
-          boxShadow: 6,
-          borderRadius: 5,
+          boxShadow: 10,
+          borderRadius: 3,
           p: 2,
           m: 2,
-          mx: 40,
+          mx: 60,
           minWidth: 300,
         }}
       >
         <div className='QnAEntrie'>
           <div>
-            <div className='qBody'>
+            {console.log(this.props)}
+            {/* <div className='qBody'>
               Q: {this.props.question.question_body}
+            </div> */}
+            <Typography variant='h5' align='center' >
+            Q: {this.props.question.question_body}</Typography>
+            {/* <span className='helpfulPlacement'>Helpful? Yes({this.props.question.question_helpfulness})</span> */}
+            <div> {answerBody.length === 0 ? (
+              <div >
+            <Typography onClick={this.helpfulQuestion} className='helpfulQuestion'>Helpful? Yes({this.props.question.question_helpfulness})</Typography>
+              <Grid
+              justify='center'
+              alignItems="center"
+              container direction="column"
+              >
+                <Button
+                onClick={this.handleAnswer}
+                endIcon={<SendIcon />}
+                size='medium'
+                variant='outlined'
+                color='primary'
+                >Add First Answer</Button>
+              </Grid>
+                </div>
+            ) : (
+              <div>
+                {this.state.answerBody.map(item => {
+                  var temp = new Date(item.date)
+                  var date = temp.toString().substring(0, 16)
+                  return <AnswerEntrie answers={item} key={item.answer_id} date={date} questionId={this.props.question.question_id} getAnswers={this.getAnswers}/>
+                })}
+                <Grid
+                display='inline'
+                container direction="column"
+                alignItems="right"
+                >
+                <Grid item xs={12}>
+                <Typography onClick={this.helpfulQuestion} className='helpfulQuestion'>Helpful? Yes({this.props.question.question_helpfulness})</Typography>
+                <Button
+                onClick={this.handleAnswer}
+                endIcon={<SendIcon />}
+                size='small'
+                color='primary'
+                >Add Answer
+                </Button>
+                <div className='reportQuestion'>
+                  <Button size='small' varient='text' disabled={this.state.btnDisabled} color='error' onClick={this.reportQuestion}>Report Question</Button>
+                </div>
+              </Grid>
+                </Grid>
+              </div>
+            )}
+
             </div>
-            <span>Helpful? Yes({this.props.question.question_helpfulness})</span>
-            <button onClick={this.handleAnswer}>Add Answer</button>
-            <div>
-              {this.state.answerBody.map(item => {
-                var temp = new Date(item.date)
-                var date = temp.toString().substring(0, 16)
-                return <AnswerEntrie answers={item} key={item.answer_id} date={date} questionId={this.props.question.question_id} getAnswers={this.getAnswers}/>
-              })}
-            </div>
+
           </div>
         </div>
       </Box>
@@ -138,7 +196,7 @@ class QnAEntrie extends React.Component {
           minWidth: 300,
         }}
       >
-        <Typography variant='h6' align='center'>
+        <Typography variant='h5' align='center' sx={{my:3}}>
           Q: {this.props.question.question_body}
         </Typography>
         <Card sx={{
@@ -146,7 +204,13 @@ class QnAEntrie extends React.Component {
           boxShadow: 10,
         }} style={{ maxWidth: 600, margin: '0 auto' }}>
           <CardContent>
-          <button onClick={this.handleAnswer}>Back</button>
+            <Button
+            onClick={this.handleAnswer}
+            size='small'
+            sx={{
+              mb:1
+            }}
+            ><ArrowBackIosNewIcon/></Button>
             <form onSubmit={this.addAnswer}>
               <Grid container spacing={1}>
                 <Grid xs={12} sm={6} item>
@@ -176,3 +240,10 @@ class QnAEntrie extends React.Component {
 
 
 export default QnAEntrie;
+{/* <div>
+{this.state.answerBody.map(item => {
+  var temp = new Date(item.date)
+  var date = temp.toString().substring(0, 16)
+  return <AnswerEntrie answers={item} key={item.answer_id} date={date} questionId={this.props.question.question_id} getAnswers={this.getAnswers}/>
+})}
+</div> */}

@@ -6,6 +6,9 @@ import axios from 'axios';
 import { API_KEY } from '../../config/config.js'
 import fakeData from './fakeData.js'
 axios.defaults.headers.common['Authorization'] = API_KEY;
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+
 class QnACore extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +39,11 @@ class QnACore extends React.Component {
       var sortedRes = response.data.results.sort(function (a, b) {
         return b.question_helpfulness - a.question_helpfulness;
       })
-      var temp = sortedRes.splice(0, this.state.count)
+       var sortedWithoutReported = sortedRes.filter(item =>{
+         console.log(item)
+         return item.reported !== true
+       })
+      var temp = sortedWithoutReported.splice(0, this.state.count)
       this.setState({
         questions: temp,
         allQuestions: sortedRes,
@@ -83,7 +90,6 @@ class QnACore extends React.Component {
     return this.state.filteredQuestions.length > 0 ?
     <div>
     <div>
-
       <form onSubmit={this.handleSubmit}>
         <input
           className='search-questions'
@@ -99,7 +105,6 @@ class QnACore extends React.Component {
     (
       <div>
         <div>
-        {console.log(this)}
           <form onSubmit={this.handleSubmit}>
             <input
               className='search-questions'
