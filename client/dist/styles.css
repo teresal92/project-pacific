@@ -257,9 +257,9 @@ a {
 }
 
 .selImage {
-  margin-left: 25%;
   max-height: 500px;
   width: 60%;
+  margin-left: 25%;
   object-fit: cover;
   object-position: bottom;
 }
@@ -271,6 +271,25 @@ a {
   opacity: 0.9;
   background-color: transparent;
 }
+
+.chevron {
+  position: absolute;
+  top: 50%;
+}
+
+.chevron:hover {
+  color: #900000;
+  cursor: pointer;
+}
+
+.img-chevron-left {
+  left: 160px;
+}
+
+.img-chevron-right {
+  right: 60px;
+}
+
 .css-rm9e7r{
   margin:0%;
   padding: 0%;
@@ -295,7 +314,6 @@ a {
 .underLine:hover {
   color:red;
 }
-<<<<<<< HEAD
 .css-ahj2mt-MuiTypography-root {
   position: relative;
   display:inline;
@@ -306,7 +324,6 @@ a {
 .helpfulQuestion:hover {
   color: red;
 }
-=======
 
 .css-11lq3yg-MuiGrid-root {
   box-sizing: border-box;
@@ -334,4 +351,3 @@ a {
   height: 200px;
   width: 150px;
 }
->>>>>>> Added OutfitnRelated folder with related items and youroutfit list

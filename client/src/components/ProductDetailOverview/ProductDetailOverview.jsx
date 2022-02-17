@@ -25,8 +25,10 @@ function ProductDetailOverview({productId}) {
   const [styles, setStyles] = useState([]);
   const [selectedStyle, setSelectedStyle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  // const [productOOS, setProductOOS] = useState(false);
 
-  // fetch list of styles and product info for particular product id
+  // TODO: handle cases when url or skus are null
+
   useEffect(() => {
     const getProductInfo = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}`, {
       headers: { Authorization: `${API_KEY}` },

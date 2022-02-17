@@ -5,27 +5,29 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-
 function ImageGallery({style}) {
   const [photos, setPhotos] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [isSelected, setIsSelected] = useState(false);
+  // const [isSelected, setIsSelected] = useState(false);
 
   // TODO: when different style is selected, update the default image;
   useEffect(() => {
     if (style.photos) {
       setPhotos(style.photos);
     }
-    // setCurrentIdx(style.photos[0].url);
   }, [style]);
 
 
-  const renderDefaultView = () => {
+  const renderView = () => {
     // console.log(`${style.photos}`)
     // console.log(`${JSON.stringify(style.photos[currentIdx].url)}`)
+
+    // if default view
     return (
       <img className="selImage" src={`${style.photos[currentIdx].url}`} alt="" />
     );
+
+    // if expanded view
   }
 
 
@@ -34,15 +36,10 @@ function ImageGallery({style}) {
   // Clicking on any thumbnail should update the main image to match that shown in the thumbnail clicked.
   // The thumbnail corresponding to the image currently selected as the main image should be highlighted to indicate the current selection.
 
-  const renderExpandedView = () => {
-
-
-  }
-
   const handleThumbnailClick = (e, i) => {
     setCurrentIdx(i);
     setIsSelected(true);
-  }
+  };
 
   const handleVerticalScrollUp = () => {
 
@@ -54,14 +51,15 @@ function ImageGallery({style}) {
 
 
   const handleHorizontalScrollRight = () => {
-
+    console.log('clicked!');
   }
 
   const handleHorizontalScrollLeft = () => {
-
+    console.log('clicked!');
   }
 
-
+  // conditionally render bottom bar under selected thumbnail
+  // style={{borderBottom: (isSelected) ? '3px solid #121212' : null }}
 
   return (
     <div className="image-gallery">
@@ -70,7 +68,6 @@ function ImageGallery({style}) {
           {photos.map((photo, i) =>
             <ImageListItem
               key={`photo-${i}`}
-              style={{borderBottom: (isSelected) ? '3px solid #121212' : null }}
               onClick={(e) => handleThumbnailClick(e, i)}
             >
               <img
@@ -85,8 +82,17 @@ function ImageGallery({style}) {
           )}
         </ImageList>
       </div>
-      {renderDefaultView()}
-      {/* <img className="selImage" height="500" src={currentImg} alt="" /> */}
+      <ChevronLeftIcon
+        className="chevron img-chevron-left"
+        onClick={handleHorizontalScrollLeft}
+        fontSize="large"
+      />
+      {renderView()}
+      <ChevronRightIcon
+        className="chevron img-chevron-right"
+        onClick={handleHorizontalScrollRight}
+        fontSize="large"
+      />
     </div>
   );
 }
