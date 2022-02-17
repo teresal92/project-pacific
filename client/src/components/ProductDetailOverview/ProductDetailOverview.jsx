@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 // MUI
 import Grid from '@mui/material/Grid';
@@ -19,23 +20,23 @@ import Ratings from './Ratings.jsx';
 import { API_KEY } from '../../config/config.js';
 const axios = require('axios');
 
-const ProductDetailOverview = ({productId}) => {
-  const [ productInfo, setProductInfo ] = useState([]);
-  const [ styles, setStyles ] = useState([]);
-  const [ selectedStyle, setSelectedStyle ] = useState({});
-  const [ isLoading, setIsLoading ] = useState(true);
+function ProductDetailOverview({productId}) {
+  const [productInfo, setProductInfo] = useState([]);
+  const [styles, setStyles] = useState([]);
+  const [selectedStyle, setSelectedStyle] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   // fetch list of styles and product info for particular product id
   useEffect(() => {
-    let getProductInfo = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}`, {
-      headers: { 'Authorization': `${API_KEY}` }
+    const getProductInfo = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}`, {
+      headers: { Authorization: `${API_KEY}` },
     });
 
-    let getStyles = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
-      headers: { 'Authorization': `${API_KEY}` }
+    const getStyles = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
+      headers: { Authorization: `${API_KEY}` },
     });
 
-    Promise.all([ getProductInfo, getStyles])
+    Promise.all([getProductInfo, getStyles])
       .catch(err => console.error(err))
       .then(res => {
         setProductInfo(res[0].data);
@@ -44,7 +45,6 @@ const ProductDetailOverview = ({productId}) => {
       })
       .then(() => setIsLoading(false));
   }, [productId]);
-
 
   // when style is clicked within styleSelector, pass particular style id into handleStyleSelector
   // to set selectedStyle
@@ -84,25 +84,7 @@ const ProductDetailOverview = ({productId}) => {
     </Container>
   ) : (
     <div>Loading... </div>
-  )
-};
+  );
+}
 
 export default ProductDetailOverview;
-
-
-// function getStyles() {
-  //   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
-  //       headers: { 'Authorization': `${API_KEY}` }
-  //     })
-  //     .then( res => setStyles(res.data.results))
-  //     .catch( err => console.error(err))
-  //     .then( () => setIsLoading(false));
-  // };
-  // getStyles();
-
-  // function getProductInfo() {
-  //
-  //   .then( res => setProductInfo(res.data))
-  //   .catch( err => console.error(err));
-  // }
-  // getProductInfo();

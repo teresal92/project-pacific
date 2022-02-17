@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 
-const ProductInfo = ({product, style}) => {
-
+function ProductInfo({product, style}) {
   // check if styles.results.sale_price is not null
   function flagOnSale() {
     return ((style.sale_price !== null) ? (
@@ -18,15 +17,15 @@ const ProductInfo = ({product, style}) => {
       <span className='org-price'>
           {product.default_price}
       </span>
-    ))
-  };
+    ));
+  }
 
   return (
     <div className="product-info">
       <Typography variant="overline" display="block" gutterBottom>
         {product.category}
       </Typography>
-      <Typography variant='h4' component='div'>
+      <Typography variant="h4" component="div">
         {product.name}
       </Typography>
       {flagOnSale()}
@@ -34,7 +33,7 @@ const ProductInfo = ({product, style}) => {
         {product.description}
       </Typography>
     </div>
-  )
-};
+  );
+}
 
 export default ProductInfo;
