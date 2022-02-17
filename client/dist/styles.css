@@ -32,7 +32,18 @@ a {
   padding: 15px;
   font-size: 22px;
 }
+
+
+.helpfulPlacement{
+  float: right;
+  text-align: right;
+}
+.css-1rwt2y5-MuiButtonBase-root-MuiButton-root{
+  width: 40%;
+}
+
 .qBody {
+  display:inline;
   font: bold;
   position: relative;
   left: 35%;
@@ -56,7 +67,6 @@ a {
   font-size: 11px;
   font: lighter;
   position: relative;
-  left: 36%;
   justify-content: center;
 }
 .answer-body {
@@ -261,7 +271,14 @@ a {
   opacity: 0.9;
   background-color: transparent;
 }
+.css-rm9e7r{
+  margin:0%;
+  padding: 0%;
+}
 
+.reportQuestion {
+  float: right;
+}
 .css-zow5z4-MuiGrid-root>.MuiGrid-item {
   padding-top: 24px;
   margin-top: 8%;
@@ -278,4 +295,13 @@ a {
 .underLine:hover {
   color:red;
 }
-
+.css-ahj2mt-MuiTypography-root {
+  position: relative;
+  display:inline;
+  float:inline-end;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.helpfulQuestion:hover {
+  color: red;
+}
