@@ -383,16 +383,13 @@ const QnAEntrie = (props) => {
   var [addAnswerClick, setAddAnswerClick] = useState(false);
   var [count, setCount] = useState(5);
 
-  useEffect(() => {
-    getAnswers();
-  },[])
 
-   const getAnswers = () => {
+  const getAnswers = () => {
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${props.question.question_id}/answers?count=500`, {
       headers: {
         Authorization: API_KEY
       }
-    }).then(async (response) => {
+    }).then( (response) => {
       var sortedAnswerArray = response.data.results.sort(function (a, b) {
         var dateA = new Date(a.date), dateB = new Date(b.date)
         return dateB - dateA;
@@ -404,20 +401,20 @@ const QnAEntrie = (props) => {
       })
       var splicedAnswers = temp.splice(0, count)
       console.log(splicedAnswers)
-      await setAnswerBody(splicedAnswers)
+      setAnswerBody(splicedAnswers)
     }).catch(err => {
       console.error(err)
     })
   }
 
   const helpfulQuestion = (e) => {
-    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${this.props.question.question_id}/helpful`)
-      .then(async (e) => {
-        await props.getQuestions();
-      })
+    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${props.question.question_id}/helpful`)
+    .then( (e) => {
+       props.getQuestions();
+    })
   }
 
-   const addAnswer = (e) => {
+  const addAnswer = (e) => {
     e.preventDefault();
     axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${props.question.question_id}/answers`, {
       body: body,
@@ -425,7 +422,7 @@ const QnAEntrie = (props) => {
       email: email,
       photos: photos,
     }).then(response => {
-      props.getAnswers();
+        getAnswers();
     }).catch(err => {
       console.error(err)
     })
@@ -451,13 +448,16 @@ const QnAEntrie = (props) => {
 
   const reportQuestion = (e) => {
     axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${props.question.question_id}/report`)
-      .then(async () => {
-        await props.getQuestions()
-      })
+    .then(async () => {
+      await props.getQuestions()
+    })
   }
 
-    return !addAnswerClick ? (
-      <Accordion defaultExpanded={true}>
+  useEffect(() => {
+    getAnswers();
+  },[])
+  return !addAnswerClick ? (
+    <Accordion defaultExpanded={true}>
         <AccordionSummary>
           <Typography variant='h5' align='center' >
             Q: {props.question.question_body}
@@ -482,7 +482,7 @@ const QnAEntrie = (props) => {
           ) : (
             <div>
               <Box sx={{
-                bgcolor: 'primary.main',
+                bgcolor: '#fffff',
                 boxShadow: 10,
               }}>
                 {answerBody.map(item => {
