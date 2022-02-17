@@ -7,7 +7,7 @@ body{
 
 html {
   display: block;
-  width: 95% !important;
+  width: 97% !important;
 }
 
 
@@ -149,9 +149,9 @@ a {
 .react-3d-carousel .slider-container .slider-right div {
   position: relative ;
   top: 50%;
-  left: 0%;
+  left: 48% !important;
   margin-top: -20px;
-  color: #ffffff !important;
+  color: #ffffff;
   transform: translateY(-50%);
   padding: 10px 10px;
   border-top: 2px solid #900000 !important;
@@ -235,7 +235,7 @@ a {
 .imageContainer {
   position: relative;
   width: 42% !important;
-  margin-left: 10%;
+  margin-left: 20%;
   margin-top: 10%;
   margin-bottom: 2%;
     background-image:
@@ -295,6 +295,7 @@ a {
 .underLine:hover {
   color:red;
 }
+<<<<<<< HEAD
 .css-ahj2mt-MuiTypography-root {
   position: relative;
   display:inline;
@@ -305,3 +306,32 @@ a {
 .helpfulQuestion:hover {
   color: red;
 }
+=======
+
+.css-11lq3yg-MuiGrid-root {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.outfitBox {
+  margin-top: 600px;
+  position: relative;
+  border: 2px solid #900000;
+}
+
+.outfitItem {
+  height: 200px;
+  width: 150px;
+}
+>>>>>>> Added OutfitnRelated folder with related items and youroutfit list
