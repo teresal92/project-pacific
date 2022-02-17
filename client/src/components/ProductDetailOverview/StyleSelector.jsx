@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 // MUI
-import { ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material';
+import { ImageList, ImageListItem, Typography } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
-function StyleSelector({styles, handleStyleSelector}) {
-  const [ selectedStyle, setSelectedStyle ] = useState({});
+function StyleSelector({styles, selectedStyle, handleStyleSelector}) {
   const [ isSelected, setIsSelected ] = useState(false);
 
-  // retrieve default for selectedStyle
   useEffect(() => {
-    if (styles[0]) {
-      setSelectedStyle(styles[0]);
+    if (selectedStyle) {
       setIsSelected(true);
     }
-  }, [styles])
+  }, [selectedStyle])
 
   const handleClick = (event, style) => {
-    setSelectedStyle(style);
+    // console.log(`clicked on ${JSON.stringify(style)}`)
     handleStyleSelector(style);
     setIsSelected(true);
   };
@@ -37,14 +34,14 @@ function StyleSelector({styles, handleStyleSelector}) {
       <Typography variant="overline" display="block" >
         STYLE > {selectedStyle.name ? selectedStyle.name : 'SELECT STYLE'}
       </Typography>
-      <ImageList sx={{ width: 400, height: 250 }} cols={4} rowHeight={100}>
+      <ImageList sx={{ width: 360, height: 200 }} cols={4} rowHeight={80}>
         {styles.map((style, i) =>
           <ImageListItem key={`style-${i}`} onClick={(e) => handleClick(e, style)}>
             <img
               className='select-style-thumbnail'
               name={style.style_id}
-              src={`${style.photos[0].thumbnail_url}?w=100&h=100&fit=crop&auto=format`}
-              srcSet={`${style.photos[0].thumbnail_url}?w=100&h=100&fit=crop&auto=format&dpr=2 2x`}
+              src={`${style.photos[0].thumbnail_url}?w=80&h=8&fit=crop&auto=format`}
+              srcSet={`${style.photos[0].thumbnail_url}?w=80&h=80&fit=crop&auto=format&dpr=2 2x`}
               alt={style.name}
               loading='lazy'
             />

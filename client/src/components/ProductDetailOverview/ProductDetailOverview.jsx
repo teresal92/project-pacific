@@ -49,7 +49,7 @@ function ProductDetailOverview({productId}) {
   // when style is clicked within styleSelector, pass particular style id into handleStyleSelector
   // to set selectedStyle
   function handleStyleSelector(style) {
-    if (style.length > 0) {
+    if (style) {
       setSelectedStyle(style);
     }
   }
@@ -62,13 +62,13 @@ function ProductDetailOverview({productId}) {
         </Grid>
         <Grid item xs={12} sm={12} md={5}>
           <Stack direction="row" spacing={3}>
-              <Ratings />
-              <a href="#">Read all Reviews</a>
-              <span className="social">
-                <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
-                <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
-                <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
-              </span>
+            <Ratings />
+            <a href="#">Read all Reviews</a>
+            <span className="social">
+              <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
+              <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
+              <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
+            </span>
           </Stack>
           <ProductInfo
             product={productInfo}
@@ -76,9 +76,10 @@ function ProductDetailOverview({productId}) {
           />
           <StyleSelector
             styles={styles}
+            selectedStyle={selectedStyle}
             handleStyleSelector={handleStyleSelector}
           />
-          <AddToCart style={selectedStyle}/>
+          <AddToCart style={selectedStyle} />
         </Grid>
       </Grid>
     </Container>
