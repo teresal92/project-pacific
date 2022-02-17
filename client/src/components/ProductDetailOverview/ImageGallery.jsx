@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ImageList, ImageListItem, Typography } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 function ImageGallery({style}) {
   const [photos, setPhotos] = useState([]);
