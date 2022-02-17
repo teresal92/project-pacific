@@ -13,7 +13,11 @@ import MenuItem from '@mui/material/MenuItem';
 
 export default function AddToCart({style}) {
   const skus = style.skus;
-  const skuList = Object.keys(skus).map(skuId => ({ id: skuId, quantity: skus[skuId].quantity, size: skus[skuId].size }));
+  const skuList = Object.keys(skus).map(skuId => ({
+    id: skuId,
+    quantity: skus[skuId].quantity,
+    size: skus[skuId].size,
+  }));
   const [sku, setSku] = React.useState('');
   const [size, setSize] = React.useState('');
   const [qty, setQty] = React.useState('');
@@ -22,7 +26,7 @@ export default function AddToCart({style}) {
 
   /* Size Dropdown */
   const renderSizeDropdown = () => {
-    let availableSkus = skuList.filter(sku => sku.quantity > 0);
+    const availableSkus = skuList.filter(sku => sku.quantity > 0);
     if (availableSkus.length === 0) {
       setOOS(true);
     }
@@ -91,11 +95,11 @@ export default function AddToCart({style}) {
   const renderQtyDropdown = () => {
     if (sku !== '') {
       console.log(sku.quantity);
-      let max = ( sku.quantity < 15) ? sku.quantity : 15;
-      let range = [];
+      const max = (sku.quantity < 15) ? sku.quantity : 15;
+      const range = [];
       for (let i = 1; i <= max; i++) {
         range.push(i);
-      };
+      }
       return (
         <FormControl sx={{ m: 1, minWidth: 200 }}>
           <InputLabel id="demo-simple-select-label">Select Qty</InputLabel>
@@ -105,7 +109,7 @@ export default function AddToCart({style}) {
             value={qty}
             onChange={handleQtyChange}
           >
-            {range.map((num, i) => (
+           {range.map((num, i) => (
             <MenuItem
               key={i}
               value={num}
@@ -115,7 +119,7 @@ export default function AddToCart({style}) {
             ))}
           </Select>
         </FormControl>
-      )
+      );
     } else {
       return (
         <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -131,7 +135,7 @@ export default function AddToCart({style}) {
             </MenuItem>
           </Select>
         </FormControl>
-      )
+      );
     }
     // return (
     //     <select value={qty} onChange={handleQtyChange}>
@@ -166,7 +170,7 @@ export default function AddToCart({style}) {
 
   // set state for sku and size based on sku id, then pass sku id to showQtyDropdown
   const handleSizeChange = (e) => {
-    let size = e.target.value;
+    const size = e.target.value;
     setSize(size);
   };
 
@@ -184,9 +188,10 @@ export default function AddToCart({style}) {
     e.preventDefault();
     if (sku && qty) {
       setOpen(false);
-      axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/cart', { 'sku_id': sku.id }, { headers: { 'Authorization': `${API_KEY}` } })
-      .then( res => console.log(`Success! ${res}`))
-      .catch( err => console.error(err));
+      axios
+        .post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/cart', { sku_id: sku.id }, { headers: { Authorization: `${API_KEY}` } })
+        .then(res => console.log(`Success! ${res}`))
+        .catch(err => console.error(err));
     } else {
       setOpen(true);
     }
@@ -194,11 +199,11 @@ export default function AddToCart({style}) {
 
   const handleOpen = () => {
     setOpen(true);
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
-  }
+  };
 
   return (
     <form className="add-to-cart-form">

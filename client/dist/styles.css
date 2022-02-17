@@ -242,12 +242,24 @@ a {
   float: left;
 }
 
-.product-image-gallery {
-  max-height: 360px;
+.image-gallery {
+  max-height: 500px;
 }
 
 .selImage {
   margin-left: 25%;
+  max-height: 500px;
+  width: 60%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.img-thumbnail-overlay {
+  position: absolute;
+  top: 20px;
+  left: 35px;
+  opacity: 0.9;
+  background-color: transparent;
 }
 
 .css-zow5z4-MuiGrid-root>.MuiGrid-item {
@@ -266,3 +278,4 @@ a {
 .underLine:hover {
   color:red;
 }
+

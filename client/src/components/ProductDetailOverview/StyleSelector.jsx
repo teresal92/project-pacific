@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 // MUI
-import { ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material';
+import { ImageList, ImageListItem, Typography } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
-function StyleSelector({styles, handleStyleSelector}) {
-  const [ selectedStyle, setSelectedStyle ] = useState({});
+function StyleSelector({styles, selectedStyle, handleStyleSelector}) {
   const [ isSelected, setIsSelected ] = useState(false);
 
-  // retrieve default for selectedStyle
   useEffect(() => {
-    if (styles[0]) {
-      setSelectedStyle(styles[0]);
+    if (selectedStyle) {
       setIsSelected(true);
     }
-  }, [styles])
+  }, [selectedStyle])
 
   const handleClick = (event, style) => {
-    setSelectedStyle(style);
+    // console.log(`clicked on ${JSON.stringify(style)}`)
     handleStyleSelector(style);
     setIsSelected(true);
   };
