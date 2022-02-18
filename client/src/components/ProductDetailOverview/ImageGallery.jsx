@@ -31,7 +31,6 @@ function ImageGallery({style}) {
 
   const handleSelectedImage = (e, i) => {
     setCurrentIdx(i);
-    // setIsSelected(true);
   };
 
   // prev img
@@ -48,16 +47,14 @@ function ImageGallery({style}) {
     if (photos.length > 7) {
       // be able to scroll to previous
     }
-  }
+  };
 
   const handleScrollDown = () => {
     if (photos.length > 7) {
       // be able to scroll to next
     }
-  }
+  };
 
-  // conditionally render bottom bar under selected thumbnail
-  // style={{borderBottom: (isSelected) ? '3px solid #121212' : null }}
   return (
     <div className="img-gallery-carousel-container">
       <div className="img-gallery-carousel-overlay">
@@ -73,7 +70,10 @@ function ImageGallery({style}) {
               onClick={(e) => handleSelectedImage(e, i)}
             >
               <img
-                style={{ borderBottom: (currentIdx === i) ? '3px solid #900000' : null }}
+                style={{
+                  borderBottom: (currentIdx === i) ? '3px solid #900000' : null,
+                  opacity: (currentIdx === i) ? '0.8' : '1',
+                }}
                 className="img-gallery-carousel-thumbnail"
                 name={i}
                 src={`${photo.thumbnail_url}?w=70&h=70&fit=crop&auto=format`}
