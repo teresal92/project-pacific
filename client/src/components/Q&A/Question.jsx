@@ -108,7 +108,7 @@ return !questionBtnClicked  ? (
         ><ArrowBackIosNewIcon /></Button>
         <Typography className={classes.addAnswerHeader}>Add Question</Typography>
       <Accordion className={classes.accordion}>
-      <form onSubmit={() => { onClick(), handleChange()}} >
+      <form onSubmit={(e) => {sendQuestion(e), onClick(e)}}>
         <Grid container spacing={1}>
           <Grid xs={12} sm={6} item>
             <TextField onChange={answerFormSubmit} label='Enter Name' placeholder='Name' variant='outlined' fullWidth required />
