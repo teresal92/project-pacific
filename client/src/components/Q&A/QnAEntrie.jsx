@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API_KEY } from '../../../../config.js'
 import AnswerEntrie from './AnswerEntrie.jsx';
-axios.defaults.headers.common['Authorization'] = API_KEY;
 import { FormControl, Card, CardContent, Grid, Typography, Button, TextField, OutlinedInput, Box, Container } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
@@ -67,10 +65,8 @@ const QnAEntrie = (props) => {
 
 
   const getAnswers = () => {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${props.question.question_id}/answers?count=500`, {
-      headers: {
-        Authorization: API_KEY
-      }
+
+    axios.get(`/api/qa/questions/${props.question.question_id}/answers?count=500`, {
     }).then( (response) => {
       var sortedAnswerArray = response.data.results.sort(function (a, b) {
         var dateA = new Date(a.date), dateB = new Date(b.date)
@@ -82,10 +78,7 @@ const QnAEntrie = (props) => {
         }
       })
       var splicedAnswers = temp.splice(0, count)
-<<<<<<< HEAD
-=======
       // console.log(splicedAnswers)
->>>>>>> Initialized changes for OutfitList to be a child component of ProductDetailOverview
       setAnswerBody(splicedAnswers)
     }).catch(err => {
       console.error(err)
@@ -93,7 +86,7 @@ const QnAEntrie = (props) => {
   }
 
   const helpfulQuestion = (e) => {
-    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${props.question.question_id}/helpful`)
+    axios.put(`/api/qa/questions/${props.question.question_id}/helpful`)
     .then( (e) => {
       props.getQuestions();
     })
@@ -101,7 +94,7 @@ const QnAEntrie = (props) => {
 
   const addAnswer = (e) => {
     e.preventDefault();
-    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${props.question.question_id}/answers`, {
+    axios.post(`/api/qa/questions/${props.question.question_id}/answers`, {
       body: body,
       name: name,
       email: email,
@@ -132,7 +125,7 @@ const QnAEntrie = (props) => {
   }
 
   const reportQuestion = (e) => {
-    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/${props.question.question_id}/report`)
+    axios.put(`/api/qa/questions/${props.question.question_id}/report`)
     .then(async () => {
       await props.getQuestions()
     })

@@ -43,15 +43,11 @@ const Question = (props) => {
   }
   const sendQuestion = (e) => {
     e.preventDefault();
-    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/`, {
+    axios.post(`/api/qa/questions/`, {
        body: body,
        name: name,
        email: email,
        product_id: props.prodId
-   }, {
-     headers: {
-       Authorization: API_KEY
-     }
    })
    .then(response => {
      console.log('Success ', response)
