@@ -16,11 +16,12 @@ import ImageGallery from './ImageGallery.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 import Ratings from './Ratings.jsx';
+import OutfitList from '../OutfitnRelated/YourOutfit.jsx';
 
 import { API_KEY } from '../../config.js';
 const axios = require('axios');
 
-function ProductDetailOverview({productId}) {
+function ProductDetailOverview({ productId, outfit, selected, add }) {
   const [productInfo, setProductInfo] = useState([]);
   const [styles, setStyles] = useState([]);
   const [selectedStyle, setSelectedStyle] = useState({});
@@ -83,6 +84,9 @@ function ProductDetailOverview({productId}) {
           />
           <AddToCart style={selectedStyle} />
         </Grid>
+      </Grid>
+      <Grid item xs={12} sm={12} md={12}>
+        <OutfitList outfit={outfit} selected={selected} item={selectedStyle} add={add}/>
       </Grid>
     </Container>
   ) : (

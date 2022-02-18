@@ -6,6 +6,8 @@ import { Grid, Container } from '@mui/material';
 
 export default function OutfitList(props) {
 
+  console.log(props.outfit)
+
   return (
     props.selected ? (
       <Container >
@@ -15,15 +17,20 @@ export default function OutfitList(props) {
             {props.outfit.map((item, i) => (
               <Grid item key={`item-key-${i}`}>
                 <Card className='outfitItem'>
-                  <CardHeader titleTypographyProps={{variant:'h7' }} title={item.name} />
+                  <CardHeader titleTypographyProps={{ variant: 'h7' }} title={item.name} height='50'/>
+                  <CardMedia
+                    component='img'
+                    height='200'
+                    alt='NO IMAGE'
+                    src={item.photos[0].thumbnail_url} />
                 </Card>
               </Grid>
             ))}
-          </Grid>
-          <Grid>
-            <Card className='outfitAdd' onClick={(e) => { console.log('clicking works') }}>
-              <CardHeader title={'ADD TO OUTFIT'} />
-            </Card>
+            <Grid>
+              <Card className='outfitAdd' onClick={(e) => { props.add(props.item) }}>
+                <CardHeader title={'ADD TO OUTFIT'} />
+              </Card>
+            </Grid>
           </Grid>
         </div>
       </Container>
@@ -35,7 +42,7 @@ export default function OutfitList(props) {
             {props.outfit.map((item, i) => (
               <Grid item key={`item-key-${i}`}>
                 <Card className='outfitItem'>
-                  <CardHeader titleTypographyProps={{variant:'h7' }} title={item.name} />
+                  <CardHeader titleTypographyProps={{ variant: 'h7' }} title={item.name} />
                 </Card>
               </Grid>
             ))}

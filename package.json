@@ -46,6 +46,7 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.4.1",
     "@mui/material": "^5.4.1",
+    "@mui/styles": "^5.4.2",
     "3d-react-carousal": "^4.0.2",
     "axios": "^0.25.0",
     "cors": "^2.8.5",

@@ -1,74 +1,134 @@
-import React from 'react';
-import {API_KEY} from '../../config/config.js';
+import React, { useState, useEffect } from 'react';
+import { API_KEY } from '../../../../config.js'
 import axios from 'axios';
-
-class Question extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      body: '',
-      name: '',
-      email: '',
-
-    }
-    this.answerFormSubmit = this.answerFormSubmit.bind(this);
-    this.sendQuestion = this.sendQuestion.bind(this);
+import { FormControl, Card, CardContent, Grid, Typography, Button, TextField, OutlinedInput, Box, Container, Accordion, AccordionDetails, AccordionSummary} from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { makeStyles } from '@mui/styles';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { Grow } from '@mui/material';
+const useStyles = makeStyles({
+  addAnswerHeader : {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    fontSize: 22,
+  },
+  accordion: {
+    position: 'relative',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    maxWidth: 700,
   }
+})
 
+const Question = (props) => {
 
+  const classes = useStyles()
 
-  answerFormSubmit(e) {
+  var [body, setBody] = useState('');
+  var [name, setName] = useState('');
+  var [email, setEmail] = useState('');
+  var [questionBtnClicked, setQuestionBtnClicked] = useState(false)
+  var [checked, setChecked] = useState(false);
+  const answerFormSubmit = (e)  => {
     e.preventDefault();
     if (e.target.placeholder === 'Name') {
-      this.setState({
-        name: e.target.value
-      })
+      setName(e.target.value)
     } else if (event.target.placeholder === 'Body') {
-      this.setState({
-        body: e.target.value
-      })
+      setBody(e.target.value)
     } else if (event.target.placeholder === 'Email') {
-      this.setState({
-        email: e.target.value
-      })
+      setEmail(e.target.value)
     }
     console.log(e.target.value)
   }
-
-   sendQuestion(e) {
-     e.preventDefault();
-     axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/`, {
-        body: this.state.body,
-        name: this.state.name,
-        email: this.state.email,
-        product_id: this.props.prodId
-    }, {
-      headers: {
-        Authorization: API_KEY
-      }
-    })
-    .then(response => {
-      console.log('Success ', response)
-      this.props.getQuestions();
-    }).catch(err => {
-      console.error(err)
-    })
+  const sendQuestion = (e) => {
+    e.preventDefault();
+    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/`, {
+       body: body,
+       name: name,
+       email: email,
+       product_id: props.prodId
+   }, {
+     headers: {
+       Authorization: API_KEY
+     }
+   })
+   .then(response => {
+     console.log('Success ', response)
+     props.getQuestions();
+   }).catch(err => {
+     console.error(err)
+   })
+ }
+  const onClick = (e) => {
+    setQuestionBtnClicked(!questionBtnClicked);
   }
 
 
-  render() {
-    return (
-      <div>
-        <div>
-          <form>
-            <input onChange={this.answerFormSubmit} type='text' placeholder='Name'></input>
-            <input onChange={this.answerFormSubmit} type='text' placeholder='Body'></input>
-            <input onChange={this.answerFormSubmit} type='text' placeholder='Email'></input>
-            <button className='addQuestionButton' onClick={(e) => {this.sendQuestion(e)}}>Add Question +</button>
-          </form>
-        </div>
-      </div>
-    )
-  }
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
+//  return(
+//   <div>
+//   <div>
+//     <form>
+//       <input onChange={answerFormSubmit} type='text' placeholder='Name'></input>
+//       <input onChange={answerFormSubmit} type='text' placeholder='Body'></input>
+//       <input onChange={answerFormSubmit} type='text' placeholder='Email'></input>
+//       <button className='addQuestionButton' onClick={(e) => {sendQuestion(e)}}>Add Question +</button>
+//     </form>
+//   </div>
+// </div>
+//  )
+
+return !questionBtnClicked  ? (
+  <Grid>
+    <Accordion className={classes.accordion} onClick={(e) => {onClick(e) , handleChange(e)}}>
+      <AccordionSummary addicon={<AddCircleOutlineIcon/>}>
+        <Typography className={classes.addAnswerHeader}>Add Question</Typography>
+      </AccordionSummary>
+    </Accordion>
+  </Grid>
+):(
+  <Grow in={checked}
+  style={{ transformOrigin: '0 0 0' }}
+  {...(checked ? { timeout: 1000 } : {})}>
+  <Card sx={{
+    bgcolor: 'background.paper',
+    boxShadow: 10,
+  }} style={{ maxWidth: 600, margin: 'auto auto' }}>
+
+    <CardContent>
+      <Button
+        onClick={(e) => {handleChange(e), onClick(e)}}
+        size='small'
+        sx={{
+          mb: 1
+        }}
+        ><ArrowBackIosNewIcon /></Button>
+        <Typography className={classes.addAnswerHeader}>Add Question</Typography>
+      <Accordion className={classes.accordion}>
+      <form onSubmit={(e) => {sendQuestion(e), onClick(e)}}>
+        <Grid container spacing={1}>
+          <Grid xs={12} sm={6} item>
+            <TextField onChange={answerFormSubmit} label='Enter Name' placeholder='Name' variant='outlined' fullWidth required />
+          </Grid>
+          <Grid xs={12} sm={6} item>
+            <TextField onChange={answerFormSubmit} type='email' label='Enter Email' placeholder='Email' variant='outlined' fullWidth required />
+          </Grid>
+          <Grid xs={12} item>
+            <TextField onChange={answerFormSubmit} label='Enter Question Body' multiline rows={4} placeholder='Body' variant='outlined' fullWidth required />
+          </Grid>
+          <Grid xs={12} item>
+            <Button type='submit' variant='contained' color='primary' fullWidth >Submit Answer</Button>
+          </Grid>
+        </Grid>
+      </form>
+      </Accordion>
+    </CardContent>
+  </Card>
+        </Grow>
+
+)
 }
 export default Question;
