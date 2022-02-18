@@ -59,10 +59,10 @@ class App extends React.Component {
             }}
             varient='middle'/>
           </div>
-          <div className='qna'>
+          {/* <div className='qna'>
             <QnACore prodId={this.state.selectedProduct.id} />
-          </div>
-        </div >
+          </div> */}
+        </div>
       ) : (
         <div>
           <div className='navbar'>

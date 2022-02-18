@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { API_KEY } from '../../config.js';
 
 // MUI components
 import Button from '@mui/material/Button';
@@ -43,7 +42,7 @@ export default function AddToCart({style}) {
     if (sku && qty) {
       setOpen(false);
       axios
-        .post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/cart', { sku_id: sku.id }, { headers: { Authorization: `${API_KEY}` } })
+        .post(`/api/cart/${sku.id}`)
         .then(res => console.log(`Success! ${res}`))
         .catch(err => console.error(err));
     } else {
@@ -114,7 +113,6 @@ export default function AddToCart({style}) {
   /* Size Dropdown */
   const renderQtyDropdown = () => {
     if (sku !== '') {
-      console.log(sku.quantity);
       const max = (sku.quantity < 15) ? sku.quantity : 15;
       const range = [];
       for (let i = 1; i <= max; i++) {
@@ -179,7 +177,7 @@ export default function AddToCart({style}) {
 
   return (
     <form className="add-to-cart-form">
-      {open ? <p>Please select a size</p> : <p></p>}
+      {open ? <p>Please select a size</p> : <p />}
       {renderSizeDropdown()}
       {renderQtyDropdown()}
       {renderCartButton()}
