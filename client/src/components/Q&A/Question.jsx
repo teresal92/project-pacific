@@ -3,13 +3,33 @@ import {API_KEY} from '../../config/config.js';
 import axios from 'axios';
 import { FormControl, Card, CardContent, Grid, Typography, Button, TextField, OutlinedInput, Box, Container, Accordion, AccordionDetails, AccordionSummary} from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { makeStyles } from '@mui/styles';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { Grow } from '@mui/material';
+const useStyles = makeStyles({
+  addAnswerHeader : {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    fontSize: 22,
+  },
+  accordion: {
+    position: 'relative',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    maxWidth: 700,
+  }
+})
 
 const Question = (props) => {
+
+  const classes = useStyles()
+
   var [body, setBody] = useState('');
   var [name, setName] = useState('');
   var [email, setEmail] = useState('');
   var [questionBtnClicked, setQuestionBtnClicked] = useState(false)
-
+  var [checked, setChecked] = useState(false);
   const answerFormSubmit = (e)  => {
     e.preventDefault();
     if (e.target.placeholder === 'Name') {
@@ -21,7 +41,6 @@ const Question = (props) => {
     }
     console.log(e.target.value)
   }
-
   const sendQuestion = (e) => {
     e.preventDefault();
     axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/`, {
@@ -45,6 +64,10 @@ const Question = (props) => {
     setQuestionBtnClicked(!questionBtnClicked);
   }
 
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
 //  return(
 //   <div>
 //   <div>
@@ -60,26 +83,32 @@ const Question = (props) => {
 
 return !questionBtnClicked  ? (
   <Grid>
-    <Accordion>
-      <AccordionSummary>
-        <Typography>Add Question</Typography>
+    <Accordion className={classes.accordion} onClick={(e) => {onClick(e) , handleChange(e)}}>
+      <AccordionSummary addicon={<AddCircleOutlineIcon/>}>
+        <Typography className={classes.addAnswerHeader}>Add Question</Typography>
       </AccordionSummary>
     </Accordion>
   </Grid>
 ):(
+  <Grow in={checked}
+  style={{ transformOrigin: '0 0 0' }}
+  {...(checked ? { timeout: 1000 } : {})}>
   <Card sx={{
     bgcolor: 'background.paper',
     boxShadow: 10,
-  }} style={{ maxWidth: 600, margin: '0 auto' }}>
+  }} style={{ maxWidth: 600, margin: 'auto auto' }}>
+
     <CardContent>
       <Button
-        onClick={onClick}
+        onClick={(e) => {handleChange(e), onClick(e)}}
         size='small'
         sx={{
           mb: 1
         }}
         ><ArrowBackIosNewIcon /></Button>
-      <form onSubmit={sendQuestion} >
+        <Typography className={classes.addAnswerHeader}>Add Question</Typography>
+      <Accordion className={classes.accordion}>
+      <form onSubmit={() => { onClick(), handleChange()}} >
         <Grid container spacing={1}>
           <Grid xs={12} sm={6} item>
             <TextField onChange={answerFormSubmit} label='Enter Name' placeholder='Name' variant='outlined' fullWidth required />
@@ -95,8 +124,10 @@ return !questionBtnClicked  ? (
           </Grid>
         </Grid>
       </form>
+      </Accordion>
     </CardContent>
   </Card>
+        </Grow>
 
 )
 }

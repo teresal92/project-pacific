@@ -10,7 +10,7 @@ const QnAList = (props) => {
         sx={{
           flexDirection: 'row',
           bgcolor: 'rgb(236, 241, 241)',
-          boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
+          // boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
           borderRadius: 2,
           mx: 60,
           minWidth: 300,

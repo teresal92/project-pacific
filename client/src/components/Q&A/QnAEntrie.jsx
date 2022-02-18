@@ -18,13 +18,14 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: "center",
     alignItems: 'center',
-    background: '#fffbf0',
+    background: 'rgb(236, 241, 241)',
     border: 0,
     borderRadius: 5,
     color: 'black',
     margin: 5,
     fontSize: 18,
-    whiteSpace:'normal'
+    whiteSpace:'normal',
+    boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
   },
   summary: {
     flexDirection: 'column',
@@ -36,7 +37,7 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     whiteSpace:'normal',
     background: '#bdbdbd',
-    borderRadius:30,
+    borderRadius:10,
     justifyContent: "center",
     alignItems:'center',
   },
@@ -197,8 +198,8 @@ const QnAEntrie = (props) => {
     ) : (
       <Box
       sx={{
-        bgcolor: '#bdbdbd',
-        boxShadow: 6,
+        bgcolor: 'rgb(236, 241, 241)',
+        // boxShadow: 6,
         borderRadius: 5,
         maxWidth: 700,
         margin: "0 auto",
