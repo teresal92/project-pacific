@@ -30,6 +30,7 @@ export default function ProductListEntry(props) {
         <CardMedia
         component='img'
         height='300'
+        alt='NO IMAGE'
         src={photo.url}/>
       </Card>
     </div>

@@ -82,6 +82,10 @@ const QnAEntrie = (props) => {
         }
       })
       var splicedAnswers = temp.splice(0, count)
+<<<<<<< HEAD
+=======
+      // console.log(splicedAnswers)
+>>>>>>> Initialized changes for OutfitList to be a child component of ProductDetailOverview
       setAnswerBody(splicedAnswers)
     }).catch(err => {
       console.error(err)
