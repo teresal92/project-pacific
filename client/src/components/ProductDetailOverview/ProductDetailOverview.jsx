@@ -17,7 +17,7 @@ import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 import Ratings from './Ratings.jsx';
 
-import { API_KEY } from '../../config/config.js';
+import { API_KEY } from '../../config.js';
 const axios = require('axios');
 
 function ProductDetailOverview({productId}) {
@@ -25,8 +25,10 @@ function ProductDetailOverview({productId}) {
   const [styles, setStyles] = useState([]);
   const [selectedStyle, setSelectedStyle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  // const [productOOS, setProductOOS] = useState(false);
 
-  // fetch list of styles and product info for particular product id
+  // TODO: handle cases when url or skus are null
+
   useEffect(() => {
     const getProductInfo = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}`, {
       headers: { Authorization: `${API_KEY}` },

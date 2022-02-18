@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductListEntry from './ProductListEntry.jsx';
-import { API_KEY } from '../../config/config.js';
+import { API_KEY } from '../../config.js';
 import { ImageList, ImageListItem, ImageListItemBar } from '@mui/material';
 import { Carousel } from '3d-react-carousal';
 

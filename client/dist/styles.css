@@ -92,7 +92,7 @@ a {
   color: #900000;
 }
 
-.overlay {
+.select-style-overlay {
   position: absolute;
   top: -2px;
   right: -2px;
@@ -103,11 +103,9 @@ a {
 
 .select-style-thumbnail {
   border-radius: 50%;
-  cursor: pointer;
 }
 
-.thumbnail:hover {
-  border-radius: 50%;
+.select-style-thumbnail:hover {
   cursor: pointer;
   opacity: 0.8;
 }
@@ -232,6 +230,8 @@ a {
   margin-right: 5%;
 }
 
+/* Image Gallery */
+
 .imageContainer {
   position: relative;
   width: 42% !important;
@@ -252,25 +252,68 @@ a {
   float: left;
 }
 
-.image-gallery {
-  max-height: 500px;
+.img-gallery-carousel-container {
+  max-height: 600px;
 }
 
 .selImage {
-  margin-left: 25%;
   max-height: 500px;
   width: 60%;
+  margin-left: 25%;
   object-fit: cover;
-  object-position: bottom;
+  object-position: center;
+  cursor: -webkit-zoom-in;
 }
 
-.img-thumbnail-overlay {
+.img-gallery-carousel-overlay {
   position: absolute;
   top: 20px;
   left: 35px;
   opacity: 0.9;
   background-color: transparent;
 }
+
+.img-gallery-carousel-thumbnail:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+
+.img-gallery-carousel-inner {
+
+}
+
+.img-gallery-carousel-controls {
+  position: relative;
+  /* top: 50%; */
+}
+
+img-gallery-carousel-controls-alt {
+  height: 35px;
+  width: 35px;
+}
+
+.img-gallery-carousel-controls:hover {
+  color: #900000;
+  cursor: pointer;
+}
+
+.img-gallery-carousel-controls-left {
+  left: 165px;
+}
+
+.img-gallery-carousel-controls-right {
+
+}
+
+.img-gallery-carousel-controls-up {
+
+}
+
+.img-gallery-carousel-controls-down {
+
+}
+
 .css-rm9e7r{
   margin:0%;
   padding: 0%;
