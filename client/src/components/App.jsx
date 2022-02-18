@@ -50,11 +50,7 @@ class App extends React.Component {
             varient='middle'/>
             <QnACore prodId={this.state.selectedProduct.id}/>
           </div>
-          <div className='outfitList'>
-            <OutfitList outfit={this.state.outfit} selected={this.state.productSelected} />
-          </div>
           <div className='qna'>
-            <QnACore prodId={this.state.selectedProduct.id} />
           </div>
         </div >
       ) : (

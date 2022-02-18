@@ -22,13 +22,13 @@ class AnswerEntrie extends React.Component {
         await this.props.getAnswers();
       })
   }
-  reportAnswer() {
+  reportAnswer(e) {
     axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/answers/${this.props.answers.answer_id}/report`)
-      .then( () => {
-        console.log('Reported')
-      }).catch(err => {
-        consolr.error(err)
-      })
+      .then( async() => (
+         await console.log('Reported')
+      )).catch(() => (
+        console.log('didnt report')
+      ))
   }
 
   onClickReport(e) {
@@ -37,28 +37,6 @@ class AnswerEntrie extends React.Component {
     })
   }
   render() {
-    // return (
-    //   <div>
-
-    //       <div className='answer-body'>
-    //         A: {this.props.answers.body}
-    //       </div>
-
-    //       <div className='answer-comments'>
-    //         <p className='answerBody'>
-    //           <span>by</span>
-    //           <span className='userName'> {this.props.answers.answerer_name}</span>
-    //           <span>, {this.props.date} |</span>
-    //           <span> Helpful? </span>
-    //           <span className='underLine' onClick={this.helpfulRequest}>Yes</span>
-    //           <span> ({this.props.answers.helpfulness}) | </span>
-    //           <span className='underLine'> Report</span>
-    //         </p>
-    //       </div>
-
-    //   </div>
-    // )
-
     return (
       <div>
         <Box
@@ -82,9 +60,9 @@ class AnswerEntrie extends React.Component {
             <span> Helpful? </span>
             <span className='underLine' onClick={this.helpfulRequest}>Yes</span>
             <span> ({this.props.answers.helpfulness}) | </span>
-            <span className='underLine' onClick={this.reportAnswer} onClick={this.onClickReport}>{this.state.reported}</span>
+            <span className='underLine' onClick={(e) => {this.onClickReport(),this.reportAnswer()}} >{this.state.reported}</span>
           </p>
-          <Divider light/>
+          <Divider />
         </div>
         </Box>
         </Box>
