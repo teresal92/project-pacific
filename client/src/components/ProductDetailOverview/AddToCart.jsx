@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { API_KEY } from '../../config/config.js';
+import { API_KEY } from '../../config.js';
 
 // MUI components
 import Button from '@mui/material/Button';
