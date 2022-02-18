@@ -1,3 +1,4 @@
+
 body{
   background-color: rgb(236, 241, 241);
   color: #121212;
@@ -5,12 +6,16 @@ body{
   width: 100% !important;
 }
 
+
 html {
   display: block;
   width: 97% !important;
 }
-
-
+.css-37jdci-MuiTypography-root {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 a {
   cursor: pointer;
 }
@@ -41,7 +46,13 @@ a {
 .css-1rwt2y5-MuiButtonBase-root-MuiButton-root{
   width: 40%;
 }
-
+.css-sghohy-MuiButtonBase-root-MuiButton-root {
+  flex-direction:row;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
 .qBody {
   display:inline;
   font: bold;
@@ -349,7 +360,7 @@ img-gallery-carousel-controls-alt {
   color: red;
 }
 
-.css-11lq3yg-MuiGrid-root {
+.css-11lq3gityg-MuiGrid-root {
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
