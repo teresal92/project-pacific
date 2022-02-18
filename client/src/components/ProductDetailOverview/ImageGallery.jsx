@@ -16,24 +16,6 @@ function ImageGallery({style}) {
     }
   }, [style]);
 
-  const renderView = () => {
-    // default view
-    if (!isExpanded) {
-      return (
-        <img
-          className="selImage"
-          src={`${style.photos[currentIdx].url}`}
-          alt="selected"
-          onClick={handleSelImageClick}
-        />
-      );
-    }
-    // TODO: create expanded view
-    return (
-      <img className="selImage" onClick={handleSelImageClick} src={`${style.photos[currentIdx].url}`} alt="" />
-    );
-  };
-
   const handleSelImageChange = (e, i) => {
     setCurrentIdx(i);
   };
@@ -64,6 +46,16 @@ function ImageGallery({style}) {
     }
   };
 
+
+  const renderDefaultView = () => {
+
+  };
+
+  const renderExpandedView = () => {
+
+  };
+
+  // return isExpanded ? ()
   return (
     <div className="img-gallery-carousel-container">
       <div className="img-gallery-carousel-overlay">
@@ -105,7 +97,12 @@ function ImageGallery({style}) {
             fontSize="large"
           />
         ) : <div className="img-gallery-carousel-controls-alt" /> }
-        {renderView()}
+        <img
+          className="selImage"
+          src={`${style.photos[currentIdx].url}`}
+          alt="selected"
+          onClick={handleSelImageClick}
+        />
         {currentIdx !== photos.length - 1 ? (
           <ChevronRightIcon
             className="img-gallery-carousel-controls img-gallery-carousel-controls-right"

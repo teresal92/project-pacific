@@ -17,7 +17,7 @@ import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 import Ratings from './Ratings.jsx';
 
-import { API_KEY } from '../../config/config.js';
+import { API_KEY } from '../../config.js';
 const axios = require('axios');
 
 function ProductDetailOverview({productId}) {
