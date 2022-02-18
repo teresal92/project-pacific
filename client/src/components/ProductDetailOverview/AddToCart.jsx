@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { API_KEY } from '../../config/config.js';
-const axios = require('axios');
 
 // MUI components
 import Button from '@mui/material/Button';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+
+const axios = require('axios');
 
 export default function AddToCart({style}) {
   const skus = style.skus;
@@ -24,6 +24,41 @@ export default function AddToCart({style}) {
   const [open, setOpen] = React.useState(false);
   const [OOS, setOOS] = React.useState(false);
 
+  /* Event Handlers */
+  const handleSizeChange = (e) => {
+    setSize(e.target.value);
+  };
+
+  const handleSizeClick = (e, sku) => {
+    setSku(sku);
+  };
+
+  const handleQtyChange = (e) => {
+    setQty(e.target.value);
+  };
+
+  /* On Click of Aadd to cart button */
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    if (sku && qty) {
+      setOpen(false);
+      axios
+        .post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/cart', { sku_id: sku.id }, { headers: { Authorization: `${API_KEY}` } })
+        .then(res => console.log(`Success! ${res}`))
+        .catch(err => console.error(err));
+    } else {
+      setOpen(true);
+    }
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   /* Size Dropdown */
   const renderSizeDropdown = () => {
     const availableSkus = skuList.filter(sku => sku.quantity > 0);
@@ -32,7 +67,7 @@ export default function AddToCart({style}) {
     }
 
     if (!OOS) {
-      return (
+      return !OOS ? (
         <FormControl sx={{ m: 1, minWidth: 140 }}>
           <InputLabel id="demo-simple-select-label">Select Size</InputLabel>
           <Select
@@ -58,9 +93,7 @@ export default function AddToCart({style}) {
             ))}
           </Select>
         </FormControl>
-      )
-    } else {
-      return (
+      ) : (
         <FormControl sx={{ m: 1, minWidth: 140 }}>
           <InputLabel id="demo-simple-select-label">Select Size</InputLabel>
           <Select
@@ -74,21 +107,8 @@ export default function AddToCart({style}) {
             </MenuItem>
           </Select>
         </FormControl>
-      )
+      );
     }
-    // if (availableSkus.length > 0) {
-    //   return (
-    //     <select className="size-dropdown" value={sku} onChange={handleSizeChange}>
-    //       <option value='' disabled>Select Size</option>
-    //       {availableSkus.map((sku, i) => <option key={i} value={sku.id}>{sku.size}</option>)}
-    //     </select>
-    //   )
-    // } else {
-    //   setOOS(true);
-    //   return (
-    //     <select value={''} onChange={handleSizeChange} disabled>{'OUT OF STOCK'}</select>
-    //   )
-    // }
   };
 
   /* Size Dropdown */
@@ -137,18 +157,6 @@ export default function AddToCart({style}) {
         </FormControl>
       );
     }
-    // return (
-    //     <select value={qty} onChange={handleQtyChange}>
-    //       {range.map((num, i) => <option key={i} value={num}>{num}</option>)}
-    //     </select>
-    //   )
-    // } else {
-    //   return (
-    //     <select value={qty} onChange={handleQtyChange} disabled>
-    //       <option value=''>-</option>
-    //     </select>
-    //   )
-    // }
   };
 
   /* Add to Cart Button */
@@ -165,45 +173,9 @@ export default function AddToCart({style}) {
         Add to Cart
       </Button>
     </div> : null)
-    // return ( (size !== '') ? <input type="submit" value="Add to Cart" onClick={handleButtonClick} /> : null)
-  }
-
-  // set state for sku and size based on sku id, then pass sku id to showQtyDropdown
-  const handleSizeChange = (e) => {
-    const size = e.target.value;
-    setSize(size);
   };
 
-  const handleSizeClick = (e, sku) => {
-    console.log(sku);
-    setSku(sku);
-  }
 
-  const handleQtyChange = (e) => {
-    setQty(e.target.value);
-  };
-
-  /* On Click of Aadd to cart button */
-  const handleButtonClick = (e) => {
-    e.preventDefault();
-    if (sku && qty) {
-      setOpen(false);
-      axios
-        .post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/cart', { sku_id: sku.id }, { headers: { Authorization: `${API_KEY}` } })
-        .then(res => console.log(`Success! ${res}`))
-        .catch(err => console.error(err));
-    } else {
-      setOpen(true);
-    }
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <form className="add-to-cart-form">

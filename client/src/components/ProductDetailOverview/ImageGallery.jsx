@@ -20,17 +20,26 @@ function ImageGallery({style}) {
     // default view
     if (!isExpanded) {
       return (
-        <img className="selImage" src={`${style.photos[currentIdx].url}`} alt="" />
+        <img
+          className="selImage"
+          src={`${style.photos[currentIdx].url}`}
+          alt="selected"
+          onClick={handleSelImageClick}
+        />
       );
     }
     // TODO: create expanded view
     return (
-      <img className="selImage" src={`${style.photos[currentIdx].url}`} alt="" />
+      <img className="selImage" onClick={handleSelImageClick} src={`${style.photos[currentIdx].url}`} alt="" />
     );
   };
 
-  const handleSelectedImage = (e, i) => {
+  const handleSelImageChange = (e, i) => {
     setCurrentIdx(i);
+  };
+
+  const handleSelImageClick = () => {
+    setIsExpanded(!isExpanded);
   };
 
   // prev img
@@ -60,14 +69,13 @@ function ImageGallery({style}) {
       <div className="img-gallery-carousel-overlay">
         <ExpandLessIcon
           className="img-gallery-carousel-controls img-gallery-carousel-controls-up"
-          // onClick={handlePrevImg}
           fontSize="large"
         />
         <ImageList sx={{ width: 70, height: 490 }} cols={1} rowHeight={70}>
           {photos.map((photo, i) => (
             <ImageListItem
               key={`photo-${i}`}
-              onClick={(e) => handleSelectedImage(e, i)}
+              onClick={(e) => handleSelImageChange(e, i)}
             >
               <img
                 style={{
@@ -86,7 +94,6 @@ function ImageGallery({style}) {
         </ImageList>
         <ExpandMoreIcon
           className="img-gallery-carousel-controls img-gallery-carousel-controls-down"
-          // onClick={handleNextImg}
           fontSize="large"
         />
       </div>
