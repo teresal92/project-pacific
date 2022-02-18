@@ -17,4 +17,7 @@ router.route('/products/:productId/styles')
 router.route('/reviews/:productId')
   .get(controller.reviews.getReviews);
 
+router.route('/cart/:skuId')
+  .post(controller.cart.addToCart);
+
 module.exports = router;
