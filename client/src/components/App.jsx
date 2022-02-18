@@ -48,9 +48,11 @@ class App extends React.Component {
               mx: 40,
             }}
             varient='middle'/>
+<
             <QnACore prodId={this.state.selectedProduct.id}/>
           </div>
           <div className='qna'>
+
           </div>
         </div >
       ) : (
