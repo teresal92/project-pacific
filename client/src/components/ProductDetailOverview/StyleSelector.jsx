@@ -14,7 +14,6 @@ function StyleSelector({styles, selectedStyle, handleStyleSelector}) {
   }, [selectedStyle])
 
   const handleClick = (event, style) => {
-    // console.log(`clicked on ${JSON.stringify(style)}`)
     handleStyleSelector(style);
     setIsSelected(true);
   };
@@ -22,7 +21,7 @@ function StyleSelector({styles, selectedStyle, handleStyleSelector}) {
   const showSelected = (style) => {
     if (isSelected && style.style_id === selectedStyle.style_id) {
       return (
-        <div className='overlay'>
+        <div className='select-style-overlay'>
           <CheckCircleOutlineIcon />
         </div>
       )
@@ -34,16 +33,16 @@ function StyleSelector({styles, selectedStyle, handleStyleSelector}) {
       <Typography variant="overline" display="block" >
         STYLE > {selectedStyle.name ? selectedStyle.name : 'SELECT STYLE'}
       </Typography>
-      <ImageList sx={{ width: 400, height: 250 }} cols={4} rowHeight={100}>
+      <ImageList sx={{ width: 400, height: 220 }} cols={4} rowHeight={100}>
         {styles.map((style, i) =>
           <ImageListItem key={`style-${i}`} onClick={(e) => handleClick(e, style)}>
             <img
-              className='select-style-thumbnail'
+              className="select-style-thumbnail"
               name={style.style_id}
               src={`${style.photos[0].thumbnail_url}?w=100&h=100&fit=crop&auto=format`}
               srcSet={`${style.photos[0].thumbnail_url}?w=100&h=100&fit=crop&auto=format&dpr=2 2x`}
               alt={style.name}
-              loading='lazy'
+              loading="lazy"
             />
             {showSelected(style)}
           </ImageListItem>

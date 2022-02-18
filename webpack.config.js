@@ -1,9 +1,8 @@
+const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
-var SRC_DIR = path.join(__dirname, '/client/src');
+const SRC_DIR = path.join(__dirname, '/client/src');
 // entry point: go into above file and find index.js
-var DIST_DIR = path.join(__dirname, '/client/dist');
+const DIST_DIR = path.join(__dirname, '/client/dist');
 // dump bundle.js here
 
 module.exports = {
