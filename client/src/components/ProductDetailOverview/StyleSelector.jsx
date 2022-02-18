@@ -22,7 +22,7 @@ function StyleSelector({styles, selectedStyle, handleStyleSelector}) {
   const showSelected = (style) => {
     if (isSelected && style.style_id === selectedStyle.style_id) {
       return (
-        <div className='overlay'>
+        <div className='select-style-overlay'>
           <CheckCircleOutlineIcon />
         </div>
       )

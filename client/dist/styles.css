@@ -92,7 +92,7 @@ a {
   color: #900000;
 }
 
-.overlay {
+.select-style-overlay {
   position: absolute;
   top: -2px;
   right: -2px;
@@ -106,7 +106,7 @@ a {
   cursor: pointer;
 }
 
-.thumbnail:hover {
+.select-style-thumbnail:hover {
   border-radius: 50%;
   cursor: pointer;
   opacity: 0.8;
@@ -232,6 +232,8 @@ a {
   margin-right: 5%;
 }
 
+/* Image Gallery */
+
 .imageContainer {
   position: relative;
   width: 42% !important;
@@ -252,7 +254,7 @@ a {
   float: left;
 }
 
-.image-gallery {
+.img-gallery-carousel-container {
   max-height: 500px;
 }
 
@@ -264,7 +266,7 @@ a {
   object-position: bottom;
 }
 
-.img-thumbnail-overlay {
+.img-gallery-carousel-overlay {
   position: absolute;
   top: 20px;
   left: 35px;
@@ -272,22 +274,44 @@ a {
   background-color: transparent;
 }
 
-.chevron {
-  position: absolute;
-  top: 50%;
+.img-gallery-thumbnail-selected {
+  border: 2px solid #900000;
 }
 
-.chevron:hover {
+.img-gallery-carousel-thumbnail:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+
+.img-gallery-carousel-inner {
+
+}
+
+.img-gallery-carousel-controls {
+  position: relative;
+  /* top: 50%; */
+}
+
+.img-gallery-carousel-controls:hover {
   color: #900000;
   cursor: pointer;
 }
 
-.img-chevron-left {
-  left: 160px;
+.img-gallery-carousel-controls-left {
+  left: 165px;
 }
 
-.img-chevron-right {
-  right: 60px;
+.img-gallery-carousel-controls-right {
+
+}
+
+.img-gallery-carousel-controls-up {
+
+}
+
+.img-gallery-carousel-controls-down {
+
 }
 
 .css-rm9e7r{
