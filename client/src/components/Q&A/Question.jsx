@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {API_KEY} from '../../config/config.js';
+import { API_KEY } from '../../../../config.js'
 import axios from 'axios';
 import { FormControl, Card, CardContent, Grid, Typography, Button, TextField, OutlinedInput, Box, Container, Accordion, AccordionDetails, AccordionSummary} from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';

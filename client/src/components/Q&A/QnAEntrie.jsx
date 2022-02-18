@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API_KEY } from '../../config/config.js';
+import { API_KEY } from '../../../../config.js'
 import AnswerEntrie from './AnswerEntrie.jsx';
 axios.defaults.headers.common['Authorization'] = API_KEY;
 import { FormControl, Card, CardContent, Grid, Typography, Button, TextField, OutlinedInput, Box, Container } from '@mui/material';

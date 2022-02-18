@@ -3,7 +3,7 @@ import React from 'react';
 import QnAList from './QnAList.jsx';
 import Question from './Question.jsx';
 import axios from 'axios';
-import { API_KEY } from '../../config/config.js'
+import { API_KEY } from '../../../../config.js'
 import fakeData from './fakeData.js'
 axios.defaults.headers.common['Authorization'] = API_KEY;
 import TextField from '@mui/material/TextField';
