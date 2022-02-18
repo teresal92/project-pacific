@@ -274,10 +274,6 @@ a {
   background-color: transparent;
 }
 
-.img-gallery-thumbnail-selected {
-  border: 2px solid #900000;
-}
-
 .img-gallery-carousel-thumbnail:hover {
   cursor: pointer;
   opacity: 0.8;
@@ -291,6 +287,11 @@ a {
 .img-gallery-carousel-controls {
   position: relative;
   /* top: 50%; */
+}
+
+img-gallery-carousel-controls-alt {
+  height: 35px;
+  width: 35px;
 }
 
 .img-gallery-carousel-controls:hover {

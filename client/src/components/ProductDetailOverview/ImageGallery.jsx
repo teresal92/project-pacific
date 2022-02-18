@@ -1,5 +1,5 @@
-import React, { useState, useEffect, createRef } from 'react';
-import { ImageList, ImageListItem, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { ImageList, ImageListItem } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
@@ -9,12 +9,10 @@ function ImageGallery({style}) {
   const [photos, setPhotos] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
-  const carouselImgRef =
 
   useEffect(() => {
     if (style.photos && style.photos[0]) {
       setPhotos(style.photos);
-      setCurrentIdx(0);
     }
   }, [style]);
 
@@ -75,9 +73,8 @@ function ImageGallery({style}) {
               onClick={(e) => handleSelectedImage(e, i)}
             >
               <img
-                className={currentIdx === i ? 'img-gallery-carousel-thumbnail-selected'
-                  : 'img-gallery-carousel-thumbnail'
-                }
+                style={{ borderBottom: (currentIdx === i) ? '3px solid #900000' : null }}
+                className="img-gallery-carousel-thumbnail"
                 name={i}
                 src={`${photo.thumbnail_url}?w=70&h=70&fit=crop&auto=format`}
                 srcSet={`${photo.thumbnail_url}?w=70&h=70&fit=crop&auto=format&dpr=2 2x`}
@@ -100,7 +97,7 @@ function ImageGallery({style}) {
             onClick={handlePrevImg}
             fontSize="large"
           />
-        ) : <div></div>}
+        ) : <div className="img-gallery-carousel-controls-alt" /> }
         {renderView()}
         {currentIdx !== photos.length - 1 ? (
           <ChevronRightIcon
@@ -108,7 +105,7 @@ function ImageGallery({style}) {
             onClick={handleNextImg}
             fontSize="large"
           />
-        ) : <div></div> }
+        ) : <div className="img-gallery-carousel-controls-alt" /> }
       </div>
     </div>
   );
