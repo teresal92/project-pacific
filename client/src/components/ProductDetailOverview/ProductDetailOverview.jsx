@@ -18,7 +18,6 @@ import AddToCart from './AddToCart.jsx';
 import Ratings from './Ratings.jsx';
 import OutfitList from '../OutfitnRelated/YourOutfit.jsx';
 
-import { API_KEY } from '../../config.js';
 const axios = require('axios');
 
 function ProductDetailOverview({ productId, outfit, selected, add }) {
@@ -31,13 +30,9 @@ function ProductDetailOverview({ productId, outfit, selected, add }) {
   // TODO: handle cases when url or skus are null
 
   useEffect(() => {
-    const getProductInfo = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}`, {
-      headers: { Authorization: `${API_KEY}` },
-    });
+    const getProductInfo = axios.get(`/api/products/${productId}`);
 
-    const getStyles = axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
-      headers: { Authorization: `${API_KEY}` },
-    });
+    const getStyles = axios.get(`/api/products/${productId}/styles`);
 
     Promise.all([getProductInfo, getStyles])
       .catch(err => console.error(err))
