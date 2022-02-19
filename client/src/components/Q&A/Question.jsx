@@ -17,7 +17,9 @@ const useStyles = makeStyles({
     position: 'relative',
     marginLeft: 'auto',
     marginRight: 'auto',
-    maxWidth: 700,
+    maxWidth: 850,
+    backgroundColor: '#e3f2fd',
+    boxShadow: 10
   }
 })
 
@@ -64,18 +66,6 @@ const Question = (props) => {
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
-//  return(
-//   <div>
-//   <div>
-//     <form>
-//       <input onChange={answerFormSubmit} type='text' placeholder='Name'></input>
-//       <input onChange={answerFormSubmit} type='text' placeholder='Body'></input>
-//       <input onChange={answerFormSubmit} type='text' placeholder='Email'></input>
-//       <button className='addQuestionButton' onClick={(e) => {sendQuestion(e)}}>Add Question +</button>
-//     </form>
-//   </div>
-// </div>
-//  )
 
 return !questionBtnClicked  ? (
   <Grid>
@@ -92,7 +82,7 @@ return !questionBtnClicked  ? (
   <Card sx={{
     bgcolor: 'background.paper',
     boxShadow: 10,
-  }} style={{ maxWidth: 600, margin: 'auto auto' }}>
+  }} style={{ maxWidth: 850, margin: 'auto auto' }}>
 
     <CardContent>
       <Button
@@ -103,7 +93,7 @@ return !questionBtnClicked  ? (
         }}
         ><ArrowBackIosNewIcon /></Button>
         <Typography className={classes.addAnswerHeader}>Add Question</Typography>
-      <Accordion className={classes.accordion}>
+      <Accordion >
       <form onSubmit={(e) => {sendQuestion(e), onClick(e)}}>
         <Grid container spacing={1}>
           <Grid xs={12} sm={6} item>

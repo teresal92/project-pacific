@@ -27,15 +27,16 @@ a {
   border: 3px solid rgb(115, 117, 115);
 }
 .search-questions{
-  position:relative;
-  left:33%;
-  nav-down:25%;
-  width: 500px;
-  text-align:left;
+  display: block;
   justify-content: center;
-  margin: 50px;
+  align-items: center;
+  position:relative;
+  width: 850px;
+  margin: auto;
   padding: 15px;
-  font-size: 22px;
+  margin-top: 8px;
+  margin-bottom: 25px;
+  font-size: 24px;
 }
 
 
@@ -386,8 +387,6 @@ img-gallery-carousel-controls-alt {
   height: 200px;
   width: 150px;
 }
-<<<<<<< HEAD
-=======
 
 .outfitAdd {
   height: 200px;
@@ -409,4 +408,3 @@ img-gallery-carousel-controls-alt {
   align-items: center;
   padding: 1px !important;
 }
->>>>>>> Initialized changes for OutfitList to be a child component of ProductDetailOverview

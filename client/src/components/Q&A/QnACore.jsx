@@ -6,7 +6,7 @@ import axios from 'axios';
 import { API_KEY } from '../../../../config.js'
 import fakeData from './fakeData.js'
 axios.defaults.headers.common['Authorization'] = API_KEY;
-import TextField from '@mui/material/TextField';
+import {TextField, Typography} from '@mui/material';
 import Box from '@mui/material/Box';
 
 class QnACore extends React.Component {
@@ -90,6 +90,7 @@ class QnACore extends React.Component {
     return this.state.filteredQuestions.length > 0 ?
     <div>
     <div>
+      <Typography>Questions & Answers</Typography>
       <form onSubmit={this.handleSubmit}>
         <input
           className='search-questions'
@@ -104,6 +105,12 @@ class QnACore extends React.Component {
   </div> :(
     (
       <div>
+        <Box sx={{
+          marginTop: 10,
+          marginLeft: 61,
+        }}>
+        <Typography variant='h6'>Questions & Answers</Typography>
+        </Box>
         <div>
           <form onSubmit={this.handleSubmit}>
             <input
