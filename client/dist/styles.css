@@ -290,7 +290,7 @@ a {
 }
 
 .selImage {
-  max-height: 500px;
+  height: 500px;
   width: 60%;
   margin-left: 25%;
   object-fit: cover;
