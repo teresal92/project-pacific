@@ -43,7 +43,7 @@ const Question = (props) => {
   }
   const sendQuestion = (e) => {
     e.preventDefault();
-    axios.post(`/api/qa/questions/`, {
+    axios.post(`/api/qa/questions`, {
        body: body,
        name: name,
        email: email,

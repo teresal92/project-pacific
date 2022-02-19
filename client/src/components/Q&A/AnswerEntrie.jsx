@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API_KEY } from '../../../../config.js'
 import { FormControl, Card, CardContent, Grid, Typography, Button, TextField, OutlinedInput, Box, Container, Divider} from '@mui/material';
-axios.defaults.headers.common['Authorization'] = API_KEY;
 
 class AnswerEntrie extends React.Component {
   constructor(props) {
@@ -17,17 +15,20 @@ class AnswerEntrie extends React.Component {
   }
 
   helpfulRequest(e) {
-    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/answers/${this.props.answers.answer_id}/helpful`)
+    axios.put(`/api/qa/answers/${this.props.answers.answer_id}/helpful`)
       .then(async () => {
+        console.log('Helpful')
         await this.props.getAnswers();
+      }).catch(async err => {
+        await console.log(err)
       })
   }
   reportAnswer(e) {
-    axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/answers/${this.props.answers.answer_id}/report`)
+    axios.put(`/api/qa/answers/${this.props.answers.answer_id}/report`)
       .then( async() => (
          await console.log('Reported')
-      )).catch(() => (
-        console.log('didnt report')
+      )).catch(async () => (
+        await console.log('didnt report')
       ))
   }
 

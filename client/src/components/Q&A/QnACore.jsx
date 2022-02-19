@@ -20,6 +20,7 @@ class QnACore extends React.Component {
       filteredQuestions: [],
       count: 4,
       allQuestions: [],
+      pageCount: 400
     }
     // this.getAnswers = this.getAnswers.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
@@ -34,16 +35,16 @@ class QnACore extends React.Component {
 
 
   getQuestions() {
-    axios.get(`/api/qa/questions/?product_id=${this.state.prodId}&count=200`, {
-    }).then(response => {
+    axios.get(`/api/qa/questions/?product_id=${this.state.prodId}&count=${this.state.pageCount}`)
+      .then(async response => {
       var sortedRes = response.data.results.sort(function (a, b) {
         return b.question_helpfulness - a.question_helpfulness;
       })
-       var sortedWithoutReported = sortedRes.filter(item =>{
-         return item.reported !== true
-       })
-      var temp = sortedWithoutReported.splice(0, this.state.count)
-      this.setState({
+      //  var sortedWithoutReported = sortedRes.filter(item =>{
+      //    return item.reported === false
+      //  })
+      var temp = sortedRes.splice(0, this.state.count)
+      await this.setState({
         questions: temp,
         allQuestions: sortedRes,
       })

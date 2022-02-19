@@ -18,7 +18,6 @@ router.route('/reviews/:productId')
   .get(controller.reviews.getReviews);
 
 
-
 //QnA
 router.route('/qa/questions')
   .get(controller.questions.getQuestions)
@@ -41,5 +40,7 @@ router.route('/qa/answers/:answer_id/helpful')
 
 router.route('/qa/answers/:answer_id/report')
   .put(controller.answers.reportAnswer)
+router.route('/cart/:skuId')
+  .post(controller.cart.addToCart);
 
 module.exports = router;

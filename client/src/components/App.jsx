@@ -64,6 +64,7 @@ class App extends React.Component {
             <QnACore prodId={this.state.selectedProduct.id} />
           </div>
         </div >
+
       ) : (
         <div>
           <div className='navbar'>

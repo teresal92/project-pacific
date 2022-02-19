@@ -63,23 +63,18 @@ const QnAEntrie = (props) => {
   var [addAnswerClick, setAddAnswerClick] = useState(false);
   var [count, setCount] = useState(2);
 
-
+    useEffect(() => {
+    getAnswers();
+  },[])
   const getAnswers = () => {
-
-    axios.get(`/api/qa/questions/${props.question.question_id}/answers?count=500`, {
-    }).then( (response) => {
+    axios.get(`/api/qa/questions/${props.question.question_id}/answers`, {
+    }).then(async (response) => {
       var sortedAnswerArray = response.data.results.sort(function (a, b) {
         var dateA = new Date(a.date), dateB = new Date(b.date)
         return dateB - dateA;
       })
-      var temp = sortedAnswerArray.filter(item => {
-        if (item.body.length > 0) {
-          return item
-        }
-      })
-      var splicedAnswers = temp.splice(0, count)
-      // console.log(splicedAnswers)
-      setAnswerBody(splicedAnswers)
+      var splicedAnswers = sortedAnswerArray.splice(0, count)
+      await setAnswerBody(splicedAnswers)
     }).catch(err => {
       console.error(err)
     })
@@ -87,8 +82,8 @@ const QnAEntrie = (props) => {
 
   const helpfulQuestion = (e) => {
     axios.put(`/api/qa/questions/${props.question.question_id}/helpful`)
-    .then( (e) => {
-      props.getQuestions();
+    .then((e) => {
+       props.getQuestions();
     })
   }
 
@@ -126,14 +121,12 @@ const QnAEntrie = (props) => {
 
   const reportQuestion = (e) => {
     axios.put(`/api/qa/questions/${props.question.question_id}/report`)
-    .then(async () => {
-      await props.getQuestions()
+    .then(() => {
+       props.getQuestions()
     })
   }
 
-  useEffect(() => {
-    getAnswers();
-  },[])
+
   return !addAnswerClick ? (
     <Accordion  defaultExpanded={true} className={classes.accordion}>
         <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon/>}>
