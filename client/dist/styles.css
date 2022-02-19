@@ -27,11 +27,8 @@ a {
   border: 3px solid rgb(115, 117, 115);
 }
 .search-questions{
-  display: block;
-  justify-content: center;
-  align-items: center;
   position:relative;
-  width: 850px;
+  width: 700px;
   margin: auto;
   padding: 15px;
   margin-top: 8px;

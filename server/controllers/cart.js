@@ -6,7 +6,7 @@ module.exports = {
   // Adds a product to the cart based on sku_id
   addToCart: (req, res) => {
     const skuId = Number(req.params.skuId);
-    console.log(typeof skuId);
+    // console.log(typeof skuId);
     axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/cart',
       { sku_id: skuId },
       { headers: { Authorization: `${API_KEY}` } },
