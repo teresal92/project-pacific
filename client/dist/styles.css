@@ -267,8 +267,20 @@ a {
   float: left;
 }
 
-.img-gallery-carousel-container {
-  max-height: 600px;
+.img-gallery-carousel-container-default {
+  /* max-height: 500px; */
+}
+
+.img-gallery-carousel-container-expanded {
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 600px;
+  width: 100%;
+  display: block;
+  border: 2px solid black;
 }
 
 .selImage {
