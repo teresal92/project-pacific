@@ -283,6 +283,12 @@ a {
   border: 2px solid black;
 }
 
+.img-gallery-carousel-container-expanded-close {
+  position: relative;
+  top: 10px;
+  right: -10px;
+}
+
 .selImage {
   max-height: 500px;
   width: 60%;
