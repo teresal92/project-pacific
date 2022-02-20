@@ -267,26 +267,11 @@ a {
   float: left;
 }
 
-.img-gallery-carousel-container-default {
-  /* max-height: 500px; */
-}
-
-.img-gallery-carousel-container-expanded {
-  position: relative;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 600px;
-  width: 100%;
-  display: block;
-  border: 2px solid black;
-}
-
-.img-gallery-carousel-container-expanded-close {
-  position: relative;
-  top: 10px;
-  right: -10px;
+.img-gallery-carousel-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
 }
 
 .selImage {
@@ -298,11 +283,16 @@ a {
   cursor: -webkit-zoom-in;
 }
 
-.img-gallery-carousel-overlay {
+.img-gallery-carousel-thumbnail-overlay {
   position: absolute;
-  top: 20px;
-  left: 35px;
+  top: 5px;
+  left: 10%;
+  margin: 0;
   opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
 }
 
@@ -311,19 +301,9 @@ a {
   opacity: 0.8;
 }
 
-
-.img-gallery-carousel-inner {
-
-}
-
 .img-gallery-carousel-controls {
   position: relative;
-  /* top: 50%; */
-}
-
-img-gallery-carousel-controls-alt {
-  height: 35px;
-  width: 35px;
+  margin: 0;
 }
 
 .img-gallery-carousel-controls:hover {
@@ -335,16 +315,58 @@ img-gallery-carousel-controls-alt {
   left: 165px;
 }
 
-.img-gallery-carousel-controls-right {
-
+.img-gallery-carousel-expanded-overlay {
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 600px;
+  width: 98%;
+  display: block;
+  border-radius: 5px;
+  /* background-color: rgba(0,0,0,0.5); */
+  background: transparent;
 }
 
-.img-gallery-carousel-controls-up {
 
+.img-gallery-carousel-dots {
+  position: absolute;
+  top: 85%;
+  display: inline-block;
+  left: 50%;
+  margin-top: 3rem;
+  transform: translateX(-50%);
 }
 
-.img-gallery-carousel-controls-down {
+.dot {
+  background: #121212;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 1rem;
+  width: 1rem;
+  margin: 0 0.3rem;
+  outline: none;
+}
 
+.dot.active, .dot:hover {
+  background: #900000;
+  transform: scale(1.1);
+}
+
+.selImage-expanded {
+  height: 500px;
+  width: 70%;
+  object-fit: cover;
+  object-position: center;
+  cursor: -webkit-zoom-in;
+}
+
+.img-gallery-carousel-container-expanded-close {
+  position: relative;
+  top: 10px;
+  right: -10px;
 }
 
 .css-rm9e7r{

@@ -41,10 +41,14 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
     }
   };
 
+  const handleDotClick = (i) => {
+    setCurrentIdx(i);
+  }
+
   /* Views */
   const renderDefaultView = () => (
-      <div className="img-gallery-carousel-container-default">
-        <div className="img-gallery-carousel-overlay">
+      <div className="img-gallery-carousel-container">
+        <div className="img-gallery-carousel-thumbnail-overlay">
           <ExpandLessIcon
             className="img-gallery-carousel-controls img-gallery-carousel-controls-up"
             fontSize="large"
@@ -105,9 +109,9 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   );
 
   const renderExpandedView = () => (
-    <div className="img-gallery-carousel-container-expanded">
+    <div className="img-gallery-carousel-expanded-overlay">
       <CloseIcon
-        className="img-gallery-carousel-container-expanded-close"
+        className="img-gallery-carousel-controls img-gallery-carousel-container-expanded-close"
         fontSize="large"
         onClick={handleSelImageClick}
         onKeyPress={handleSelImageClick}
@@ -115,13 +119,13 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
       <div className="img-gallery-carousel-inner">
           {(currentIdx !== 0) ? (
             <ChevronLeftIcon
-              className="img-gallery-carousel-controls img-gallery-carousel-controls-left"
+              className="img-gallery-carousel-controls img-gallery-carousel-controls-left-expanded"
               onClick={handlePrevImg}
               fontSize="large"
             />
           ) : <div className="img-gallery-carousel-controls-alt" />}
           <img
-            className="selImage"
+            className="selImage-expanded"
             src={`${style.photos[currentIdx].url}`}
             alt="selected"
           />
@@ -132,7 +136,16 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
               fontSize="large"
             />
           ) : <div className="img-gallery-carousel-controls-alt" />}
-        </div>
+          <div className="img-gallery-carousel-dots">
+            {photos.slice().map((pos, i) => (
+                <button
+                    key={i}
+                    onClick={() => handleDotClick(i)}
+                    className={i === currentIdx ? 'dot active' : 'dot'}
+                />
+            ))}
+          </div>
+      </div>
     </div>
   );
 
