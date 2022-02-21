@@ -9,6 +9,13 @@ import CloseIcon from '@mui/icons-material/Close';
 function ImageGallery({ style, isExpanded, handleExpandedView }) {
   const [photos, setPhotos] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [isZoomed, setIsZoomed] = useState(false);
+  // coordinates of mouse cursor
+  const [x, setX] = useState(null);
+  const [y, setY] = useState(null)
+  const _x = 0;
+  const _y = 0;
+
   const thumbnailImgRef = useRef();
 
   useEffect(() => {
@@ -24,6 +31,19 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   const handleSelImageClick = () => {
     handleExpandedView(!isExpanded);
   };
+
+  const handleExpandedImageClick = () => {
+    setIsZoomed(!isZoomed);
+  }
+
+  const handleMouseMove = (e) => {
+    // x: how far cursor is from left of an element
+    setX(e.pageX);
+    // y: how far cursor is from top of an eleent
+    setY(e.pageY);
+    console.log(`x: ${x}, y: ${y}`);
+  }
+
 
   // prev img
   const handlePrevImg = () => {
@@ -117,34 +137,49 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
         onKeyPress={handleSelImageClick}
       />
       <div className="img-gallery-carousel-inner">
-          {(currentIdx !== 0) ? (
-            <ChevronLeftIcon
-              className="img-gallery-carousel-controls img-gallery-carousel-controls-left-expanded"
-              onClick={handlePrevImg}
-              fontSize="large"
-            />
-          ) : <div className="img-gallery-carousel-controls-alt" />}
+        <ChevronLeftIcon
+            className="img-gallery-carousel-controls img-gallery-carousel-controls-left-expanded"
+            onClick={handlePrevImg}
+            fontSize="large"
+            style={{ display: isZoomed ? 'none' : 'block' }}
+          />
+        <div className="img-expanded-container">
           <img
             className="selImage-expanded"
             src={`${style.photos[currentIdx].url}`}
             alt="selected"
+            onClick={handleExpandedImageClick}
+            onMouseMove={handleMouseMove}
+            // add custom minus sign for isZoomed
+            style={{
+              cursor: isZoomed ? 'url(client/dist/images/add.png) 24 24,auto'
+              : 'url(client/dist/images/remove.png) 24 24, auto',
+              '-webkit-transform': isZoomed ? 'scale(2.5)' : 'scale(1)',
+              '-ms-transform': isZoomed ? 'scale(2.5)' : 'scale(1)',
+              transform: isZoomed ? 'scale(2.5)' : 'scale(1)',
+              transition: 'transform 0.4s ease-out 0s',
+            }}
           />
-          {currentIdx !== photos.length - 1 ? (
-            <ChevronRightIcon
-              className="img-gallery-carousel-controls img-gallery-carousel-controls-right"
-              onClick={handleNextImg}
-              fontSize="large"
-            />
-          ) : <div className="img-gallery-carousel-controls-alt" />}
-          <div className="img-gallery-carousel-dots">
-            {photos.slice().map((pos, i) => (
-                <button
-                    key={i}
-                    onClick={() => handleDotClick(i)}
-                    className={i === currentIdx ? 'dot active' : 'dot'}
-                />
-            ))}
-          </div>
+        </div>
+
+        <ChevronRightIcon
+          className="img-gallery-carousel-controls img-gallery-carousel-controls-right"
+          onClick={handleNextImg}
+          fontSize="large"
+          style={{display: isZoomed ? 'none' : 'block'}}
+        />
+        <div
+          className="img-gallery-carousel-dots"
+          style={{display: isZoomed ? 'none' : 'block'}}
+        >
+          {photos.slice().map((pos, i) => (
+              <button
+                  key={i}
+                  onClick={() => handleDotClick(i)}
+                  className={i === currentIdx ? 'dot active' : 'dot'}
+              />
+          ))}
+        </div>
       </div>
     </div>
   );
