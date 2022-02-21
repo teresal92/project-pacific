@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import Grid from '@mui/material/Grid';
 
 const axios = require('axios');
 
@@ -119,7 +120,7 @@ export default function AddToCart({style}) {
         range.push(i);
       }
       return (
-        <FormControl sx={{ m: 1, minWidth: 200 }}>
+        <FormControl sx={{ m: 1, width: 200 }}>
           <InputLabel id="demo-simple-select-label">Select Qty</InputLabel>
           <Select
             labelId="demo-controlled-open-select-label"
@@ -140,7 +141,7 @@ export default function AddToCart({style}) {
       );
     } else {
       return (
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <FormControl sx={{ m: 1, width: 120 }}>
           <InputLabel id="demo-simple-select-label">Select Qty</InputLabel>
           <Select
             labelId="demo-controlled-open-select-label"
@@ -160,21 +161,22 @@ export default function AddToCart({style}) {
   /* Add to Cart Button */
   const renderCartButton = () => {
     return ( !OOS ?
-    <div style={{"margin-left" : "15px"}}>
-      <Button
-        variant="contained"
-        size="large"
-        color="inherit"
-        onClick={handleButtonClick}
-        startIcon={<ShoppingCartRoundedIcon />}
-      >
-        Add to Cart
-      </Button>
-    </div> : null)
+      <div>
+        <Button
+          variant="contained"
+          size="large"
+          color="inherit"
+          onClick={handleButtonClick}
+          startIcon={<ShoppingCartRoundedIcon />}
+          sx={{ mx: 1, my: 2 }}
+        >
+          Add to Cart
+        </Button>
+      </div> : null)
   };
 
   return (
-    <form className="add-to-cart-form" style={{"justify-content" : "start"}}>
+    <form className="add-to-cart-form">
       {open ? <p>Please select a size</p> : <p />}
       {renderSizeDropdown()}
       {renderQtyDropdown()}
