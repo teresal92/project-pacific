@@ -253,7 +253,7 @@ a {
   margin-left: 20%;
   margin-top: 10%;
   margin-bottom: 2%;
-    background-image:
+  background-image:
     linear-gradient(
       to right,
       rgba(180, 180, 180, 0.2),
@@ -268,6 +268,8 @@ a {
 }
 
 .img-gallery-carousel-inner {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -290,6 +292,8 @@ a {
   left: 10%;
   margin: 0;
   opacity: 0.9;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -360,17 +364,23 @@ a {
   height: 500px;
   width: 700px;
   overflow: hidden;
-
 }
-
 
 .selImage-expanded {
   width: 100%;
   height: 100%;
-  aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: center;
-  /* cursor: crosshair; */
+  cursor: 'crosshair';
+  transition: 'transform 0.4s ease-out 0s';
+}
+
+// TODO: add custom minus sign for isZoomed
+.selImage-expanded-zoom {
+  /* -webkit-transform: scale(2.5);
+  -ms-transform: scale(2.5); */
+  transform: translate(-50%, -50%) scale(2.5);
+  cursor: 'zoom-out';
 }
 
 .img-gallery-carousel-container-expanded-close {
