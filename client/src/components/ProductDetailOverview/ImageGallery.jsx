@@ -11,12 +11,11 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   // coordinates of mouse cursor
-  const [x, setX] = useState(null);
-  const [y, setY] = useState(null)
-  const _x = 0;
-  const _y = 0;
+  const [mouseX, setMouseX] = useState(0);
+  const [mouseY, setMouseY] = useState(0);
 
   const thumbnailImgRef = useRef();
+  const expandedImgRef = useRef(null);
 
   useEffect(() => {
     if (style.photos && style.photos[0]) {
@@ -36,14 +35,23 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
     setIsZoomed(!isZoomed);
   }
 
-  const handleMouseMove = (e) => {
-    // x: how far cursor is from left of an element
-    setX(e.pageX);
-    // y: how far cursor is from top of an eleent
-    setY(e.pageY);
-    console.log(`x: ${x}, y: ${y}`);
+  const generateZoom = (e) => {
+    let scale;
+    if (isZoomed) {
+      scale = 2.5;
+    } else {
+      scale = 1;
+    }
+    console.log(`ref: ${expandedImgRef.current}`);
+    // // x: how far cursor is from left of an element
+    // setMouseX(e.nativeEvent.clientX);
+    // // y: how far cursor is from top of an eleent
+    // setMouseY(e.nativeEvent.cientY);
+    // console.log(`x: ${x}, y: ${y}`);
+    console.log(`e.offsetX: ${e.nativeEvent.offsetX}`);
+    console.log(`e.offsetY: ${e.nativeEvent.offsetY}`);
+    console.log(` after scale: e.offsetX: ${e.nativeEvent.offsetX}`);
   }
-
 
   // prev img
   const handlePrevImg = () => {
@@ -145,20 +153,12 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
           />
         <div className="img-expanded-container">
           <img
-            className="selImage-expanded"
+            className={isZoomed ? "selImage-expanded-zoom" : "selImage-expanded"}
             src={`${style.photos[currentIdx].url}`}
             alt="selected"
             onClick={handleExpandedImageClick}
-            onMouseMove={handleMouseMove}
-            // add custom minus sign for isZoomed
-            style={{
-              cursor: isZoomed ? 'url(client/dist/images/add.png) 24 24,auto'
-              : 'url(client/dist/images/remove.png) 24 24, auto',
-              '-webkit-transform': isZoomed ? 'scale(2.5)' : 'scale(1)',
-              '-ms-transform': isZoomed ? 'scale(2.5)' : 'scale(1)',
-              transform: isZoomed ? 'scale(2.5)' : 'scale(1)',
-              transition: 'transform 0.4s ease-out 0s',
-            }}
+            onMouseMove={generateZoom}
+            ref={expandedImgRef}
           />
         </div>
 
