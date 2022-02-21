@@ -68,7 +68,11 @@ const Question = (props) => {
   };
 
 return !questionBtnClicked  ? (
-  <Grid>
+  <Grid sx={{
+    margin:'auto',
+    maxWidth:750,
+    minWidth: 450,
+  }}>
     <Accordion className={classes.accordion} onClick={(e) => {onClick(e) , handleChange(e)}}>
       <AccordionSummary addicon={<AddCircleOutlineIcon/>}>
         <Typography className={classes.addAnswerHeader}>Add Question</Typography>
@@ -82,6 +86,7 @@ return !questionBtnClicked  ? (
   <Card sx={{
     bgcolor: 'background.paper',
     boxShadow: 10,
+    width:'50%',
   }} style={{ maxWidth: 850, margin: 'auto auto' }}>
 
     <CardContent>

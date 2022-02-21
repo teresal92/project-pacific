@@ -6,7 +6,7 @@ import axios from 'axios';
 import { API_KEY } from '../../../../config.js'
 import fakeData from './fakeData.js'
 axios.defaults.headers.common['Authorization'] = API_KEY;
-import {TextField, Typography, Grid} from '@mui/material';
+import {TextField, Typography, Grid, OutlinedInput} from '@mui/material';
 import Box from '@mui/material/Box';
 
 class QnACore extends React.Component {
@@ -88,16 +88,29 @@ class QnACore extends React.Component {
   render() {
     var {questions} = this.state
     return this.state.filteredQuestions.length > 0 ?
-    <div data-testid='core-1'>
     <div>
-      <Typography>Questions & Answers</Typography>
-      <form onSubmit={this.handleSubmit}>
-        <input
-          className='search-questions'
-          placeholder='Have a question? Search for answers…'
-          onChange={(e) => {this.grabUserInput(e), this.filterSearch(e)}}></input>
-      </form>
-    </div>
+        <Box sx={{
+          marginTop: 10,
+          marginLeft: 61,
+        }}>
+        </Box>
+        <div>
+          <Grid sx={{
+            margin:'auto',
+            maxWidth:750,
+            minWidth: 450,
+          }}>
+            <Grid xs={12} sm={6} md={12} item>
+            <Typography variant='h6'>Questions & Answers</Typography>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              className='search-questions'
+              placeholder='Have a question? Search for answers…'
+              onChange={(e) => {this.grabUserInput(e), this.filterSearch(e)}}></input>
+          </form>
+            </Grid>
+          </Grid>
+        </div>
     <div>
       <QnAList count={this.state.count} addCount={this.addCount} questions={this.state.filteredQuestions} />
       <Question prodId={this.state.prodId} getQuestions={this.getQuestions} />
@@ -109,7 +122,6 @@ class QnACore extends React.Component {
           marginTop: 10,
           marginLeft: 61,
         }}>
-        <Typography variant='h6'>Questions & Answers</Typography>
         </Box>
         <div>
           <Grid sx={{
@@ -117,7 +129,8 @@ class QnACore extends React.Component {
             maxWidth:750,
             minWidth: 450,
           }}>
-            <Grid xs={12} sm={6} md={3} item>
+            <Grid xs={12} sm={6} md={12} item>
+            <Typography variant='h6'>Questions & Answers</Typography>
           <form onSubmit={this.handleSubmit}>
             <input
               className='search-questions'
