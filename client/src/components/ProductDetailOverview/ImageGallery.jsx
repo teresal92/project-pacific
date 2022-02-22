@@ -163,7 +163,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
             onClick={handleExpandedImageClick}
             ref={expandedImgRef}
             onMouseMove={isZoomed ? generateZoom : 'null'}
-            // onMouseLeave={isZoomed ? exitZoom : 'null'}
+            onMouseLeave={isZoomed ? exitZoom : 'null'}
             // style={isZoomed ? {transform: `translate(-${x}%, -${y}%) scale(2.5)`, cursor: 'zoom-out'}
             // : { transform: 'scale(1)', cursor: 'crosshair'}}
           />
