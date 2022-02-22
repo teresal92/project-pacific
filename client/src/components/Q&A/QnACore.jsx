@@ -40,9 +40,6 @@ class QnACore extends React.Component {
       var sortedRes = response.data.results.sort(function (a, b) {
         return b.question_helpfulness - a.question_helpfulness;
       })
-      //  var sortedWithoutReported = sortedRes.filter(item =>{
-      //    return item.reported === false
-      //  })
       var temp = sortedRes.splice(0, this.state.count)
       await this.setState({
         questions: temp,
@@ -60,14 +57,17 @@ class QnACore extends React.Component {
 
   filterSearch(e) {
     var filtered = this.state.allQuestions.filter(question => {
-      if (this.state.userInput === '') {
-        return question
-      } else if (question.question_body.toLowerCase().includes(this.state.userInput.toLowerCase())) {
+       if (question.question_body.toLowerCase().includes(this.state.userInput.toLowerCase())) {
           return question
+      } else if (this.state.userInput === '') {
+        return;
       }
     })
+    var sortedFilter = filtered.sort(function (a, b) {
+      return b.question_helpfulness - a.question_helpfulness;
+    })
     this.setState({
-      filteredQuestions: filtered
+      filteredQuestions: sortedFilter
     })
   }
 
@@ -88,7 +88,7 @@ class QnACore extends React.Component {
   render() {
     var {questions} = this.state
     return this.state.filteredQuestions.length > 0 ?
-    <div>
+    <div >
         <Box sx={{
           marginTop: 10,
           marginLeft: 61,

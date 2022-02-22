@@ -1,9 +1,20 @@
 import React from 'react';
-import {render, screen, cleanup} from '@testing-library/react'
-import QnACore from '../client/src/components/QnA/QnACore';
+import {rest} from 'msw';
+import {setupServer} from 'msw/node';
+import {render, getByText, waitFor, screen} from '@testing-library/react';
+import QnACore from '../client/src/components/Q&A/QnACore.jsx';
 
-test('Should render Core Component', () => {
-  render(<QnACore />)
-  const coreElement = screen.getByTestId('core-1');
-  expect(coreElement).toBeInTheDocument()
+
+const server = new setupServer(
+  res.get()
+)
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test('Should render Core Component', async () => {
+    render(<QnACore />);
+    const item = await screen.getByText('Questions & Answers');
+    expect(item).toBeVisable()
 })

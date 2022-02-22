@@ -16,19 +16,18 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: "center",
     alignItems: 'center',
-    background: 'rgb(236, 241, 241)',
-    border: 0,
+    background: 'transparent',
     borderRadius: 5,
     color: 'black',
     margin: 5,
     fontSize: 18,
     whiteSpace:'normal',
-    boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
+
   },
   summary: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: "flexStart",
-    alignItems: 'center',
+
     whiteSpace:'normal',
   },
   detail: {
@@ -43,8 +42,7 @@ const useStyles = makeStyles({
     float: 'right'
   },
   firstAnswerBtn: {
-    display: 'inline-block',
-    alignItems: 'center'
+    margin: 'auto'
   }
 
 })
@@ -130,7 +128,7 @@ const QnAEntrie = (props) => {
   return !addAnswerClick ? (
     <Accordion  defaultExpanded={true} className={classes.accordion} >
         <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon/>}>
-          <Typography variant='h5' align='center' >
+          <Typography variant='h5' >
             Q: {props.question.question_body}
           </Typography>
         </AccordionSummary>
@@ -140,6 +138,7 @@ const QnAEntrie = (props) => {
               <Grid className={classes.detail}>
               <Typography onClick={helpfulQuestion} className='helpfulQuestion'>Helpful? Yes({props.question.question_helpfulness})</Typography>
               <Button
+                className={classes.firstAnswerBtn}
                 onClick={handleAnswer}
                 endIcon={<SendIcon />}
                 size='medium'

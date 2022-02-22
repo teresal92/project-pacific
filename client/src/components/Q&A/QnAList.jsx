@@ -1,16 +1,17 @@
 import React from 'react';
 import QnAEntrie from './QnAEntrie.jsx';
-import { Container, Grid, Button, Box} from '@mui/material';
+import { Container, Grid, Button, Box, Accordion, AccordionDetails, AccordionSummary} from '@mui/material';
 
 const QnAList = (props) => {
   return (
     <div>
       <div>
+
+
       <Grid
         sx={{
           flexDirection: 'column',
-          bgcolor: 'rgb(236, 241, 241)',
-          // boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
+          bgcolor: 'transparent',
           borderRadius: 2,
           whiteSpace:'normal',
           minWidth:450,
@@ -29,6 +30,7 @@ const QnAList = (props) => {
 
       </Grid>
         </Grid>
+
       </div>
     </div>
   )
