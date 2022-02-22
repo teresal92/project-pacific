@@ -459,6 +459,23 @@ a {
 .outfitAdd {
   height: 200px;
   width: 150px;
+  background-color: #6f0000 !important;
+}
+
+.plusIcon {
+  font-size: 80px !important;
+  padding-left: 30%;
+}
+
+.relatedBox {
+  margin-top: 100px;
+  position: relative;
+  border: 2px solid #900000;
+}
+
+.relativeItem {
+  height: 200px;
+  width: 150px;
 }
 
 .homeDivider {

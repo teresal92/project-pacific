@@ -5,6 +5,10 @@ import NavBar from './Home/NavBar.jsx';
 import QnACore from './Q&A/QnACore.jsx'
 import { Divider } from '@mui/material';
 import OutfitList from './OutfitnRelated/YourOutfit.jsx';
+<<<<<<< HEAD
+=======
+import RelatedItems from './OutfitnRelated/RelatedItems.jsx';
+>>>>>>> Finishing staged of outfit and related lists
 import exProductData from './exProductData.js';
 
 class App extends React.Component {
@@ -14,6 +18,7 @@ class App extends React.Component {
       selectedProduct: exProductData[0],
       productSelected: false,
       outfit: [],
+      related: exProductData,
     }
   }
 
@@ -33,10 +38,11 @@ class App extends React.Component {
   }
 
   addToOutfit = (event) => {
-    // console.log(event)
-    this.setState({
-      outfit: this.state.outfit.concat(event)
-    })
+    if (!this.state.outfit.includes(event)) {
+      this.setState({
+        outfit: this.state.outfit.concat(event)
+      })
+    }
   }
 
   render() {
@@ -48,21 +54,26 @@ class App extends React.Component {
           </div>
           <div>
             <ProductDetailOverview
-            productId={this.state.selectedProduct.id}
-            outfit={this.state.outfit}
-            selected={this.state.productSelected}
-            add={this.addToOutfit.bind(this)}/>
+              productId={this.state.selectedProduct.id}
+              outfit={this.state.outfit}
+              selected={this.state.productSelected}
+              add={this.addToOutfit.bind(this)} />
             <Divider
-            sx={{
-              mt: 10,
-              mx: 40,
-            }}
-            varient='middle'/>
+              sx={{
+                mt: 10,
+                mx: 40,
+              }}
+              varient='middle' />
           </div>
           <div className='qna'>
             <QnACore prodId={this.state.selectedProduct.id} />
+<<<<<<< HEAD
           </div>
         </div >
+=======
+          </div> */}
+        </div>
+>>>>>>> Finishing staged of outfit and related lists
       ) : (
         <div>
           <div className='navbar'>
@@ -73,17 +84,21 @@ class App extends React.Component {
             <div className='textbox'>text box</div>
           </div>
           <div className='homeDivider'>
-          <Divider
-            sx={{
-              mt: 10,
-              mx: 40,
-            }}
-            varient='middle'/>
+            <Divider
+              sx={{
+                mt: 10,
+                mx: 40,
+              }}
+              varient='middle' />
           </div>
           <div className='outfitList'>
             <OutfitList
-            outfit={this.state.outfit}
-            selected={this.state.productSelected}/>
+              outfit={this.state.outfit}
+              selected={this.state.productSelected} />
+          </div>
+          <div className='related'>
+            <RelatedItems
+              related={this.state.related} />
           </div>
         </div>
       ))
