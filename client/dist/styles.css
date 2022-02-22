@@ -253,7 +253,7 @@ a {
   margin-left: 20%;
   margin-top: 10%;
   margin-bottom: 2%;
-    background-image:
+  background-image:
     linear-gradient(
       to right,
       rgba(180, 180, 180, 0.2),
@@ -267,12 +267,18 @@ a {
   float: left;
 }
 
-.img-gallery-carousel-container {
-  max-height: 600px;
+.img-gallery-carousel-inner {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  overflow: hidden;
 }
 
 .selImage {
-  max-height: 500px;
+  height: 500px;
   width: 60%;
   margin-left: 25%;
   object-fit: cover;
@@ -280,11 +286,18 @@ a {
   cursor: -webkit-zoom-in;
 }
 
-.img-gallery-carousel-overlay {
+.img-gallery-carousel-thumbnail-overlay {
   position: absolute;
-  top: 20px;
-  left: 35px;
+  top: 5px;
+  left: 10%;
+  margin: 0;
   opacity: 0.9;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
 }
 
@@ -293,19 +306,9 @@ a {
   opacity: 0.8;
 }
 
-
-.img-gallery-carousel-inner {
-
-}
-
 .img-gallery-carousel-controls {
   position: relative;
-  /* top: 50%; */
-}
-
-img-gallery-carousel-controls-alt {
-  height: 35px;
-  width: 35px;
+  margin: 0;
 }
 
 .img-gallery-carousel-controls:hover {
@@ -317,16 +320,78 @@ img-gallery-carousel-controls-alt {
   left: 165px;
 }
 
-.img-gallery-carousel-controls-right {
-
+.img-gallery-carousel-expanded-overlay {
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 600px;
+  width: 98%;
+  display: block;
+  border-radius: 5px;
+  /* background-color: rgba(0,0,0,0.5); */
+  background: transparent;
 }
 
-.img-gallery-carousel-controls-up {
 
+.img-gallery-carousel-dots {
+  position: absolute;
+  top: 85%;
+  display: inline-block;
+  left: 50%;
+  margin-top: 3rem;
+  transform: translateX(-50%);
 }
 
-.img-gallery-carousel-controls-down {
+.dot {
+  background: #121212;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 1rem;
+  width: 1rem;
+  margin: 0 0.3rem;
+  outline: none;
+}
 
+.dot.active, .dot:hover {
+  background: #900000;
+  transform: scale(1.1);
+}
+
+.img-expanded-container {
+  height: 500px;
+  width: 700px;
+  overflow: hidden;
+}
+
+.selImage-expanded {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1);
+  cursor: 'crosshair';
+  transition: 'transform 0.4s ease-out 0s';
+}
+
+/* TODO: add custom minus sign for isZoomed */
+.selImage-expanded-zoom {
+  width: 100%;
+  height: 100%;
+  margin-left: 40%;
+  margin-top: 20%;
+  object-fit: cover;
+  object-position: center;
+  cursor: 'zoom-out';
+  transition: 'transform 0.4s ease-out 0s';
+}
+
+.img-gallery-carousel-container-expanded-close {
+  position: relative;
+  top: 10px;
+  right: -10px;
 }
 
 .css-rm9e7r{
