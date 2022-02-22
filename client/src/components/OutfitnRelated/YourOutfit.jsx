@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardMedia } from '@mui/material';
+import { Card, CardHeader, CardContent, CardMedia, Typography } from '@mui/material';
 import { Grid, Container } from '@mui/material';
 
 
@@ -15,18 +15,23 @@ export default function OutfitList(props) {
             {props.outfit.map((item, i) => (
               <Grid item key={`item-key-${i}`}>
                 <Card className='outfitItem'>
-                  <CardHeader titleTypographyProps={{ variant: 'h7' }} title={item.name} height='50'/>
+                  <CardHeader titleTypographyProps={{ variant: 'h7' }} title={item.name} height='50' />
                   <CardMedia
                     component='img'
                     height='200'
-                    alt='NO IMAGE'
+                    alt={item.photos[0].url}
                     src={item.photos[0].thumbnail_url} />
                 </Card>
               </Grid>
             ))}
             <Grid>
               <Card className='outfitAdd' onClick={(e) => { props.add(props.item) }}>
-                <CardHeader title={'ADD TO OUTFIT'} />
+                <CardHeader titleTypographyProps={{ variant: 'h6' }} title={'ADD TO OUTFIT'} />
+                <CardContent>
+                  <Typography className='plusIcon'>
+                    +
+                  </Typography>
+                </CardContent>
               </Card>
             </Grid>
           </Grid>
@@ -41,6 +46,11 @@ export default function OutfitList(props) {
               <Grid item key={`item-key-${i}`}>
                 <Card className='outfitItem'>
                   <CardHeader titleTypographyProps={{ variant: 'h7' }} title={item.name} />
+                  <CardMedia
+                    component='img'
+                    height='200'
+                    alt={item.photos[0].url}
+                    src={item.photos[0].thumbnail_url} />
                 </Card>
               </Grid>
             ))}
