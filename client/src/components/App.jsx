@@ -5,6 +5,7 @@ import NavBar from './Home/NavBar.jsx';
 import QnACore from './Q&A/QnACore.jsx'
 import { Divider } from '@mui/material';
 import OutfitList from './OutfitnRelated/YourOutfit.jsx';
+
 import exProductData from './exProductData.js';
 
 class App extends React.Component {
@@ -59,10 +60,11 @@ class App extends React.Component {
             }}
             varient='middle'/>
           </div>
-          {/* <div className='qna'>
+          <div className='qna'>
             <QnACore prodId={this.state.selectedProduct.id} />
-          </div> */}
-        </div>
+          </div>
+        </div >
+
       ) : (
         <div>
           <div className='navbar'>

@@ -6,8 +6,6 @@ import { Grid, Container } from '@mui/material';
 
 export default function OutfitList(props) {
 
-  console.log(props.outfit)
-
   return (
     props.selected ? (
       <Container >

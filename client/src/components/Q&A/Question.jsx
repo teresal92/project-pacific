@@ -17,7 +17,9 @@ const useStyles = makeStyles({
     position: 'relative',
     marginLeft: 'auto',
     marginRight: 'auto',
-    maxWidth: 700,
+    maxWidth: 850,
+    backgroundColor: '#e3f2fd',
+    boxShadow: 10
   }
 })
 
@@ -43,15 +45,11 @@ const Question = (props) => {
   }
   const sendQuestion = (e) => {
     e.preventDefault();
-    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/qa/questions/`, {
+    axios.post(`/api/qa/questions`, {
        body: body,
        name: name,
        email: email,
        product_id: props.prodId
-   }, {
-     headers: {
-       Authorization: API_KEY
-     }
    })
    .then(response => {
      console.log('Success ', response)
@@ -68,21 +66,13 @@ const Question = (props) => {
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
-//  return(
-//   <div>
-//   <div>
-//     <form>
-//       <input onChange={answerFormSubmit} type='text' placeholder='Name'></input>
-//       <input onChange={answerFormSubmit} type='text' placeholder='Body'></input>
-//       <input onChange={answerFormSubmit} type='text' placeholder='Email'></input>
-//       <button className='addQuestionButton' onClick={(e) => {sendQuestion(e)}}>Add Question +</button>
-//     </form>
-//   </div>
-// </div>
-//  )
 
 return !questionBtnClicked  ? (
-  <Grid>
+  <Grid sx={{
+    margin:'auto',
+    maxWidth:750,
+    minWidth: 450,
+  }}>
     <Accordion className={classes.accordion} onClick={(e) => {onClick(e) , handleChange(e)}}>
       <AccordionSummary addicon={<AddCircleOutlineIcon/>}>
         <Typography className={classes.addAnswerHeader}>Add Question</Typography>
@@ -96,7 +86,8 @@ return !questionBtnClicked  ? (
   <Card sx={{
     bgcolor: 'background.paper',
     boxShadow: 10,
-  }} style={{ maxWidth: 600, margin: 'auto auto' }}>
+    width:'50%',
+  }} style={{ maxWidth: 850, margin: 'auto auto' }}>
 
     <CardContent>
       <Button
@@ -107,7 +98,7 @@ return !questionBtnClicked  ? (
         }}
         ><ArrowBackIosNewIcon /></Button>
         <Typography className={classes.addAnswerHeader}>Add Question</Typography>
-      <Accordion className={classes.accordion}>
+      <Accordion >
       <form onSubmit={(e) => {sendQuestion(e), onClick(e)}}>
         <Grid container spacing={1}>
           <Grid xs={12} sm={6} item>
