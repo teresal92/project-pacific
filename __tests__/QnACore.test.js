@@ -18,6 +18,5 @@ afterAll(() => server.close());
 
 test('Should render Core Component', async () => {
     render(<QnACore />);
-    const item = await screen.getByText('Questions & Answers');
-    expect(item).toBeVisable()
+    screen.getByText('Questions & Answers')
 })
