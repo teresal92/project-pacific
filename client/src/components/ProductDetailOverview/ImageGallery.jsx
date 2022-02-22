@@ -168,7 +168,6 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
             // : { transform: 'scale(1)', cursor: 'crosshair'}}
           />
         </div>
-
         <ChevronRightIcon
           className="img-gallery-carousel-controls img-gallery-carousel-controls-right"
           onClick={handleNextImg}
