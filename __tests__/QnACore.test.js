@@ -4,9 +4,12 @@ import {setupServer} from 'msw/node';
 import {render, getByText, waitFor, screen} from '@testing-library/react';
 import QnACore from '../client/src/components/Q&A/QnACore.jsx';
 
+const path = 'http://localhost/api/qa';
 
 const server = new setupServer(
-  res.get()
+  rest.get(`${path}/questions`, (req, res, ctx) => {
+
+  })
 )
 
 beforeAll(() => server.listen());
