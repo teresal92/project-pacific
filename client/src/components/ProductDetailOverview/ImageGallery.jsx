@@ -11,8 +11,8 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   // coordinates of mouse cursor
-  const [mouseX, setMouseX] = useState(0);
-  const [mouseY, setMouseY] = useState(0);
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
 
   const thumbnailImgRef = useRef();
   const expandedImgRef = useRef(null);
@@ -36,21 +36,24 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   }
 
   const generateZoom = (e) => {
-    let scale;
-    if (isZoomed) {
-      scale = 2.5;
-    } else {
-      scale = 1;
-    }
-    console.log(`ref: ${expandedImgRef.current}`);
-    // // x: how far cursor is from left of an element
-    // setMouseX(e.nativeEvent.clientX);
-    // // y: how far cursor is from top of an eleent
-    // setMouseY(e.nativeEvent.cientY);
-    // console.log(`x: ${x}, y: ${y}`);
-    console.log(`e.offsetX: ${e.nativeEvent.offsetX}`);
-    console.log(`e.offsetY: ${e.nativeEvent.offsetY}`);
-    console.log(` after scale: e.offsetX: ${e.nativeEvent.offsetX}`);
+    let scale = 2.5;
+    // clientX: how far cursor is from left of an element
+    let posX = e.nativeEvent.clientX - expandedImgRef.current.offsetLeft;
+    // clientY: how far cursor is from top of an eleent
+    let posY = e.nativeEvent.clientY - expandedImgRef.current.offsetTop
+    let mWidth = expandedImgRef.current.offsetWidth;
+    let mHeight = expandedImgRef.current.offsetHeight;
+    posX = posX / mWidth * 100;
+    posY = posY / mHeight * 100;
+
+    expandedImgRef.current.style.transform = `translate(-${posX}%, -${posY}%) scale(${scale})`;
+  }
+
+  const exitZoom = () => {
+    let scale = 1;
+    expandedImgRef.current.style.transform = `scale(${scale})`;
+    expandedImgRef.current.style.marginLeft = '0%';
+    expandedImgRef.current.style.marginTop = '0%';
   }
 
   // prev img
@@ -133,7 +136,6 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
           ) : <div className="img-gallery-carousel-controls-alt" />}
         </div>
       </div>
-
   );
 
   const renderExpandedView = () => (
@@ -151,14 +153,19 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
             fontSize="large"
             style={{ display: isZoomed ? 'none' : 'block' }}
           />
-        <div className="img-expanded-container">
+        <div
+          className="img-expanded-container"
+        >
           <img
             className={isZoomed ? "selImage-expanded-zoom" : "selImage-expanded"}
             src={`${style.photos[currentIdx].url}`}
             alt="selected"
             onClick={handleExpandedImageClick}
-            onMouseMove={generateZoom}
             ref={expandedImgRef}
+            onMouseMove={isZoomed ? generateZoom : 'null'}
+            // onMouseLeave={isZoomed ? exitZoom : 'null'}
+            // style={isZoomed ? {transform: `translate(-${x}%, -${y}%) scale(2.5)`, cursor: 'zoom-out'}
+            // : { transform: 'scale(1)', cursor: 'crosshair'}}
           />
         </div>
 
@@ -174,9 +181,9 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
         >
           {photos.slice().map((pos, i) => (
               <button
-                  key={i}
-                  onClick={() => handleDotClick(i)}
-                  className={i === currentIdx ? 'dot active' : 'dot'}
+                key={i}
+                onClick={() => handleDotClick(i)}
+                className={i === currentIdx ? 'dot active' : 'dot'}
               />
           ))}
         </div>
