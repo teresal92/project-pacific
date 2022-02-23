@@ -24,6 +24,7 @@ const axios = require('axios');
 function ProductDetailOverview({ productId, outfit, selected, add }) {
   const [productInfo, setProductInfo] = useState([]);
   const [styles, setStyles] = useState([]);
+  const [ratings, setRatings] = useState({});
   const [selectedStyle, setSelectedStyle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -32,13 +33,16 @@ function ProductDetailOverview({ productId, outfit, selected, add }) {
   useEffect(() => {
     const getProductInfo = axios.get(`/api/products/${productId}`);
     const getStyles = axios.get(`/api/products/${productId}/styles`);
+    const getReviews = axios.get(`/api/reviews/meta/${productId}`);
 
-    Promise.all([getProductInfo, getStyles])
+    Promise.all([getProductInfo, getStyles, getReviews])
       .catch(err => console.error(err))
       .then(res => {
+        console.log(res);
         setProductInfo(res[0].data);
         setStyles(res[1].data.results);
         setSelectedStyle(res[1].data.results[0]);
+        setRatings(res[2].data.ratings)
       })
       .then(() => setIsLoading(false));
   }, [productId]);
@@ -70,7 +74,7 @@ function ProductDetailOverview({ productId, outfit, selected, add }) {
               </Grid>
               <Grid item xs={12} sm={6} md={5}>
                 <Stack direction="row" spacing={3}>
-                  <Ratings />
+                  <Ratings ratings={ratings} />
                   <a href="#">Read all Reviews</a>
                   <span className="social">
                     <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>

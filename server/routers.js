@@ -5,6 +5,7 @@ var router = require('express').Router();
 //     console.log('TEST')
 //   })
 
+//Products
 router.route('/products')
   .get(controller.products.getProducts);
 
@@ -13,10 +14,6 @@ router.route('/products/:productId')
 
 router.route('/products/:productId/styles')
   .get(controller.products.getStyles);
-
-router.route('/reviews/:productId')
-  .get(controller.reviews.getReviews);
-
 
 //QnA
 router.route('/qa/questions')
@@ -42,5 +39,9 @@ router.route('/qa/answers/:answer_id/report')
   .put(controller.answers.reportAnswer)
 router.route('/cart/:skuId')
   .post(controller.cart.addToCart);
+
+// Reviews
+router.route('/reviews/meta/:productId')
+  .get(controller.reviews.getReviewsMeta);
 
 module.exports = router;
