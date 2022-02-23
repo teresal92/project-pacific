@@ -57,7 +57,7 @@ class QnACore extends React.Component {
 
   filterSearch(e) {
     var filtered = this.state.allQuestions.filter(question => {
-       if (this.state.userInput === '') {
+       if (this.state.userInput.length < 3 || this.state.userInput === '') {
           return;
       }  else if (question.question_body.toLowerCase().includes(this.state.userInput.toLowerCase())) {
         return question;
