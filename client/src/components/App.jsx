@@ -5,10 +5,7 @@ import NavBar from './Home/NavBar.jsx';
 import QnACore from './Q&A/QnACore.jsx'
 import { Divider } from '@mui/material';
 import OutfitList from './OutfitnRelated/YourOutfit.jsx';
-<<<<<<< HEAD
-=======
 import RelatedItems from './OutfitnRelated/RelatedItems.jsx';
->>>>>>> Finishing staged of outfit and related lists
 import exProductData from './exProductData.js';
 
 class App extends React.Component {
@@ -67,13 +64,8 @@ class App extends React.Component {
           </div>
           <div className='qna'>
             <QnACore prodId={this.state.selectedProduct.id} />
-<<<<<<< HEAD
           </div>
         </div >
-=======
-          </div> */}
-        </div>
->>>>>>> Finishing staged of outfit and related lists
       ) : (
         <div>
           <div className='navbar'>
