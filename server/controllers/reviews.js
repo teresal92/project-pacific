@@ -3,14 +3,11 @@ const { API_KEY } = require('../../config.js');
 
 module.exports = {
   // Retrieves list of reviews
-  getReviews: (req, res) => {
+  getReviewsMeta: (req, res) => {
     let productId = req.params.productId;
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews', {
+    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews/meta', {
       headers: { Authorization: `${API_KEY}` },
       params: {
-        page: 1,
-        count: 5,
-        sort: 'newest',
         product_id: productId,
       },
     })
