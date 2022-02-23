@@ -4,9 +4,10 @@ import {setupServer} from 'msw/node';
 import {render, getByText, waitFor, screen} from '@testing-library/react';
 import QnACore from '../client/src/components/Q&A/QnACore.jsx';
 import {handlers} from '../client/src/mocks/QnA/index.js'
+
 const path = 'http://localhost/api/qa';
 
-const server = setupServer(...handlers)
+const server = setupServer(handlers)
 
 
 beforeAll(() => server.listen());
