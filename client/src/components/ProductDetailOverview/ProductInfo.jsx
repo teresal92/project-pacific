@@ -21,7 +21,7 @@ function ProductInfo({product, style}) {
   }
 
   return (
-    <div className="product-info">
+    <div className="product-info" data-testid="productInfo">
       <Typography variant="overline" display="block" gutterBottom>
         {product.category}
       </Typography>

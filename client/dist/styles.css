@@ -372,8 +372,8 @@ a {
   object-fit: cover;
   object-position: center;
   transform: scale(1);
-  cursor: 'crosshair';
-  transition: 'transform 0.4s ease-out 0s';
+  cursor: crosshair;
+  transition: 500ms;
 }
 
 /* TODO: add custom minus sign for isZoomed */
@@ -384,8 +384,8 @@ a {
   margin-top: 20%;
   object-fit: cover;
   object-position: center;
-  cursor: 'zoom-out';
-  transition: 'transform 0.4s ease-out 0s';
+  cursor: zoom-out;
+  transition: 500ms;
 }
 
 .img-gallery-carousel-container-expanded-close {

@@ -32,14 +32,19 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   };
 
   const handleExpandedImageClick = () => {
-    setIsZoomed(!isZoomed);
+    if (isZoomed) {
+      exitZoom();
+      setIsZoomed(!isZoomed);
+    } else {
+      setIsZoomed(!isZoomed);
+    }
   }
 
   const generateZoom = (e) => {
     let scale = 2.5;
-    // clientX: how far cursor is from left of an element
+    // clientX: how far cursor is from left of img
     let posX = e.nativeEvent.clientX - expandedImgRef.current.offsetLeft;
-    // clientY: how far cursor is from top of an eleent
+    // clientY: how far cursor is from top of img
     let posY = e.nativeEvent.clientY - expandedImgRef.current.offsetTop
     let mWidth = expandedImgRef.current.offsetWidth;
     let mHeight = expandedImgRef.current.offsetHeight;
@@ -52,8 +57,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   const exitZoom = () => {
     let scale = 1;
     expandedImgRef.current.style.transform = `scale(${scale})`;
-    expandedImgRef.current.style.marginLeft = '0%';
-    expandedImgRef.current.style.marginTop = '0%';
+    expandedImgRef.current.style.margin = `auto`;
   }
 
   // prev img
@@ -162,10 +166,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
             alt="selected"
             onClick={handleExpandedImageClick}
             ref={expandedImgRef}
-            onMouseMove={isZoomed ? generateZoom : 'null'}
-            // onMouseLeave={isZoomed ? exitZoom : 'null'}
-            // style={isZoomed ? {transform: `translate(-${x}%, -${y}%) scale(2.5)`, cursor: 'zoom-out'}
-            // : { transform: 'scale(1)', cursor: 'crosshair'}}
+            onMouseMove={isZoomed ? generateZoom : () => {}}
           />
         </div>
         <ChevronRightIcon
