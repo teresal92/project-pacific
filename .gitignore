@@ -4,3 +4,5 @@ bundle.js
 bundle.js.map
 
 config.js
+
+coverage
