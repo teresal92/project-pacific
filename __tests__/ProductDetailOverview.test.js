@@ -10,9 +10,9 @@ import '@testing-library/jest-dom'
 // import component to test
 import ProductDetailOverview from '../client/src/components/ProductDetailOverview/ProductDetailOverview.jsx';
 // import mock data
-import exStyleData from '../client/src/mocks/exStyleData.js';
-import ratingsData from '../client/src/mocks/ratingsData.js';
-import productInfoData from '../client/src/mocks/productInfoData.js';
+import exStyleData from '../client/src/components/ProductDetailOverview/mocks/exStyleData.js';
+import ratingsData from '../client/src/components/ProductDetailOverview/mocks/ratingsData.js';
+import productInfoData from '../client/src/components/ProductDetailOverview/mocks/productInfoData.js';
 import exProductData from '../client/src/components/exProductData.js';
 
 const path = 'http://localhost:3000/api';
@@ -46,7 +46,7 @@ afterAll(() => server.close());
 // });
 
 describe('Product Detail Overview Module', () => {
-  test('should render style selector if fetch requests on mount are resolved', () => {
+  test('should render style selector if fetch requests on mount are resolved', async () => {
     render(<ProductDetailOverview productId={exProductData[0].id} />);
     const styleText = await screen.findByText('STYLE')
     expect(styleText).toBeInTheDocument();
