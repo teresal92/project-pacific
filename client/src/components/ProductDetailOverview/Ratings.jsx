@@ -42,6 +42,6 @@ export default function Ratings({ratings}) {
 
 
   return (
-    <Rating name="half-rating-read" defaultValue={avgRating} precision={0.25} readOnly />
+    <Rating name="read-only" value={avgRating} precision={0.25} readOnly />
   );
 }

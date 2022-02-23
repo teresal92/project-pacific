@@ -37,6 +37,8 @@ router.route('/qa/answers/:answer_id/helpful')
 
 router.route('/qa/answers/:answer_id/report')
   .put(controller.answers.reportAnswer)
+
+// Cart
 router.route('/cart/:skuId')
   .post(controller.cart.addToCart);
 

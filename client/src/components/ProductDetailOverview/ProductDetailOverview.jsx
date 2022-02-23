@@ -60,99 +60,60 @@ function ProductDetailOverview({ productId, outfit, selected, add }) {
   };
 
   return !isLoading ? (
-    <Container>
-      <Box sx={{ minHeight: 600 }}>
-        <Grid container spacing={3}>
-          {!isExpanded ? (
-            <>
-              <Grid className="imageContainer" item xs={12} sm={6} md={7}>
+    <div test>
+      <Container>
+        <Box sx={{ minHeight: 600 }}>
+          <Grid container spacing={3}>
+            {!isExpanded ? (
+              <>
+                <Grid className="imageContainer" item xs={12} sm={6} md={7}>
+                  <ImageGallery
+                    style={selectedStyle}
+                    isExpanded={isExpanded}
+                    handleExpandedView={handleExpandedView}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={5}>
+                  <Stack direction="row" spacing={3}>
+                    <Ratings ratings={ratings} />
+                    <a href="#">Read all Reviews</a>
+                    <span className="social">
+                      <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
+                      <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
+                      <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
+                    </span>
+                  </Stack>
+                  <ProductInfo
+                    product={productInfo}
+                    style={selectedStyle}
+                  />
+                  <StyleSelector
+                    styles={styles}
+                    selectedStyle={selectedStyle}
+                    handleStyleSelector={handleStyleSelector}
+                  />
+                  <AddToCart style={selectedStyle} />
+                </Grid>
+              </>
+            ) : (
+              <Grid className="imageContainer" item xs={12}>
                 <ImageGallery
                   style={selectedStyle}
                   isExpanded={isExpanded}
                   handleExpandedView={handleExpandedView}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={5}>
-                <Stack direction="row" spacing={3}>
-                  <Ratings ratings={ratings} />
-                  <a href="#">Read all Reviews</a>
-                  <span className="social">
-                    <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
-                    <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
-                    <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
-                  </span>
-                </Stack>
-                <ProductInfo
-                  product={productInfo}
-                  style={selectedStyle}
-                />
-                <StyleSelector
-                  styles={styles}
-                  selectedStyle={selectedStyle}
-                  handleStyleSelector={handleStyleSelector}
-                />
-                <AddToCart style={selectedStyle} />
-              </Grid>
-            </>
-          ) : (
-            <Grid className="imageContainer" item xs={12}>
-              <ImageGallery
-                style={selectedStyle}
-                isExpanded={isExpanded}
-                handleExpandedView={handleExpandedView}
-              />
-            </Grid>
-          )}
+            )}
+          </Grid>
+        <Grid item xs={12} sm={12} md={12}>
+          <OutfitList outfit={outfit} selected={selected} item={selectedStyle} add={add} />
         </Grid>
-      <Grid item xs={12} sm={12} md={12}>
-        <OutfitList outfit={outfit} selected={selected} item={selectedStyle} add={add} />
-      </Grid>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+    </div>
   ) : (
     <div>Loading... </div>
   );
-
-  // return !isLoading ? (
-  //   <Container>
-  //     <Grid container justify="center" spacing={3}>
-  //       <Grid className="imageContainer" item xs={12} sm={6} md={7} >
-  //         <ImageGallery
-  //           style={selectedStyle}
-  //           isExpanded={isExpanded}
-  //           handleExpandedView={handleExpandedView}
-  //         />
-  //       </Grid>
-  //       <Grid item xs={12} sm={6} md={5}>
-  //         <Stack direction="row" spacing={3}>
-  //           <Ratings />
-  //           <a href="#">Read all Reviews</a>
-  //           <span className="social">
-  //             <a className="sm-icon" href="https://www.pinterest.com/"><PinterestIcon /></a>
-  //             <a className="sm-icon" href="https://www.facebook.com/"><FacebookIcon /></a>
-  //             <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
-  //           </span>
-  //         </Stack>
-  //         <ProductInfo
-  //           product={productInfo}
-  //           style={selectedStyle}
-  //         />
-  //         <StyleSelector
-  //           styles={styles}
-  //           selectedStyle={selectedStyle}
-  //           handleStyleSelector={handleStyleSelector}
-  //         />
-  //         <AddToCart style={selectedStyle} />
-  //       </Grid>
-  //     </Grid>
-  //     <Grid item xs={12} sm={12} md={12}>
-  //       <OutfitList outfit={outfit} selected={selected} item={selectedStyle} add={add}/>
-  //     </Grid>
-  //   </Container>
-  // ) : (
-  //   <div>Loading... </div>
-  // );
-
 }
 
 export default ProductDetailOverview;
