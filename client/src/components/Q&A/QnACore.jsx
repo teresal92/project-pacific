@@ -88,7 +88,7 @@ class QnACore extends React.Component {
   render() {
     var {questions} = this.state
     return this.state.filteredQuestions.length > 0 ?
-    <div >
+    <div>
         <Box sx={{
           marginTop: 10,
           marginLeft: 61,
@@ -101,7 +101,9 @@ class QnACore extends React.Component {
             minWidth: 450,
           }}>
             <Grid xs={12} sm={6} md={12} item>
+              <div role='QnA-test1'>
             <Typography variant='h6'>Questions & Answers</Typography>
+              </div>
           <form onSubmit={this.handleSubmit}>
             <input
               className='search-questions'
@@ -130,7 +132,9 @@ class QnACore extends React.Component {
             minWidth: 450,
           }}>
             <Grid xs={12} sm={6} md={12} item>
+              <div role='QnA-test1'>
             <Typography variant='h6'>Questions & Answers</Typography>
+              </div>
           <form onSubmit={this.handleSubmit}>
             <input
               className='search-questions'
