@@ -161,7 +161,7 @@ export default function AddToCart({style}) {
   /* Add to Cart Button */
   const renderCartButton = () => {
     return ( !OOS ?
-      <div>
+      <div data-testid="addToCartButton">
         <Button
           variant="contained"
           size="large"
@@ -176,11 +176,11 @@ export default function AddToCart({style}) {
   };
 
   return (
-    <form className="add-to-cart-form">
+    <div className="add-to-cart-form" data-testid="addToCart">
       {open ? <p>Please select a size</p> : <p />}
       {renderSizeDropdown()}
       {renderQtyDropdown()}
       {renderCartButton()}
-    </form>
+    </div>
   )
 };

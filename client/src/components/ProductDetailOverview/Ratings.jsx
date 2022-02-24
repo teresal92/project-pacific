@@ -5,7 +5,7 @@ export default function Ratings({ratings}) {
   const [ avgRating, setAvgRating ] = useState(0);
 
   useEffect(() => {
-    if (!Object.keys(ratings).length) {
+    if (ratings === undefined || !Object.keys(ratings).length) {
       setAvgRating(0);
     }
 
@@ -29,19 +29,17 @@ export default function Ratings({ratings}) {
           total += Number.parseFloat(ratings[rating]);
         }
       }
-      console.log(typeof total);
       return total;
     };
     let totalRatings = Number.parseFloat(getTotalRatings());
 
-
-
-    // console.log(typeof totalRatings);
     setAvgRating((sumRatings)/(totalRatings).toFixed(2));
   }, [ratings]);
 
 
   return (
-    <Rating name="read-only" value={avgRating} precision={0.25} readOnly />
+    <div data-testid="ratings">
+      <Rating name="read-only" value={avgRating} precision={0.25} readOnly />
+    </div>
   );
 }

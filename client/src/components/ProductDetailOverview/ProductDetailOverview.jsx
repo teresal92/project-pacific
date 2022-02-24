@@ -40,10 +40,11 @@ function ProductDetailOverview({ productId, outfit, selected, add }) {
         setProductInfo(res[0].data);
         setStyles(res[1].data.results);
         setSelectedStyle(res[1].data.results[0]);
-        setRatings(res[2].data.ratings)
+        setRatings(res[2].data.ratings);
+        setIsLoading(false);
       })
-      .then(() => setIsLoading(false))
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
+
   }, [productId]);
 
   // when style is clicked within styleSelector, pass particular style id into handleStyleSelector

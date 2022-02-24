@@ -82,8 +82,8 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
 
   /* Views */
   const renderDefaultView = () => (
-      <div className="img-gallery-carousel-container">
-        <div className="img-gallery-carousel-thumbnail-overlay">
+      <div className="img-gallery-carousel-container" data-testid="defaultImageView">
+        <div className="img-gallery-carousel-thumbnail-overlay" data-testid="defaultImageOverlay">
           <ExpandLessIcon
             className="img-gallery-carousel-controls img-gallery-carousel-controls-up"
             fontSize="large"
@@ -143,7 +143,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   );
 
   const renderExpandedView = () => (
-    <div className="img-gallery-carousel-expanded-overlay">
+    <div className="img-gallery-carousel-expanded-overlay" data-testid="expandedImageView">
       <CloseIcon
         className="img-gallery-carousel-controls img-gallery-carousel-container-expanded-close"
         fontSize="large"
@@ -176,6 +176,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
           style={{display: isZoomed ? 'none' : 'block'}}
         />
         <div
+          data-testid="expandedImageDots"
           className="img-gallery-carousel-dots"
           style={{display: isZoomed ? 'none' : 'block'}}
         >
