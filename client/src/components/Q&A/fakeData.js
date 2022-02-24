@@ -64,7 +64,8 @@ var fakeData = {
           "reported": false,
           "answers": {}
       }
-  ]
+  ],
+
 }
 
 export default fakeData;
