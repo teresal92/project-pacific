@@ -352,6 +352,7 @@ a {
   height: 100%;
   margin-left: 40%;
   margin-top: 20%;
+  /* margin: auto; */
   object-fit: cover;
   object-position: center;
   cursor: zoom-out;

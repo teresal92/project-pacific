@@ -9,10 +9,9 @@ import CloseIcon from '@mui/icons-material/Close';
 function ImageGallery({ style, isExpanded, handleExpandedView }) {
   const [photos, setPhotos] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [start, setStart] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
-  // coordinates of mouse cursor
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
+
 
   const thumbnailImgRef = useRef();
   const expandedImgRef = useRef(null);
@@ -23,7 +22,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
     }
   }, [style]);
 
-  const handleSelImageChange = (e, i) => {
+  const handleSelImageChange = (i) => {
     setCurrentIdx(i);
   };
 
@@ -42,9 +41,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
 
   const generateZoom = (e) => {
     let scale = 2.5;
-    // clientX: how far cursor is from left of img
     let posX = e.nativeEvent.clientX - expandedImgRef.current.offsetLeft;
-    // clientY: how far cursor is from top of img
     let posY = e.nativeEvent.clientY - expandedImgRef.current.offsetTop
     let mWidth = expandedImgRef.current.offsetWidth;
     let mHeight = expandedImgRef.current.offsetHeight;
@@ -63,17 +60,11 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   // prev img
   const handlePrevImg = () => {
     setCurrentIdx(currentIdx === 0 ? photos.length - 1 : currentIdx - 1);
-    if (currentIdx > 7) {
-      thumbnailImgRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
-    }
   };
 
   // next img
   const handleNextImg = () => {
     setCurrentIdx(currentIdx === photos.length - 1 ? 0 : currentIdx + 1);
-    if (currentIdx > 7) {
-      thumbnailImgRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
-    }
   };
 
   const handleDotClick = (i) => {
@@ -90,10 +81,10 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
             onClick={handlePrevImg}
           />
           <ImageList sx={{ width: 70, height: 490 }} cols={1} rowHeight={70}>
-            {photos.map((photo, i) => (
+            {photos.slice(start, start + 7).map((photo, i) => (
               <ImageListItem
                 key={`photo-${i}`}
-                onClick={(e) => handleSelImageChange(e, i)}
+                onClick={() => handleSelImageChange(start + i)}
               >
                 <img
                   style={{
