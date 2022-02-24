@@ -19,7 +19,6 @@ const QnAList = (props) => {
       >
       <Grid xs={12} sm={12} item>
         {props.questions.map(item => {
-          console.log(item)
           return <QnAEntrie question={item} key={item.question_id} getQuestions={props.getQuestions}/>
         })}
         <Button onClick={ (e) => {
