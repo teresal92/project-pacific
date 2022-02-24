@@ -34,4 +34,5 @@ const reviewsData = {
 
 const ratingsData = reviewsData.ratings;
 
-export default ratingsData;
+export default reviewsData;
+

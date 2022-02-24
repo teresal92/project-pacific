@@ -166,14 +166,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
             alt="selected"
             onClick={handleExpandedImageClick}
             ref={expandedImgRef}
-<<<<<<< HEAD
             onMouseMove={isZoomed ? generateZoom : () => {}}
-=======
-            onMouseMove={isZoomed ? generateZoom : 'null'}
-            onMouseLeave={isZoomed ? exitZoom : 'null'}
-            // style={isZoomed ? {transform: `translate(-${x}%, -${y}%) scale(2.5)`, cursor: 'zoom-out'}
-            // : { transform: 'scale(1)', cursor: 'crosshair'}}
->>>>>>> testing css changes
           />
         </div>
         <ChevronRightIcon
