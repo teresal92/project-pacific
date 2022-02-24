@@ -30,6 +30,7 @@ module.exports = {
   },
 
   getStyles: (req, res) => {
+    console.log(req)
     const productId = req.params.productId;
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
       headers: { Authorization: `${API_KEY}` },
@@ -41,5 +42,18 @@ module.exports = {
         res.status(404).send(`Error retrieving styles: ${err}`);
       });
   },
+
+  getRelated: (req, res) => {
+    const productId = req.params.productId;
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/related`, {
+      headers: { Authorization: `${API_KEY}` },
+    })
+      .then(result => {
+        res.json(result.data);
+      })
+      .catch(err => {
+        res.status(404).send(`Error retrieving related items: ${err}`);
+      });
+  }
 
 }

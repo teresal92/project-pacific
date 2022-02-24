@@ -1,29 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, CardMedia } from '@mui/material';
 import { Grid, Container } from '@mui/material';
+import Carousel from 'react-elastic-carousel';
+import RelatedItemEntry from './RelatedItemEntry.jsx';
+const axios = require('axios');
 
 
 
 export default function RelatedItems(props) {
+  const [related, setRelated] = useState([]);
+
+  useEffect(() => {
+    async function getRelated() {
+      try {
+        const res = await axios.get(`/api/products/${props.productId}/related`);
+        setRelated(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getRelated();
+  }, []);
+
+  const breakPoints = [
+    { width: 300, itemsToShow: 4 },
+  ];
 
   return (
-    <Container >
-      <div className='relatedBox'>
-        <h3>Related Items</h3>
-        <Grid container>
-          {props.related.map((item, i) => (
-            <Grid item key={`item-key-${i}`}>
-              <Card className='relativeItem'>
-                <CardHeader titleTypographyProps={{ variant: 'h7' }} title={item.name} height='50' />
-                <CardMedia
-                  component='img'
-                  height='200'
-                  alt={'no image'} />
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-    </Container>
+    <div className='relatedList'>
+      <h3>RELATED ITEMS</h3>
+      <Carousel breakPoints={breakPoints}>
+        {related.map((item, i) => (
+          <RelatedItemEntry
+            comparison={props.productId}
+            item={item}
+            key={`item-key-${i}`} />
+        ))}
+      </Carousel>
+    </div>
   )
 };

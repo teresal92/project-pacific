@@ -18,10 +18,11 @@ import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 import Ratings from './Ratings.jsx';
 import OutfitList from '../OutfitnRelated/YourOutfit.jsx';
+import RelatedItems from '../OutfitnRelated/RelatedItems.jsx';
 
 const axios = require('axios');
 
-function ProductDetailOverview({ productId, outfit, selected, add }) {
+function ProductDetailOverview({ productId, outfit, selected, add, remove }) {
   const [productInfo, setProductInfo] = useState([]);
   const [styles, setStyles] = useState([]);
   const [ratings, setRatings] = useState({});
@@ -105,8 +106,11 @@ function ProductDetailOverview({ productId, outfit, selected, add }) {
               </Grid>
             )}
           </Grid>
+        <Grid className='related'>
+            <RelatedItems productId={productId}/>
+          </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <OutfitList outfit={outfit} selected={selected} item={selectedStyle} add={add} />
+          <OutfitList outfit={outfit} selected={selected} item={selectedStyle} add={add} remove={remove}/>
         </Grid>
         </Box>
       </Container>

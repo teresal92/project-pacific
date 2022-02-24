@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductListEntry from './ProductListEntry.jsx';
+import { Grid } from '@mui/material';
 import { Carousel } from '3d-react-carousal';
 
 const axios = require('axios');
@@ -21,12 +22,14 @@ function ProductList(props) {
 
   return (
     <div>
-      <Carousel slides={products.map((product, i) => (
-        <ProductListEntry
-          product={product}
-          key={`product-key-${i}`}
-          getId={props.getId} />
-      ))} />
+      <Grid >
+        <Carousel slides={products.map((product, i) => (
+          <ProductListEntry
+            product={product}
+            key={`product-key-${i}`}
+            getId={props.getId} />
+        ))} />
+      </Grid>
     </div>
   )
 };
