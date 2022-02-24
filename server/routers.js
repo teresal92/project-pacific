@@ -15,6 +15,9 @@ router.route('/products/:productId')
 router.route('/products/:productId/styles')
   .get(controller.products.getStyles);
 
+router.route('/products/:productId/related')
+  .get(controller.products.getRelated);
+
 //QnA
 router.route('/qa/questions')
   .get(controller.questions.getQuestions)

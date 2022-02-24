@@ -42,6 +42,13 @@ class App extends React.Component {
     }
   }
 
+  removeFromOutfit = (event) => {
+   let newArr = this.state.outfit.filter(item => item !== event)
+    this.setState({
+      outfit: newArr
+    })
+  }
+
   render() {
     return (
       this.state.productSelected ? (
@@ -54,7 +61,8 @@ class App extends React.Component {
               productId={this.state.selectedProduct.id}
               outfit={this.state.outfit}
               selected={this.state.productSelected}
-              add={this.addToOutfit.bind(this)} />
+              add={this.addToOutfit.bind(this)}
+              remove={this.removeFromOutfit.bind(this)}/>
             <Divider
               sx={{
                 mt: 10,
@@ -87,10 +95,6 @@ class App extends React.Component {
             <OutfitList
               outfit={this.state.outfit}
               selected={this.state.productSelected} />
-          </div>
-          <div className='related'>
-            <RelatedItems
-              related={this.state.related} />
           </div>
         </div>
       ))

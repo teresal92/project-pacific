@@ -131,7 +131,7 @@ a {
   margin-left: 10%;
   margin-top: 5%;
   margin-bottom: 2%;
-    background-image:
+  background-image:
     linear-gradient(
       to right,
       rgba(180, 180, 180, 0.2),
@@ -146,44 +146,36 @@ a {
 }
 
 .react-3d-carousel .slider-container .slider-left div {
-  position: relative ;
-  top: 50%;
-  left: 0%;
-  margin-top: -20px;
-  color: #ffffff;
-  transform: translateY(-50%);
-  padding: 10px 10px;
+  border-radius: 50%;
   border-top: 2px solid #900000 !important;
   border-right: 2px solid #900000 !important;
   border-bottom: 2px solid #900000 !important;
   border-left: 2px solid #900000 !important;
+}
+
+.react-3d-carousel .slider-container .slider-left:hover div {
+  background-color: #90000091 !important;
 }
 
 .react-3d-carousel .slider-container .slider-right div {
-  position: relative ;
-  top: 50%;
   left: 48% !important;
-  margin-top: -20px;
-  color: #ffffff;
-  transform: translateY(-50%);
-  padding: 10px 10px;
+  border-radius: 50%;
   border-top: 2px solid #900000 !important;
   border-right: 2px solid #900000 !important;
   border-bottom: 2px solid #900000 !important;
   border-left: 2px solid #900000 !important;
 }
 
+.react-3d-carousel .slider-container .slider-right:hover div {
+  background-color: #90000091 !important;
+}
+
+
 .react-3d-carousel .slider-container .slider-content .slider-single .slider-single-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  position: relative;
   left: 0;
   top: 15px !important;
   width: 100%;
+  height: 370px;
   box-shadow: 0px 10px 40px rgb(0 0 0 / 0%) !important;
   transition: 500ms cubic-bezier(0.17, 0.67, 0.55, 1.43);
   transform: scale(0);
@@ -197,41 +189,19 @@ a {
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: 4px;
   width: 250px;
-  max-height: 360px;
-  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-  overflow: hidden;
+  max-height: 350px;
+  box-shadow: 0px 10px 20px rgba(131, 131, 131, 0.5) !important;
 }
 
 .css-hip9hq-MuiPaper-root-MuiAppBar-root {
-  background-color: #fff;
-  color: rgba(0, 0, 0, 0.87);
-  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   margin-top: -8px;
   margin-left: 12.5%;
   width: 80% !important;
-  box-sizing: border-box;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  position: static;
   background-color: #6f0000 !important;
   color: #fff;
 }
 
 .css-1t6c9ts {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
   justify-content: right !important;
 }
 
@@ -261,7 +231,7 @@ a {
       rgb(255, 255, 255),
       rgba(180, 180, 180, 0.2)
     );
-    box-shadow: 0px 10px 40px rgba(180, 180, 180, 0.5);
+  box-shadow: 0px 10px 40px rgba(180, 180, 180, 0.5);
   border-radius: 20px;
   padding-bottom: 2%;
   float: left;
@@ -446,20 +416,55 @@ a {
 }
 
 .outfitBox {
-  margin-top: 100px;
+  min-height: 250px;
   position: relative;
-  border: 2px solid #900000;
+  border-radius: 20px;
+  border-top: 1px solid #00000050;
+  border-bottom: 1px solid #00000050;
+  background-image:
+    linear-gradient(
+      to right,
+      rgb(236 241 241),
+      rgb(255, 255, 255),
+      rgb(255, 255, 255),
+      rgb(255, 255, 255),
+      rgb(255, 255, 255),
+      rgb(236 241 241)
+    );
 }
 
 .outfitItem {
-  height: 200px;
-  width: 150px;
+  max-height: 200px;
+  max-width: 150px;
+  overflow: hidden;
+  box-shadow: 10px 10px 10px#121212;
+}
+
+.outfitItem:hover .outfitImage {
+  height: 150px;
+  transition: 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 .outfitAdd {
   height: 200px;
   width: 150px;
+  color: #ffffff !important;
   background-color: #6f0000 !important;
+}
+
+.css-1t6e9jv-MuiCardActions-root {
+  padding: 0px !important;
+}
+
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root {
+  width: 100% !important;
+  color: #ffffff !important;
+  background-color: #6f0000 !important;
+  margin-top: -1px !important;
+}
+
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root:hover {
+  background-color: #900000 !important;
 }
 
 .plusIcon {
@@ -467,10 +472,67 @@ a {
   padding-left: 30%;
 }
 
-.relatedBox {
-  margin-top: 100px;
+.relatedList {
+  margin-top: 50px;
   position: relative;
-  border: 2px solid #900000;
+  min-height: 250px;
+  border-radius: 20px;
+  border-top: 1px solid #00000050;
+  border-bottom: 1px solid #00000050;
+  background-image:
+    linear-gradient(
+      to right,
+      rgb(236 241 241),
+      rgb(255, 255, 255),
+      rgb(255, 255, 255),
+      rgb(255, 255, 255),
+      rgb(255, 255, 255),
+      rgb(236 241 241)
+    );
+}
+
+.izuVIe {
+  justify-content: left;
+  max-width: 200px;
+  overflow: visible;
+  height: 250px;
+}
+
+.jMNKZk {
+height: 220px !important;
+}
+
+.jZlXPY {
+height: 220px !important;
+}
+
+.gZZBOx {
+  height: 1px;
+  margin-top: 0px !important;
+}
+
+.jRFJkP {
+  background-color: #6f000080 !important;
+  color: #333;
+  box-shadow: 0 0 2px 0px #333;
+}
+
+.jRFJkP:hover:enabled, .jRFJkP:focus:enabled {
+  color: #fff;
+  background-color: #900000 !important;
+  box-shadow: 0 0 2px 0 #333;
+}
+
+.cNNJIt {
+visibility: hidden !important;
+}
+
+.lcUbOd {
+visibility: hidden !important;
+}
+
+.eaptOe {
+visibility: hidden !important;
 }
 
 .relativeItem {
@@ -483,13 +545,5 @@ a {
 }
 
 .css-185gdzj-MuiCardHeader-root {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   padding: 1px !important;
 }
