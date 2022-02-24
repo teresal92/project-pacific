@@ -4,72 +4,82 @@ import React from 'react';
 import {rest} from 'msw';
 import {setupServer} from 'msw/node';
 // import react-testing methods
-import {render, screen, act} from '@testing-library/react';
+import {render, screen, act } from '@testing-library/react';
 // add custom jest matchers from jest-dom
 import '@testing-library/jest-dom'
-// import component to test
+// import components to test
 import ProductDetailOverview from '../client/src/components/ProductDetailOverview/ProductDetailOverview.jsx';
-// import mock data
-import exStyleData from '../client/src/mocks/exStyleData.js';
-import ratingsData from '../client/src/mocks/ratingsData.js';
-import productInfoData from '../client/src/mocks/productInfoData.js';
-import exProductData from '../client/src/components/exProductData.js';
+import ProductInfo from '../client/src/components/ProductDetailOverview/ProductInfo.jsx';
+import ImageGallery from '../client/src/components/ProductDetailOverview/ImageGallery.jsx';
+import StyleSelector from '../client/src/components/ProductDetailOverview/StyleSelector.jsx';
+import Ratings from '../client/src/components/ProductDetailOverview/Ratings.jsx';
+import AddToCart from '../client/src/components/ProductDetailOverview/AddToCart.jsx';
 
-const path = 'http://localhost:3000/api';
-const skuId = "1471554";
+import exStyleData from '../client/src/mocks/ProductDetail/exStyleData';
+import productInfoData from '../client/src/mocks/ProductDetail/productInfoData';
+import reviewsData from '../client/src/mocks/ProductDetail/ratingsData';
+import exProductData from '../client/src/components/exProductData'
 
-const server = new setupServer(
-  rest.get(`${path}/products`, (req, res, ctx) => {
-    return res(ctx.json(exProductData));
-  }),
-
-  rest.get(`${path}/products/${exProductData[0].id}`, (req, res, ctx) => {
-    return res(ctx.json(productInfoData));
-  }),
-
-  rest.get(`${path}/products/${exProductData[0].id}/styles`, (req, res, ctx) => {
-    return res(ctx.json(exStyleData));
-  })
-
-  // rest.post(`${path}/cart/${skuID}`, (req, res, ctx) => {
-    // return res(ctx.json(exProductData));
-  // })
-)
-
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
-// beforeAll(() => {
+// beforeEach(() => {
 //   act(() => {
-//     render(<ProductDetailOverview productId={exProductData[0].id} />)
+//     render(<ProductDetailOverview
+//       productId={exProductData[0].id}
+//       outfit={[]}
+//       selected={true}
+//       add={() => {}}
+//     />);
 //   });
 // });
 
 describe('Product Detail Overview Module', () => {
-  test('should render style selector if fetch requests on mount are resolved', () => {
-    render(<ProductDetailOverview productId={exProductData[0].id} />);
-    const styleText = await screen.findByText('STYLE')
-    expect(styleText).toBeInTheDocument();
+  test('should render loading error div when no props are passed in', () => {
+      render(<ProductDetailOverview />);
+    expect(screen.getByText('Loading...')).toBeDefined();
   })
 
-  test('handles client error resource not found', async () => {
-    server.use(
-      rest.get('/api/products', (req, res, ctx) => {
-        return res(ctx.status(404))
-      }))
-    });
-
-  test('fetches product info for product id and displays product title and category', async () => {
-    // render(<ProductInfo product={productInfoData} style={exStyleData}/>);
-    const productInfoContainer = await waitFor(() => screen.getByTestId('productInfo'));
-    expect(productInfoContainer).toBeInTheDocument();
+  test('should render product info for specific product to the DOM', () => {
+    render(<ProductInfo product={productInfoData} style={exStyleData} />);
+    expect(screen.getByText('Camo Onesie')).toBeDefined();
   })
 
-  // test('Should fetch list of all styles and render style thumbnails', async () => {
-  //   // Arange
-  //   render(<ProductDetailOverview/>)
-  //   // Act
-  //   // Assert
-  // })
+  test('should render default view for image gallery to the DOM when isExpanded state is false', () => {
+    render(<ImageGallery style={exStyleData[0]} isExpanded={false} handleExpandedView={()=> {}}/>);
+    expect(screen.getByTestId('defaultImageView')).toBeDefined();
+  })
+
+  test('should render thumbnail carousel overlay to DOM in default view', () => {
+    render(<ImageGallery style={exStyleData[0]} isExpanded={false} handleExpandedView={()=> {}}/>);
+    expect(screen.getByTestId('defaultImageOverlay'));
+  })
+
+  test('should render expanded view for image gallery to the DOM when isExpanded state is true', () => {
+    render(<ImageGallery style={exStyleData[0]} isExpanded={true} handleExpandedView={()=> {}}/>);
+    expect(screen.getByTestId('expandedImageView')).toBeDefined();
+  })
+
+  test('should render carousel dots for image gallery to the DOM when isExpanded state is true', () => {
+    render(<ImageGallery style={exStyleData[0]} isExpanded={true} handleExpandedView={()=> {}}/>);
+    expect(screen.getByTestId('expandedImageDots')).toBeDefined();
+  })
+
+  test('should render style select thumbnails to the DOM', () => {
+    render(<StyleSelector styles={exStyleData} selectedStyle={exStyleData[0]} handleStyleSelector={() => {}}/>);
+    expect(screen.getByTestId('styleSelector')).toBeDefined();
+  })
+
+  test('should render star ratings to DOM', () => {
+    render(<Ratings ratings={reviewsData.ratings} />)
+    expect(screen.getByTestId('ratings')).toBeDefined();
+  })
+
+  test('should render addToCart component to DOM', () => {
+    render(<AddToCart style={exStyleData[0]} />)
+    expect(screen.getByTestId('addToCart')).toBeDefined();
+  })
+
+  test('should render select size dropdown to DOM', () => {
+    render(<AddToCart style={exStyleData[0]} />)
+    expect(screen.getByText(/Select Size/)).toBeDefined();
+  })
 
 })

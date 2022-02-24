@@ -36,15 +36,15 @@ function ProductDetailOverview({ productId, outfit, selected, add }) {
     const getReviews = axios.get(`/api/reviews/meta/${productId}`);
 
     Promise.all([getProductInfo, getStyles, getReviews])
-      .catch(err => console.error(err))
       .then(res => {
-        console.log(res);
         setProductInfo(res[0].data);
         setStyles(res[1].data.results);
         setSelectedStyle(res[1].data.results[0]);
-        setRatings(res[2].data.ratings)
+        setRatings(res[2].data.ratings);
+        setIsLoading(false);
       })
-      .then(() => setIsLoading(false));
+      .catch(err => console.error(err))
+
   }, [productId]);
 
   // when style is clicked within styleSelector, pass particular style id into handleStyleSelector
@@ -60,7 +60,7 @@ function ProductDetailOverview({ productId, outfit, selected, add }) {
   };
 
   return !isLoading ? (
-    <div test>
+    <div>
       <Container>
         <Box sx={{ minHeight: 600 }}>
           <Grid container spacing={3}>

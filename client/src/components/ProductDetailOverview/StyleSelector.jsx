@@ -29,7 +29,7 @@ function StyleSelector({styles, selectedStyle, handleStyleSelector}) {
   };
 
   return (
-    <div className='style-selector'>
+    <div className='style-selector' data-testid="styleSelector">
       <Typography variant="overline" display="block" >
         STYLE > {selectedStyle.name ? selectedStyle.name : 'SELECT STYLE'}
       </Typography>

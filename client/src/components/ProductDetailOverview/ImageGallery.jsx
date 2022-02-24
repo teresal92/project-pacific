@@ -82,8 +82,8 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
 
   /* Views */
   const renderDefaultView = () => (
-      <div className="img-gallery-carousel-container">
-        <div className="img-gallery-carousel-thumbnail-overlay">
+      <div className="img-gallery-carousel-container" data-testid="defaultImageView">
+        <div className="img-gallery-carousel-thumbnail-overlay" data-testid="defaultImageOverlay">
           <ExpandLessIcon
             className="img-gallery-carousel-controls img-gallery-carousel-controls-up"
             fontSize="large"
@@ -143,7 +143,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   );
 
   const renderExpandedView = () => (
-    <div className="img-gallery-carousel-expanded-overlay">
+    <div className="img-gallery-carousel-expanded-overlay" data-testid="expandedImageView">
       <CloseIcon
         className="img-gallery-carousel-controls img-gallery-carousel-container-expanded-close"
         fontSize="large"
@@ -166,14 +166,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
             alt="selected"
             onClick={handleExpandedImageClick}
             ref={expandedImgRef}
-<<<<<<< HEAD
             onMouseMove={isZoomed ? generateZoom : () => {}}
-=======
-            onMouseMove={isZoomed ? generateZoom : 'null'}
-            onMouseLeave={isZoomed ? exitZoom : 'null'}
-            // style={isZoomed ? {transform: `translate(-${x}%, -${y}%) scale(2.5)`, cursor: 'zoom-out'}
-            // : { transform: 'scale(1)', cursor: 'crosshair'}}
->>>>>>> testing css changes
           />
         </div>
         <ChevronRightIcon
@@ -183,6 +176,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
           style={{display: isZoomed ? 'none' : 'block'}}
         />
         <div
+          data-testid="expandedImageDots"
           className="img-gallery-carousel-dots"
           style={{display: isZoomed ? 'none' : 'block'}}
         >
