@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Card, CardHeader, CardContent, CardMedia } from '@mui/material';
 import { Grid, Container } from '@mui/material';
 import Carousel from 'react-elastic-carousel';
-import RelatedItemEntry from './RelatedItemEntry.jsx';
+//import RelatedItemEntry from './RelatedItemEntry.jsx';
+const RelatedItemEntry = lazy(() => import('./RelatedItemEntry.jsx'))
+
 const axios = require('axios');
 
 
@@ -31,10 +33,12 @@ export default function RelatedItems(props) {
       <h3>RELATED ITEMS</h3>
       <Carousel breakPoints={breakPoints}>
         {related.map((item, i) => (
-          <RelatedItemEntry
-            comparison={props.productId}
-            item={item}
-            key={`item-key-${i}`} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <RelatedItemEntry
+              comparison={props.productId}
+              item={item}
+              key={`item-key-${i}`} />
+          </Suspense>
         ))}
       </Carousel>
     </div>
