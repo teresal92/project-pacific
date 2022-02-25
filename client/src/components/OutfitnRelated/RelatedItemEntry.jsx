@@ -33,12 +33,12 @@ export default function RelatedItemEntry(props) {
     const getCompareInfo = axios.get(`/api/products/${props.comparison}`);
 
     Promise.all([getProductInfo, getStyles, getCompareInfo])
-      .catch(err => console.error(err))
       .then(res => {
         setProductInfo(res[0].data);
         setStyles(res[1].data.results[0].photos[0]);
         setCompareInfo(res[2].data);
       })
+      .catch(err => console.error(err))
   }, []);
 
   const columns = [
