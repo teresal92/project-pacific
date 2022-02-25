@@ -346,7 +346,7 @@ var fakeData = {
   \*******************/
 /***/ ((module) => {
 
-var API_KEY = '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';
+var API_KEY = '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';
 module.exports = {
   API_KEY: API_KEY
 };
