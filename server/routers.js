@@ -49,4 +49,8 @@ router.route('/cart/:skuId')
 router.route('/reviews/meta/:productId')
   .get(controller.reviews.getReviewsMeta);
 
+// Interactions
+router.route('/interactions')
+  .post(controller.interactions.addInteraction);
+
 module.exports = router;

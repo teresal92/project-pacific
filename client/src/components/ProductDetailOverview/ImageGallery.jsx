@@ -12,8 +12,6 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   const [start, setStart] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
 
-
-  const thumbnailImgRef = useRef();
   const expandedImgRef = useRef(null);
 
   useEffect(() => {
@@ -97,7 +95,6 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
                   srcSet={`${photo.thumbnail_url}?w=70&h=70&fit=crop&auto=format&dpr=2 2x`}
                   alt={`${i}`}
                   loading="lazy"
-                  ref={thumbnailImgRef}
                 />
               </ImageListItem>
             ))}

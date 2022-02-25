@@ -6,7 +6,9 @@ import QnACore from './Q&A/QnACore.jsx'
 import { Divider } from '@mui/material';
 import OutfitList from './OutfitnRelated/YourOutfit.jsx';
 import RelatedItems from './OutfitnRelated/RelatedItems.jsx';
+// import Track from './Track.jsx';
 import exProductData from './exProductData.js';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -48,6 +50,7 @@ class App extends React.Component {
       outfit: newArr
     })
   }
+
 
   render() {
     return (
