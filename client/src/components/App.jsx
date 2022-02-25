@@ -57,7 +57,9 @@ class App extends React.Component {
       this.state.productSelected ? (
         <div>
           <div className='navbar'>
+
             <NavBar categories={this.getHome.bind(this)} />
+
           </div>
           <div>
             <ProductDetailOverview
@@ -100,5 +102,8 @@ class App extends React.Component {
       ))
   }
 }
+
+
+
 
 export default App;
