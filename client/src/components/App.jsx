@@ -82,10 +82,7 @@ class App extends React.Component {
           <div className='navbar'>
             <NavBar />
           </div>
-          <div>
             <ProductList getId={this.getProductId.bind(this)} />
-            <div className='textbox'>text box</div>
-          </div>
           <div className='homeDivider'>
             <Divider
               sx={{
