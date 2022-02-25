@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import ProductListEntry from './ProductListEntry.jsx';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+//import ProductListEntry from './ProductListEntry.jsx';
 import { Grid, Container, Box } from '@mui/material';
 import { Carousel } from '3d-react-carousal';
+
+const ProductListEntry = lazy(() => import('./ProductListEntry.jsx'))
 
 const axios = require('axios');
 
@@ -25,10 +27,12 @@ function ProductList(props) {
       <div>
         <Grid item xs={12}>
           <Carousel slides={products.map((product, i) => (
-            <ProductListEntry
-              product={product}
-              key={`product-key-${i}`}
-              getId={props.getId} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <ProductListEntry
+                product={product}
+                key={`product-key-${i}`}
+                getId={props.getId} />
+            </Suspense>
           ))} />
         </Grid>
       </div>

@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 // MUI
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -12,13 +12,19 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 // Components
-import ProductInfo from './ProductInfo.jsx';
-import ImageGallery from './ImageGallery.jsx';
-import StyleSelector from './StyleSelector.jsx';
-import AddToCart from './AddToCart.jsx';
+//import ProductInfo from './ProductInfo.jsx';
+//import ImageGallery from './ImageGallery.jsx';
+//import StyleSelector from './StyleSelector.jsx';
+//import AddToCart from './AddToCart.jsx';
 import Ratings from './Ratings.jsx';
 import OutfitList from '../OutfitnRelated/YourOutfit.jsx';
 import RelatedItems from '../OutfitnRelated/RelatedItems.jsx';
+
+const ProductInfo = lazy(() => import('./ProductInfo.jsx'))
+const ImageGallery = lazy(() => import('./ImageGallery.jsx'))
+const StyleSelector = lazy(() => import('./StyleSelector.jsx'))
+const AddToCart = lazy(() => import('./AddToCart.jsx'))
+
 
 const axios = require('axios');
 
@@ -68,11 +74,13 @@ function ProductDetailOverview({ productId, outfit, selected, add, remove }) {
             {!isExpanded ? (
               <>
                 <Grid className="imageContainer" item xs={12} sm={6} md={7}>
+                  <Suspense fallback={<div>Loading...</div>}>
                   <ImageGallery
                     style={selectedStyle}
                     isExpanded={isExpanded}
                     handleExpandedView={handleExpandedView}
                   />
+                  </Suspense>
                 </Grid>
                 <Grid item xs={12} sm={6} md={5}>
                   <Stack direction="row" spacing={3}>
@@ -84,34 +92,38 @@ function ProductDetailOverview({ productId, outfit, selected, add, remove }) {
                       <a className="sm-icon" href="https://twitter.com/"><TwitterIcon /></a>
                     </span>
                   </Stack>
-                  <ProductInfo
-                    product={productInfo}
-                    style={selectedStyle}
-                  />
-                  <StyleSelector
-                    styles={styles}
-                    selectedStyle={selectedStyle}
-                    handleStyleSelector={handleStyleSelector}
-                  />
-                  <AddToCart style={selectedStyle} />
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <ProductInfo
+                      product={productInfo}
+                      style={selectedStyle}
+                    />
+                    <StyleSelector
+                      styles={styles}
+                      selectedStyle={selectedStyle}
+                      handleStyleSelector={handleStyleSelector}
+                    />
+                    <AddToCart style={selectedStyle} />
+                  </Suspense>
                 </Grid>
               </>
             ) : (
               <Grid className="imageContainer" item xs={12}>
-                <ImageGallery
-                  style={selectedStyle}
-                  isExpanded={isExpanded}
-                  handleExpandedView={handleExpandedView}
-                />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ImageGallery
+                    style={selectedStyle}
+                    isExpanded={isExpanded}
+                    handleExpandedView={handleExpandedView}
+                  />
+                </Suspense>
               </Grid>
             )}
           </Grid>
-        <Grid className='related'>
-            <RelatedItems productId={productId}/>
+          <Grid className='related'>
+            <RelatedItems productId={productId} />
           </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <OutfitList outfit={outfit} selected={selected} item={selectedStyle} add={add} remove={remove}/>
-        </Grid>
+          <Grid item xs={12} sm={12} md={12}>
+            <OutfitList outfit={outfit} selected={selected} item={selectedStyle} add={add} remove={remove} />
+          </Grid>
         </Box>
       </Container>
     </div>
