@@ -1,5 +1,6 @@
 node_modules
 
+bundles
 bundle.js
 bundle.js.map
 
@@ -9,9 +10,4 @@ coverage
 
 project-pacfic-aws.pem
 
-<<<<<<< HEAD
 projPacific.pem
-
-=======
-projPacific.pem
->>>>>>> Finalized Outfit and Related lists

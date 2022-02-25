@@ -2,7 +2,7 @@ const path = require('path');
 
 const SRC_DIR = path.join(__dirname, '/client/src');
 // entry point: go into above file and find index.js
-const DIST_DIR = path.join(__dirname, '/client/dist');
+const DIST_DIR = path.join(__dirname, '/client/dist/bundles');
 // dump bundle.js here
 
 module.exports = {

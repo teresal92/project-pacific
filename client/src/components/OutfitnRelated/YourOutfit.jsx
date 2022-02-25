@@ -24,7 +24,7 @@ export default function OutfitList(props) {
                   className='outfitImage'
                   component='img'
                   height='200'
-                  alt={item.photos[0].url}
+                  alt={'NO IMAGE'}
                   src={item.photos[0].thumbnail_url} />
                 <CardActions >
                   <Button size="small" onClick={() => {props.remove(item)}}>X</Button>
@@ -32,6 +32,7 @@ export default function OutfitList(props) {
               </Card>
             </div>
           ))}
+          <div role='addCardTest1'>
           <Card className='outfitAdd' onClick={(e) => { props.add(props.item) }}>
             <CardHeader titleTypographyProps={{ variant: 'h6' }} title={'ADD TO OUTFIT'} />
             <CardContent>
@@ -40,6 +41,7 @@ export default function OutfitList(props) {
               </Typography>
             </CardContent>
           </Card>
+          </div>
         </Carousel>
       </div>
     ) : (
@@ -54,7 +56,7 @@ export default function OutfitList(props) {
                   className='outfitImage'
                   component='img'
                   height='200'
-                  alt={item.photos[0].url}
+                  alt={'NO IMAGE'}
                   src={item.photos[0].thumbnail_url} />
                 <CardActions >
                   <Button size="small" onClick={console.log(item.id)}>X</Button>
