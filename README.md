@@ -54,6 +54,6 @@ http://localhost:3000
 ```
 
 ## Team Members
-[Estevan Gonzalez](https://github.com/GonzalezEstevan)
-[Tristen Urban](https://github.com/TristenUrban)
-[Teresa Lew](https://github.com/teresal92)
+* [Estevan Gonzalez](https://github.com/GonzalezEstevan)
+* [Tristen Urban](https://github.com/TristenUrban)
+* [Teresa Lew](https://github.com/teresal92)
