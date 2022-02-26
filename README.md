@@ -1,12 +1,20 @@
-# project-pacific
+# Project Pacific
 ## Overview
-Redesign and rebrand of retail storefront built using React.js and MUI for front-end components and Express.js for the main server.
+Single-page e-commerce web application using React.js for front-end and Node/Express.js for the main server.
 Deployed through AWS.
 
-## Table of Contents
+* Optimized web performance using
+  * React.lazy
+  * gzip
+
+* Testing:
+  * Jest/React Testing Library
+
+## Features
 * [Overview Module](#overview-module)
 * [Related Items & Outfit Creation Module](#related-items--outfit-creation-module)
 * [Questions & Answers](#questions--answers-module)
+
 
 # Overview Module
 * Image gallery
@@ -24,17 +32,26 @@ Deployed through AWS.
 # Related Items & Outfit Creation Module
 
 ## Installation
-1. Open up a new terminal and run the following command to install dependencies:
-`npm install`
+1. Git Fork and Clone this repo
+2. Open up a new terminal and run the following command to install dependencies:
+```
+npm install
+```
 2. Create a copy of config/config.example.js and rename it config.js
 3. Replace empty string with Github Personal Access Token
 
-## Usage
+## Setup
 1. In separate terminals, run the following commands to start server and build webpack bundle
-`npm run start`
-`npm run react-dev`
+```
+npm run start
+```
+```
+npm run react-dev
+```
 2. In your browser, go to:
-`http://localhost:3000`
+```
+http://localhost:3000
+```
 
 ## Team Members
 [Estevan Gonzalez](https://github.com/GonzalezEstevan)
