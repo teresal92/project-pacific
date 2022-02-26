@@ -88,6 +88,7 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
                   style={{
                     borderBottom: (currentIdx === i) ? '3px solid #900000' : null,
                     opacity: (currentIdx === i) ? '0.8' : '1',
+                    cursor: 'pointer',
                   }}
                   className="img-gallery-carousel-thumbnail"
                   name={i}

@@ -273,11 +273,6 @@ a {
   background-color: transparent;
 }
 
-.img-gallery-carousel-thumbnail:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-
 .img-gallery-carousel-controls {
   position: relative;
   margin: 0;
@@ -302,7 +297,6 @@ a {
   width: 98%;
   display: block;
   border-radius: 5px;
-  /* background-color: rgba(0,0,0,0.5); */
   background: transparent;
 }
 
@@ -354,7 +348,6 @@ a {
   height: 100%;
   margin-left: 40%;
   margin-top: 20%;
-  /* margin: auto; */
   object-fit: cover;
   object-position: center;
   cursor: zoom-out;

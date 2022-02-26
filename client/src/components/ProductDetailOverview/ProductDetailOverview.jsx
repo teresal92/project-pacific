@@ -28,7 +28,7 @@ const AddToCart = lazy(() => import('./AddToCart.jsx'))
 
 const axios = require('axios');
 
-function ProductDetailOverview({ productId, outfit, selected, add, remove }) {
+function ProductDetailOverview({ productId, outfit, selected, add, remove, trackClick, name}) {
   const [productInfo, setProductInfo] = useState([]);
   const [styles, setStyles] = useState([]);
   const [ratings, setRatings] = useState({});
@@ -67,7 +67,7 @@ function ProductDetailOverview({ productId, outfit, selected, add, remove }) {
   };
 
   return !isLoading ? (
-    <div>
+    <div onClick={(e, widget) => trackClick(e, 'overview')}>
       <Container>
         <Box sx={{ minHeight: 600 }}>
           <Grid container spacing={3}>

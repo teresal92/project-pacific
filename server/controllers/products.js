@@ -30,7 +30,6 @@ module.exports = {
   },
 
   getStyles: (req, res) => {
-    console.log(req)
     const productId = req.params.productId;
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products/${productId}/styles`, {
       headers: { Authorization: `${API_KEY}` },
