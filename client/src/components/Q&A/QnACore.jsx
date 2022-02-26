@@ -91,7 +91,7 @@ class QnACore extends React.Component {
   render() {
     var { questions } = this.state
     return this.state.filteredQuestions.length > 0 ?
-      <div>
+      <div onClick={(e, widget) => this.props.trackClick(e, 'qna')} >
         <Box sx={{
           marginTop: 10,
           marginLeft: 61,

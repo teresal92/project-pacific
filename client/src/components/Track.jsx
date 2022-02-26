@@ -1,38 +1,47 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-// Higher Order Component (track)
+const axios = require('axios');
+
+// Wrapper Component
+// passes states and methods to childdren components
 class Track extends React.Component {
-  onClick = (e) => {
-    console.log(`[track] ${this.props.eventName}`);
-    // make post request to /interactions API with 3 parameters:
-    // element (string): selector of element that was clicked
-    // widget (string): name of module/widget in which click occurred
-    // time (string): time interaction occurred
+  constructor(props) {
+    super(props);
+    this.state = {}
+
+    this.trackClick = this.trackClick.bind(this);
+  }
+
+  // on click make post request to /interactions API with 3 parameters:
+  //   // element (string): selector of element that was clicked
+  //   // widget (string): name of module/widget in which click occurred
+  //   // time (string): time interaction occurred
+
+  trackClick = (e, widget) => {
+    console.log('event: ', e);
+    console.log('track: ', e.target);
+    console.log('timestamp: ', e.timeStamp)
+    console.log('widget: ', widget);
+    let body = {
+      element: e.target,
+      time: e.timeStamp,
+      widget
+    };
+
+    axios.post('/api/interactions', body)
+      .then(res => console.log('successfully posted interaction'))
+      .catch(err => console.error(`Error: ${err}`));
   }
 
   render() {
     // cloning this.props.children and passing in props
     return (
-      <React.Fragment>
-        {React.Children.map(this.props.children, (child) => {
-          return React.cloneElement(this.props.children, props)
-        })}
-      </React.Fragment>
+      <>
+        {this.props.render(this.trackClick)}
+      </>
     )
   }
 };
-
-<Track>
-  <Component />
-</Track>
-
-
-// return React.Children.map(this.props.children, c =>
-//   React.cloneElement(c, {
-//     onClick: this.onClick.bind(c, c.props.onClick)
-//   })
-// );
-
 
 export default Track;

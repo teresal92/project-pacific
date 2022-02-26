@@ -6,7 +6,8 @@ import NavBar from './Home/NavBar.jsx';
 import { Divider } from '@mui/material';
 //import OutfitList from './OutfitnRelated/YourOutfit.jsx';
 import RelatedItems from './OutfitnRelated/RelatedItems.jsx';
-// import Track from './Track.jsx';
+import Track from './Track.jsx';
+// import Counter from './Counter.jsx';
 import exProductData from './exProductData.js';
 const QnACore = lazy(() => import('./Q&A/QnACore.jsx'))
 const OutfitList = lazy(() => import('./OutfitnRelated/YourOutfit.jsx'))
@@ -56,6 +57,7 @@ class App extends React.Component {
 
 
   render() {
+
     return (
       this.state.productSelected ? (
         <div>
@@ -64,12 +66,16 @@ class App extends React.Component {
           </div>
           <div>
             <Suspense fallback={<div>Loading...</div>}>
-            <ProductDetailOverview
-              productId={this.state.selectedProduct.id}
-              outfit={this.state.outfit}
-              selected={this.state.productSelected}
-              add={this.addToOutfit.bind(this)}
-              remove={this.removeFromOutfit.bind(this)}/>
+            <Track render={(trackClick) => {
+              return <ProductDetailOverview
+                productId={this.state.selectedProduct.id}
+                outfit={this.state.outfit}
+                selected={this.state.productSelected}
+                add={this.addToOutfit.bind(this)}
+                remove={this.removeFromOutfit.bind(this)}
+                trackClick={trackClick}
+                name={"overview"} />
+            }}/>
             </Suspense>
             <Divider
               sx={{
@@ -80,7 +86,11 @@ class App extends React.Component {
           </div>
           <div className='qna'>
             <Suspense fallback={<div>Loading...</div>}>
-            <QnACore prodId={this.state.selectedProduct.id} />
+            <Track render={(trackClick) => {
+              return <QnACore
+                prodId={this.state.selectedProduct.id}
+                trackClick={trackClick} />
+            }} />
             </Suspense>
           </div>
         </div >
@@ -111,6 +121,12 @@ class App extends React.Component {
 }
 
 
-
+// return (
+//   <div>
+//     <Track render={(count, incCount) => {
+//       return <Counter count={count} incCount={incCount} />
+//     }}/>
+//   </div>
+// )
 
 export default App;
