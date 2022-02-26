@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 
 function ProductInfo({product, style}) {
-  // check if styles.results.sale_price is not null
+
   function flagOnSale() {
     return ((style.sale_price !== null) ? (
       <div>
@@ -25,11 +25,11 @@ function ProductInfo({product, style}) {
       <Typography variant="overline" display="block" gutterBottom>
         {product.category}
       </Typography>
-      <Typography variant="h4" component="div">
+      <Typography variant="h4" gutterBottom>
         {product.name}
       </Typography>
       {flagOnSale()}
-      <Typography variant="body1" gutterBottom>
+      <Typography variant="body1" mt={2} gutterBottom>
         {product.description}
       </Typography>
     </div>
