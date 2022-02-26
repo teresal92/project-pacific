@@ -1,28 +1,41 @@
 # project-pacific
 ## Overview
-Redesign and rebrand of retail storefront built using React.js for front-end components and Express.js for the main server.
+Redesign and rebrand of retail storefront built using React.js and MUI for front-end components and Express.js for the main server.
+Deployed through AWS.
 
 ## Table of Contents
-You can link to the different sections below
+* [Overview Module](#overview-module)
+* [Related Items & Outfit Creation Module](#related-items--outfit-creation-module)
+* [Questions & Answers](#questions--answers-module)
 
-## Description
-* Product Detail Components include:
+# Overview Module
 * Image gallery
-* Product information
-* Style selector
-* Add to cart
-* Ratings & Reviews
-* Questions & Answers
-* Related Items & Outfit Creation
+  * Default View: Image Carousel with thumbnail overlay to view additional images
+  * Expanded View: Zoom feature to allow for zoom and pan to view product details
+* Add To Cart Form
+  * Add selected style, size, and quantity and add to cart
+  * SKU (size and quantity) logic to prevent customer from adding to cart if size and quantity is not selected. Prompts customer to select a size.
+* Dynamically rendered product information
+# Questions & Answers Module
+* Onload Questions
+* Search Bar
+* Ability to report a question and its helpfulness
+* Accordian styling for readability
+# Related Items & Outfit Creation Module
 
 ## Installation
-* Run command
-    npm install
-* Make your key available from a new file src/config/config.js
+1. Open up a new terminal and run the following command to install dependencies:
+`npm install`
+2. Create a copy of config/config.example.js and rename it config.js
+3. Replace empty string with Github Personal Access Token
+
 ## Usage
-* Open Terminal and run commands
-    npm run start
-    npm run react-dev
+1. In separate terminals, run the following commands to start server and build webpack bundle
+`npm run start`
+`npm run react-dev`
+2. In your browser, go to:
+`http://localhost:3000`
+
 ## Team Members
 [Estevan Gonzalez](https://github.com/GonzalezEstevan)
 [Tristen Urban](https://github.com/TristenUrban)
