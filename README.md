@@ -17,6 +17,7 @@ Deployed through AWS.
 
 
 # Overview Module
+![ScreenShot](https://raw.github.com/client/dist/images/project pacific overview.gif)
 * Image gallery
   * Default View: Image Carousel with thumbnail overlay to view additional images
   * Expanded View: Zoom feature to allow for zoom and pan to view product details
