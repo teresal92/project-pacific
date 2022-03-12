@@ -35,7 +35,6 @@ class Track extends React.Component {
   }
 
   render() {
-    // cloning this.props.children and passing in props
     return (
       <>
         {this.props.render(this.trackClick)}

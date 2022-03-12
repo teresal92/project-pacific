@@ -31,10 +31,8 @@ function ImageGallery({ style, isExpanded, handleExpandedView }) {
   const handleExpandedImageClick = () => {
     if (isZoomed) {
       exitZoom();
-      setIsZoomed(!isZoomed);
-    } else {
-      setIsZoomed(!isZoomed);
     }
+    setIsZoomed(!isZoomed);
   }
 
   const generateZoom = (e) => {

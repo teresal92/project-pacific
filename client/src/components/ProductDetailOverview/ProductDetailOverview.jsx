@@ -36,7 +36,6 @@ function ProductDetailOverview({ productId, outfit, selected, add, remove, track
   const [isLoading, setIsLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // TODO: handle cases when url or skus are null
   useEffect(() => {
     const getProductInfo = axios.get(`/api/products/${productId}`);
     const getStyles = axios.get(`/api/products/${productId}/styles`);
@@ -54,8 +53,6 @@ function ProductDetailOverview({ productId, outfit, selected, add, remove, track
 
   }, [productId]);
 
-  // when style is clicked within styleSelector, pass particular style id into handleStyleSelector
-  // to set selectedStyle
   const handleStyleSelector = (style) => {
     if (style) {
       setSelectedStyle(style);

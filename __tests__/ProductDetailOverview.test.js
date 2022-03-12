@@ -1,13 +1,9 @@
-// import dependencies
 import React from 'react';
-// import API mocking utilities from Mock Service Worker
 import {rest} from 'msw';
 import {setupServer} from 'msw/node';
-// import react-testing methods
 import {render, screen, act } from '@testing-library/react';
-// add custom jest matchers from jest-dom
 import '@testing-library/jest-dom'
-// import components to test
+
 import ProductDetailOverview from '../client/src/components/ProductDetailOverview/ProductDetailOverview.jsx';
 import ProductInfo from '../client/src/components/ProductDetailOverview/ProductInfo.jsx';
 import ImageGallery from '../client/src/components/ProductDetailOverview/ImageGallery.jsx';
@@ -19,17 +15,6 @@ import exStyleData from '../client/src/mocks/ProductDetail/exStyleData';
 import productInfoData from '../client/src/mocks/ProductDetail/productInfoData';
 import reviewsData from '../client/src/mocks/ProductDetail/ratingsData';
 import exProductData from '../client/src/components/exProductData'
-
-// beforeEach(() => {
-//   act(() => {
-//     render(<ProductDetailOverview
-//       productId={exProductData[0].id}
-//       outfit={[]}
-//       selected={true}
-//       add={() => {}}
-//     />);
-//   });
-// });
 
 describe('Product Detail Overview Module', () => {
   test('should render loading error div when no props are passed in', () => {
