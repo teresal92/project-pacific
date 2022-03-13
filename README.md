@@ -19,11 +19,11 @@ Deployed through AWS.
 # Overview Module
 ![ScreenShot](client/dist/images/project-pacific-overview.gif)
 * Image gallery
-  * Default View: Image Carousel with thumbnail overlay to view additional images
-  * Expanded View: Zoom feature to allow for zoom and pan to view product details
+  * Default View: Scroll additional images on the main Image Carousel or Thumbnail Carousel
+  * Expanded View: Click on image to zoom in to see additional product details
 * Add To Cart Form
   * Add selected style, size, and quantity and add to cart
-  * SKU (size and quantity) logic to prevent customer from adding to cart if size and quantity is not selected. Prompts customer to select a size.
+  * SKU logic to prevent customer from adding to cart if size and quantity is not selected. Prompts customer to select a size.
 * Dynamically rendered product information
 # Questions & Answers Module
 * Onload Questions
