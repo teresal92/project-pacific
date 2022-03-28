@@ -16,7 +16,7 @@ Deployed through AWS.
 * [Questions & Answers](#questions--answers-module)
 
 
-# Overview Module
+## Overview Module
 ![ScreenShot](client/dist/images/project-pacific-overview.gif)
 * Image gallery
   * Default View: Scroll additional images on the main Image Carousel or Thumbnail Carousel
@@ -25,12 +25,14 @@ Deployed through AWS.
   * Add selected style, size, and quantity and add to cart
   * SKU logic to prevent customer from adding to cart if size and quantity is not selected. Prompts customer to select a size.
 * Dynamically rendered product information
-# Questions & Answers Module
+
+##Questions & Answers Module
 * Onload Questions
 * Search Bar
 * Ability to report a question and its helpfulness
 * Accordian styling for readability
-# Related Items & Outfit Creation Module
+
+## Related Items & Outfit Creation Module
 
 ## Installation
 1. Git Fork and Clone this repo
